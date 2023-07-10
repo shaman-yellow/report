@@ -1,0 +1,491 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{  }
+---
+
+# Theme: free yourself and rescue time
+
+## Documentation
+
++ R base
+    1. character
+    2. data.frame
+    3. ...
++ Pubchem API
++ RCurl
++ dplyr
++ pattern
++ stringr
++ ...
+
+## You get a mission
+
+::: columns 
+:::: column 
+```{r, echo = F, eval = F}
+test <- initialize_mcnebula(.mcnebula(), sirius_project = "~/operation/sirius.test/")
+test1 <- filter_structure(test, dplyr::filter, synonym != "null")
+struc <- dplyr::select(head(latest(test1), n = 50), synonym)
+struc <- dplyr::mutate(struc, seq = 1:50, synonym = stringr::str_trunc(synonym, width = 50))
+struc <- dplyr::relocate(struc, seq, synonym)
+```
+
++ A mission for 300 compounds.
+    1. add CAS number.
+    2. Format as pretty table.
+
+```{r, eval = T, echo = F}
+knitr::kable(head(struc, n = 12), format = "markdown", caption = "Compounds")
+```
+::::
+
+:::: column 
+1. \textcolor{red}{Approach 1}
+    1. copy and paste
+
+![](~/Pictures/Screenshots/Screenshot from 2022-10-26 09-10-13.png)
+
+2. \textcolor{red}{Approach 2}
+    1. Install R...
+    2. Read table (Excel)
+    3. Use Pubchem API
+    4. Match with pattern
+    5. Format table
+    6. Output
+::::
+:::
+
+## "Economic" benefits
+
+::: columns 
+:::: column 
+\scriptsize Time for shortcut:
+
+1. \small For each compounds (30s):
+    1. \scriptsize copy and paste (5s)
+    2. search and find (20s)
+    3. copy and paste (5s)
+2. For all compounds
+    + \scriptsize $(20 + 5 + 5) \times 300 \div 60 = 150 \, (min)$
+3. Reality
+    + \scriptsize Your Emotional labor
+        + \scriptsize $150 \times 2 = 300 \, (min)$
+    + Desertion
+        + \scriptsize $300 \times 2 = 600 \, (min)$
+4. As pretty table
+    + \textcolor{red}{\scriptsize $600 + 20 = 620 \, (min)$}
+5. Your gains
+    1. \textcolor{cyan}{Complex experience}
+    2. \textcolor{cyan}{A thanks}
+::::
+
+:::: column 
+\scriptsize Time for detour:
+
++ \small Overall
+    1. \scriptsize Install R $30 \, (min)$
+    2. Read table (Excel) $30 \, (min)$
+    3. Use Pubchem API $60 \, (min)$
+    4. Match with pattern $120 \, (min)$
+        + \scriptsize \textcolor{red}{You find a new world}
+    5. Format and pretty table $120 \, (min)$
+    6. Output $30 \, (min)$
++ Your gains
+    1. \textcolor{cyan}{Entrance to programming}
+    3. \textcolor{cyan}{Criticism}
+    4. \textcolor{cyan}{The left no more in life}
+        + exact mass
+        + compound name
+        + chemistry irrelevant...
+    5. \textcolor{cyan}{...}
+
+::::
+:::
+
+## Start with R: read table into R
+
+::: columns 
+:::: column 
+\vspace{0.6em}
+![Table in Excel](~/Pictures/Screenshots/Screenshot from 2022-10-25 21-15-57.png)
+
+\scriptsize You spent more time and energy than \textcolor{red}{double clicking}
+\scriptsize Give up or continue?
+::::
+
+:::: column 
++ "Read" package:
+    1. base
+        + read.table
+    2. data.table
+        + \textcolor{red}{fread}
+    3. openxlsx
+        + \textcolor{red}{read.xlsx}
++ "Organize" package:
+    1. dplyr
+        + filter
+        + select
+        + relocate
+        + mutate
+        + arrange
+        + rename
+        + ……
+::::
+:::
+
+## Find data in Pubchem
+
+::: columns 
+:::: column 
+![Pubchem Website](~/Pictures/Screenshots/Screenshot from 2022-10-26 10-21-14.png)
+
+![URL for Compounds](~/Pictures/Screenshots/Screenshot from 2022-10-26 10-24-01.png)
+
+\scriptsize https://pubchem.ncbi.nlm.nih.gov/compound/ + "number"
+::::
+
+:::: column 
+![Where is CAS number](~/Pictures/Screenshots/Screenshot from 2022-10-26 10-42-46.png)
+
+\scriptsize https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ +
+\textcolor{red}{name} +
+/synonyms/XML
+
++ \small URL to get synonym
+    1. Prefix
+    2. your id
+    3. suffix
+
+::::
+:::
+
+## Get data in Pubchem
+
+::: columns 
+:::: column 
+
+1. \small set URL
+
+\scriptsize
+```{r, eval = F, echo = T}
+prefix <- "https..."
+name <- "compound"
+suffix <- ".../XML"
+url <- paste0(prefix, name, suffix)
+```
+
+2. \small use "spider"
+
+\scriptsize
+```{r, eval = F, echo = T}
+RCurl::getURL(url)
+```
+
+3. \small format...
+
+![](~/Pictures/Screenshots/Screenshot from 2022-10-26 11-10-23.png)
+
+::::
+
+:::: column 
++ for "spider" :
+    1. base
+        + paste0
+        + ...
+    2. RCurl
+        + getURL
+        + ……
+    3. XML
+        + xmlTreeParse
+        + xmlParse
++ \textcolor{cyan}{Extra usage}
+    1. chemical informatic data
+    2. Gene informatic data
+    3. ...
+    4. Beyond research
+::::
+:::
+
+## Match CAS number
+
+::: columns 
+:::: column 
+![CAS](~/Pictures/cas.png)
+::::
+
+:::: column 
++ \small CAS in your text
+
+![Your text](~/Pictures/Screenshots/Screenshot from 2022-10-26 11-17-10.png)
+
+\scriptsize <...> + number + number + number <...>
+::::
+:::
+
+## Pattern
+
+::: columns 
+:::: column 
+\scriptsize <...> + number + number + number <...>
+
+\vspace{1em}
+
+1111-11-1
+
+\vspace{1em}
+
+1. \small match number: [0-9]
+2. match two number: [0-9]{2}
+3. match more number [0-9]{1,}
+4. match "-": -
+5. match CAS: [0-9]{1,}\textcolor{red}{-}[0-9]{2}\textcolor{red}{-}[0-9]{}
+6. look before: (?&lt;=...)
+6. look after: (?=...)
+
+\vspace{1em}
+
+\scriptsize
+```{r, eval = F, echo = T}
+stringr::str_extract(text,
+"(?<=\>)[0-9]{1,}-[0-9]{2}-[0-9]{1,}(?=\<)")
+```
+::::
+
+:::: column 
++ for string match:
+    1. stringr
+        + str_extract
++ \textcolor{cyan}{Extra usage}
+    1. Text search
+    2. revise article
+    3. ...
+::::
+:::
+
+## Pretty table
+
+::: columns 
+:::: column 
+```{r, eval = T, echo = F}
+end <- dplyr::mutate(struc, CAS = "...")
+knitr::kable(head(end, n = 12), format = "markdown", caption = "Compounds")
+```
+::::
+
+:::: column 
++ for pretty table:
+    1. gt
+        + gt
+        + ...
+    2. knitr
+        + kable
+    3. write.table
++ \textcolor{cyan}{Extra usage}
+    1. ppt
+    2. article
+    3. ...
+::::
+:::
+
+# New module
+
+## Statistic system: binary_comparison
+
+::: columns 
+:::: column 
+```{r, eval = T, echo = F}
+df <- top_table(statistic_set(test1))[[1]]
+colnames(df)[1] <- "id"
+knitr::kable(head(df[, 1:6], n = 12), digits = 3, format = "markdown", caption = "Compounds")
+```
+::::
+
+:::: column 
+![binary comparison](~/Pictures/Screenshots/Screenshot from 2022-10-26 12-28-49.png)
+::::
+:::
+
+## report system: pdf or html or other report
+
+::: columns 
+:::: column 
+![object in console](~/Pictures/Screenshots/Screenshot from 2022-10-26 12-38-20.png)
+::::
+
+:::: column 
+![pdf_report](~/Pictures/Screenshots/Screenshot from 2022-10-26 12-40-20.png)
+::::
+:::
+
+## MCnebula2 documentation: reference.pdf
+
+::: columns 
+:::: column 
+![reference.pdf](~/Pictures/Screenshots/Screenshot from 2022-10-26 12-42-53.png)
+::::
+
+:::: column 
+![help(report)](~/Pictures/Screenshots/Screenshot from 2022-10-26 12-44-31.png)
+::::
+:::
+
+# Progress
+
+## Code refactoring: data processing
+
+::: columns 
+:::: column 
+\small Formerly finished:
+
++ S4 data structure \textcolor{cyan}{\checkmark}
++ Extract data \textcolor{cyan}{\checkmark}
+    1. project_conformation \textcolor{cyan}{\checkmark}
+    2. project_metadata \textcolor{cyan}{\checkmark}
+    3. project_api \textcolor{cyan}{\checkmark}
+    4. project_dataset \textcolor{cyan}{\checkmark}
++ Filter data
+    0. collate_data \textcolor{cyan}{\checkmark}
+    1. filter_formula \textcolor{cyan}{\checkmark}
+    2. filter_structure \textcolor{cyan}{\checkmark}
+    3. filter_ppcp \textcolor{cyan}{\checkmark}
+    4. create_reference \textcolor{cyan}{\checkmark}
+::::
+
+:::: column 
+
++ oganize data
+    1. create_features_annotation \textcolor{cyan}{\checkmark}
+    2. create_stardust_classes \textcolor{cyan}{\checkmark}
+    3. cross_filter_stardust \textcolor{cyan}{\checkmark}
+        + quantity \textcolor{cyan}{\checkmark}
+        + score \textcolor{cyan}{\checkmark}
+        + identical \textcolor{cyan}{\checkmark}
+    4. create_nebula_index \textcolor{cyan}{\checkmark}
+    5. compute_spectral_similarity \textcolor{cyan}{\checkmark}
+    6. create_parent_nebula \textcolor{cyan}{\checkmark}
+    7. create_child_nebulae \textcolor{cyan}{\checkmark}
+
+::::
+:::
+
+## Code refactoring: visualization
+
+::: columns 
+:::: column 
+\small Formerly finished:
+
++ for oganizing visualization
+    1. command \textcolor{cyan}{\checkmark}
+        + new_command \textcolor{cyan}{\checkmark}
+        + call_command \textcolor{cyan}{\checkmark}
+    2. ggset \textcolor{cyan}{\checkmark}
+        + new_ggset \textcolor{cyan}{\checkmark}
+        + mutate_layer \textcolor{cyan}{\checkmark}
+        + add_layer \textcolor{cyan}{\checkmark}
+        + delete_layer \textcolor{cyan}{\checkmark}
+        + modify_set_labs \textcolor{cyan}{\checkmark}
+        + modify_unify_scale_limits \textcolor{cyan}{\checkmark}
+        + modify_rm_legend \textcolor{cyan}{\checkmark}
+        + modify_... \textcolor{cyan}{\checkmark}
+        + call_command \textcolor{cyan}{\checkmark}
+        + ...
+::::
+
+:::: column 
++ visualization
+    1. create_child_layout \textcolor{cyan}{\checkmark}
+    2. activate_nebulae \textcolor{cyan}{\checkmark}
+    3. quantification \textcolor{cyan}{\checkmark}
+        + features_quantification \textcolor{cyan}{\checkmark}
+        + sample_metadata \textcolor{cyan}{\checkmark}
+    4. annotate_nebula \textcolor{cyan}{\checkmark}
+        + draw_structures \textcolor{cyan}{\checkmark}
+        + draw_nodes \textcolor{cyan}{\checkmark}
+    5. visualize \textcolor{cyan}{\checkmark}
+        + visualize \textcolor{cyan}{\checkmark}
+        + visualize_all \textcolor{cyan}{\checkmark}
+        + show_node \textcolor{cyan}{\checkmark}
+        + show_structure \textcolor{cyan}{\checkmark}
+::::
+:::
+
+## New module: statistic system
+
+::: columns 
+:::: column 
+\small This time finished:
+
++ binary_comparison \textcolor{orange}{\checkmark}
+    + features_quantification \textcolor{orange}{\checkmark}
+    + sample_metadata \textcolor{orange}{\checkmark}
+    + binary_comparison \textcolor{orange}{\checkmark}
+    + top_table \textcolor{orange}{\checkmark}
+::::
+
+:::: column 
+::::
+:::
+
+## New module: report system
+
+::: columns 
+:::: column 
+\small This time finished:
+
++ for each module
+    + heading \textcolor{orange}{\checkmark}
+    + paragraph \textcolor{orange}{\checkmark}
+    + code_block \textcolor{orange}{\checkmark}
+    + picture \textcolor{orange}{\checkmark}
+    + table \textcolor{orange}{\checkmark}
++ section \textcolor{orange}{\checkmark}
+    + new_section \textcolor{orange}{\checkmark}
+    + new_heading \textcolor{orange}{\checkmark}
+    + new_code_block \textcolor{orange}{\checkmark}
+    + new_code_block_table \textcolor{orange}{\checkmark}
+    + new_code_block_figure \textcolor{orange}{\checkmark}
+    + call_command \textcolor{orange}{\checkmark}
+    + ...
+::::
+
+:::: column 
++ report
+    + new_report \textcolor{orange}{\checkmark}
+    + show \textcolor{orange}{\checkmark}
+    + add_layer \textcolor{orange}{\checkmark}
+    + render \textcolor{orange}{\checkmark}
+::::
+:::
+
+# Next Schedule
+
+## Overall
+
++ Data filtering and arranging system. \textcolor{orange}{\checkmark}
++ Visualization system. \textcolor{orange}{\checkmark}
++ \textcolor{cyan}{LC-MS runing in XCMS.}
++ Statistic system. \textcolor{orange}{\checkmark}
++ Report. \textcolor{orange}{\checkmark}
++ \textcolor{red}{Documentation.}
++ \textcolor{red}{Website.}
++ Figures for article.
++ Rewrite article.
+

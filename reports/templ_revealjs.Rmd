@@ -1,0 +1,36 @@
+---
+title: 'Seminar'
+author: 'Reporter: Lichuang Huang'
+institute: '`r format(Sys.Date())`'
+date: "`Supervisor: Gang Cao`"
+output:
+  revealjs::revealjs_presentation:
+    toc: true
+    df_print: kable
+    fonttheme: "structurebold"
+fontsize: 5pt
+---
+
+# RNA-seq analysis
+
+## Literature and Guidances
+
+![limma guidance](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 11-58-35.png)
+
+## Analysis route
+
+1. Data packaging
+    + Reading in count-data
+    + Organising sample information
+    + Organising gene annotations
+2. Data pre-processing
+    + Transformations from the raw-scale
+    + Removing genes that are lowly expressed
+    + Normalising gene expression distributions
+    + Unsupervised clustering of samples
+3. Differential expression analysis
+    + Creating a design matrix and contrasts
+    + Removing heteroscedascity from count data
+    + Fitting linear models for comparisons of interest
+    + ...
+

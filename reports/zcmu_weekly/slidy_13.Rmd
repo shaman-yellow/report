@@ -1,0 +1,165 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{  }
+---
+
+# Background
+
+## From MS/MS spectrum to compound
+
+Compounds smashed by energy
+
+::: columns 
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/2095_tree.png)
+::::
+
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/2095_ms2.png)
+::::
+:::
+
+## Massive MS/MS spectra
+
+A metabolitic research need lots of identification.
+
+::: columns 
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/dataset_msms.png)
+::::
+
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/all_ms2.png)
+::::
+:::
+
+## Classification \tiny in MS/MS spectra view
+
+::: columns 
+:::: column 
+
++ classes for \textcolor{red}{sub-} or dominant structure
++ Hierarchy
+
+![](~/operation/sirius.test/mcnebula_results/2095_ms2.png)
+
+::::
+
+:::: column 
+![](~/Pictures/Screenshots/Screenshot from 2022-09-16 17-41-54.png)
+![](~/Pictures/Screenshots/Screenshot from 2022-09-16 17-44-56.png)
+::::
+:::
+
+## MCnebula proposed visualization
+
+::: columns 
+:::: column 
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/sfig2.serum_child.pdf}
+::::
+
+:::: column 
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/fig4.ac_node.pdf}
+::::
+:::
+
+## MCnebula expansion
+
+::: columns 
+:::: column 
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/fig2.serum_tracer.pdf}
+::::
+
+:::: column 
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/fig3.serum_logFC.pdf}
+::::
+:::
+
+## MCnebula expansion
+
+::: columns 
+:::: column 
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/fig5.hps.pdf}
+::::
+
+:::: column 
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/sfig4.pathway.pdf}
+::::
+:::
+
+## MCnebula expansion
+
+\includegraphics[height=67mm]{slidy_12_fig/grid_report.pdf}
+
+# MCnebula workflow
+
+## Data stream of MCnebula
+
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/fig1.data_stream.pdf}
+
+## Principle of filtering of Chemical classes
+
+\includegraphics[height=67mm]{/mnt/data/wizard/Documents/article/MCnebula2/fts/fig6.mech.pdf}
+
+## Package exMCnebula2
+
+- Pathway enrichment
+- Heat map analysis
+- Query compounds
+- Format identification
+- Demo analysis
+- ...
+
+# Structure of article 
+
+## Structure
+
+::: columns 
+:::: column 
+- introduction
+    - challenge
+    - identification
+        - library match
+        - _in silico_
+        - ...
+    - chemical classes
+    - MCnebula
+- results
+    - serum dataset
+    - herbal dataset
+::::
+
+:::: column 
+- methods (algorithm)
+    - chemical formula and structure
+    - top candidate
+    - chemical classes
+    - \textcolor{red}{ABC selection}
+    - \textcolor{red}{details of cross filter}
+    - network presentation
+    - visualization
+    - data structure
+    - report system
+    - ...
+- discussion
+::::
+:::
+

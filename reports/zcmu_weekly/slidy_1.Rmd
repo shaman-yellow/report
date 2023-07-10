@@ -1,0 +1,251 @@
+---
+title: 'Seminar'
+author: 'Reporter: Lichuang Huang'
+institute: 'Supervisor: Gang Cao'
+date: "`r format(Sys.Date())`"
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Dresden"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+fontsize: 10pt
+---
+
+[annotation]: this part sharing literature
+
+# part 1: literature sharing
+
+## LC-MS: a multi-dimentional data analysis method
+
++ Main dimention:
+    + MS level 1
+    + MS level 2
+
+AS MS spectrum fail in ascertaining the molecular scaffold (geometrical or position isomers)
+
++ Other dimention
+    + retention time
+    + CCS
+    + ...
+
+## A variety range of chromatography condition
+
+![chromatography condition](/home/wizard/Pictures/chroma_condition.png)
+
+## Retip: A machine learning method of LC-MS retention time prediction
+
+![retip](/home/wizard/Pictures/Screenshot from 2022-03-25 21-50-30.png)
+
+## Retip: A machine learning method of LC-MS retention time prediction
+
+![retip abstract](/home/wizard/Pictures/Screenshot from 2022-03-24 19-30-04.png)
+
+## Retip: Mean absolute errors
+
+![retip prediction error](/home/wizard/Pictures/Screenshot from 2022-03-24 19-53-05.png)
+
+## Retip: shrink the scope of structure library
+
+![retip application](/home/wizard/Pictures/Screenshot from 2022-03-24 21-38-44.png)
+
+## Retip: integrate in MSfinder
+
+![MSfinder](/home/wizard/Pictures/ps_Screenshot from 2022-03-24 21-59-23.png)
+
+## Retip: R package
+
+![retip in R](/home/wizard/Pictures/Screenshot from 2022-03-24 21-46-02.png)
+
+## Retip: workflow
+
+![retip workflow](/home/wizard/Pictures/Screenshot from 2022-03-24 19-46-20.png)
+
+## Summary
+
+1. An awsome method for utilizing RT and filter structure candidates
+   + computional
+   + conversion available for any chromatography condition
+   + public available R package
+2. A method possibly be integrated in MCnebula
+
+[annotation]: this part describe MCnebula
+
+# Part 2: MCnebula
+
+## Research background
+
+Untarget LC-MS analysis  
+Researcher have to check structure and spectrum one by one
+
+![MS/MS analysis](/home/wizard/Pictures/Screenshot from 2022-03-25 19-53-01.png)
+
+## Research backgroud
+
+However, there is a data disaster
+
+![data disaster](/home/wizard/Pictures/Screenshot from 2022-03-25 21-11-27.png)
+
+# Where is a 'Lazy' method ?
+
+## Extensive method development
+
++ MS dataset process tool (Integration tool)
+    + MZmine2 (recently, MZmine3 update)
+    + OpenMS (Python tool)
+    + XCMS (R tool)
+    + commercial tools……
+
+Publish in Nature (method, biotechnology, communication……):
+
++ GNPS Monopoly
+    + molecular networking (MN)
+    + Feature based molecular networking (FBMN)
+    + Qmistree, IIMN, ……
++ CompMass
+    + MAdial, MSfinder, MRMPROBES/MRMDIFF
++ SIRIUS
+    + SIRIUS, ZODIAC, CSI:fingerID, CANOPUS, COSMIC……
++ ……
+
+## The most popular or sophisticated method for MS analysis
+
+A visualization strategy: GNPS molecular networking
+
+![GNPS molecular networking](/home/wizard/Pictures/Screenshot from 2022-03-25 20-03-45.png)
+
+## The most popular or sophisticated method for MS analysis
+
+A machine learning method for compound prediction
+
+![SIRIUS workflow](/home/wizard/Pictures/Screenshot from 2022-03-25 20-26-28.png)
+
+## The most popular or sophisticated method for MS analysis
+
+A comprehensive platform
+
+![compMass](/home/wizard/Pictures/Screenshot from 2022-03-25 20-33-08.png)
+
+# What should a lazy analysis be?
+
+## A method:
+
+1. Computational workflow
+    + almost computer do all
+2. Comprehensive structure database
+    + involve all public available database
+3. High accuracy
+4. Predictive potency
+    + compound without MS/MS spectrum library
+    + unknown compound should possibly be cover
+5. The most intuitive visualization
+    + what is the dataset tell us?
+6. Fast collating
+    + easily collate metadata for identified compound
+7. ...
+
+## MCnebula Emerged
+
+![MCnubula](png/gather_child_nebulae.png)
+
+## Inovation
+
+1. Improve the compound prediction accuracy
+    + via clustering in classification
+    + via considering retention time
+    + ...
+2. High accuracy classes clustering for MS/MS annotation
+    + over 80% accuracy clustering, even unknown compound (no structure information)
+3. Intuitive compound classes distribution in network visualization
+    + each class involves a sub-nebula to explore the compound annotation
+4. MCnebula algorithm integrated in R
+    + cover SIRIUS LC-MS workflow analysis into R pipline
+5. A wide range of applicability
+    + not be confined to metabolome identification
+    + not be confined to spectrum library, but structure library
+
+## Recent progress
+
+1. Stat clustering accuracy
+2. Stat identification accuracy
+3. Simulate isotopes pattern and re-stat accuracy
+4. Design re-rank method
+5. Prepare public data for further validation
+    + format MoNA, MassBank, etc. spectrum data as mgf
+    + retention time (simulate)
+    + retention time (true positive)
+
+## Sirius accuracy
+
+![top1 and candidates](png/ps_gather_sirius_accuracy_bar.png)
+
+## The premise of improving accuracy
+
+1. Classes prediction accuracy greater than structure prediction
+2. Some correct structures are in candidates
+3. Chromatography can be implemented into identification
+
+Implementation method
+
++ Collate candidates from identification
++ Consider structure similarity in a class
++ Integrate retention time (integrate Retip RT prediction)
+
+## An assumption: half truth
+
+Based on SIRIUS identification accuracy, assuming that the half part of top score idicate true results  
+Those identified structures are considered as reference compounds
+![instance nebula]("png/gather_tt_zoom_34.png")
+
+## Re-rank method
+
+Harf as reference compound
+
++ Perform Retip learning, then predict all RT of candidates and filter the impossible.
++ Based on structure similarity in a class, perform clustering in this class and get score.
++ Integrate all scores and rerank.
+
+## Implement a new score for re-rank
+
+Structure candidates re-rank score:
+
+$$
+S_{re-rank} = ( S_{simi} \times W_{simi} ) + ( S_{cluster} \times W_{cluster} ) + ( S_{RT} \times W_{RT} )
+$$
+
+# part 3: pharmacology
+
+## E. ulmoides stir-fried with sailing water contribute to target treatment of kidney
+
+![stir-fried with sailing water](/home/wizard/Pictures/sh.png)
+
+## Serum metabolome PCA (ion mode: neg)
+
+The re-collate serum metabolome dataset
+
+![neg: Serum metabolome](png/pca_facet.png)
+
+## MetaboAnalysis pathway enrichment
+
+![metaboAnalysis enrichment](/home/wizard/operation/batch_serum_neg/ps_pathway_enrichment.png)
+
+## Compound identified from MetaboAnalysis
+
+![compound](/home/wizard/Pictures/Screenshot from 2022-03-28 11-03-56.png)
+
+## MCnebula analysis
+
+![MCnebula](png/gather_serum_neg_child_nebulae.png)
+
+## Schedule
+
++ MCnebula
+    1. Job done of re-rank method in R codes
+    2. Simulate re-rank method in identification
+    3. Compare clustering effectiveness with Qmistree and MolNetEnhancer
++ Renal LC-MS data collate and analysis
+
+# END
+
+## Thank you

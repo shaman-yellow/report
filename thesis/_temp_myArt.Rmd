@@ -1,0 +1,17 @@
+---
+title: ''
+bibliography: '../library.bib'
+csl: '../gbt7714_1987.csl'
+reference-section-title: ""
+output:
+  custom_docx_document:
+    reference_docx: ./formal_temple.docx
+---
+
+```{r fig2, fig.cap = ""}
+plot(1:10)
+```
+
+# 一、test{-}
+
+Article[@lai_deep_2022; @huang_traditional_2021; @huang_combined_2021; @li_evaluating_2021; @wang_integrated_2022]

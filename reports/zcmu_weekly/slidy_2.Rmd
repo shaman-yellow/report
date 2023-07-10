@@ -1,0 +1,104 @@
+---
+title: 'Seminar'
+author: 'Reporter: Lichuang Huang'
+institute: 'Supervisor: Gang Cao'
+date: "`r format(Sys.Date())`"
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Warsaw"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+fontsize: 10pt
+---
+
+[annotation]: this part describe MCnebula
+
+# Part 1: MCnebula
+
+## Inovation
+
+1. Improve the compound prediction accuracy
+    + via clustering in classification
+    + via considering retention time
+    + ...
+2. High accuracy classes clustering for MS/MS annotation
+    + over 80% accuracy clustering, even unknown compound (no structure information)
+3. Intuitive compound classes distribution in network visualization
+    + each class involves a sub-nebula to explore the compound annotation
+4. MCnebula algorithm integrated in R
+    + cover SIRIUS LC-MS workflow analysis into R pipline
+5. A wide range of applicability
+    + not be confined to metabolome identification
+    + not be confined to spectrum library, but structure library
+
+## Sirius accuracy
+
+![top1 and candidates](png/ps_gather_sirius_accuracy_bar.png)
+
+## Implement a new score for re-rank
+
+Structure candidates re-rank score:
+
+$$
+S_{re-rank} = ( S_{simi} \times W_{simi} ) + ( S_{cluster} \times W_{cluster} ) + ( S_{RT} \times W_{RT} )
+$$
+
+## According to Retip
+
+![Retip issue](png/retip_issue.png)
+
+## Re-rank results
+
+Score re-rank and classification re-rank
+
+![two re-rank method test](png/gather_re_rank_accuracy.png)
+
+## MCnebula accuracy
+
+![MCnebula](png/gather_sirius_accuracy_bar.png)
+
+## Compare with GNPS and MolNetEnhancer
+
+![MolNetEnhancer](png/gather_ps_ps_gnps_accuracy_bar.png)
+
+## COSMIC Noise design
+
+![COSMIC noise design](png/ps_noise.png)
+
+## Add noise: main method
+
++ Mass global shift
++ Mass individual shift
++ Intensity shift
++ Add noise peak from other peak
+
+# part 2: pharmacology
+
+## Kidney metabolome PCA (ion mode: neg)
+
+The re-collate kidney metabolome dataset
+
+![neg: kidney metabolome](png/kidney_neg_pca.png)
+
+## MetaboAnalyst pathway enrichment
+
+![neg](png/neg_pathway.png)
+
+## Kidney metabolome PCA (ion mode: pos)
+
+The re-collate kidney metabolome dataset
+
+![pos: kidney metabolome](png/kidney_pos_pca.png)
+
+## Schedule
+
++ MCnebula
+    1. Add noise
+    2. Parallel comparation (Qmistree MolNetEnhancer)
+    3. Write Vignettes and manual reference document
+    4. ...
++ Renal LC-MS data analysis
+
+# END

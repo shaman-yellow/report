@@ -1,0 +1,128 @@
+---
+title: 'Seminar'
+author: 'Reporter: Lichuang Huang'
+institute: '`r format(Sys.Date())`'
+date: "`Supervisor: Gang Cao`"
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+fontsize: 7pt
+---
+
+[annotation]: this part describe MCnebula
+
+# MCnebula
+
+## Inovation
+
+1. High accuracy classes clustering for MS/MS annotation
+    + over 80% accuracy clustering, even unknown compound (no structure information)
+2. Intuitive compound classes distribution in network visualization
+    + each class involves a sub-nebula to explore the compound annotation
+3. MCnebula algorithm integrated in R
+    + cover SIRIUS LC-MS workflow analysis into R pipline
+4. A wide range of applicability
+    + not be confined to metabolome identification
+    + not be confined to spectrum library, but structure library
+
+# MCnebula evaluation
+
+## Compare with GNPS and MolNetEnhancer
+
+![MolNetEnhancer](png/gather_ps_ps_gnps_accuracy_bar.png)
+
+## COSMIC Noise design
+
+![COSMIC noise design](png/ps_noise.png)
+
+## Add noise: main method
+
++ Mass global shift
++ Mass individual shift
++ Intensity shift
++ Add noise peak from other peak
+
+## Noise model
+
+![noise model](png/noise_instance.png)
+
+## Results: MolNetEnhancer
+
+![MolNetEnhancer accuracy](png/molnet_noise_tolerance_bar.png)
+
+## Results: MCnebula
+
+![MCnebula accuracy](png/ps_mc_noise_tolerance_bar.png)
+
+# MCnebula validation
+
+## Re-analyse a research
+
+![an article of cell](png/literatra_cell.png)
+
+## Analysis workflow (part 1)
+
+1. Overview of Multi-omic data
+2. Find High-Confidence Biomarkers
+    + EFS algorithm for Proteomics, Metabolomics
+3. Post-translational modifications (PTMs)-Tolerant analysis...
+    + GNPS molecular networking, function analysis...
+4. K-means clustering
+    + for Proteomics
+        + function analysis
+    + for Metabolomics (GNPS MN, library match, CSI:fingerID, classyfire)
+        + acyl-carnitines, steroid derivatives, indoles
+
+## Analysis workflow (part 2)
+
+5. Data integration
+    + LASSO logistic classification algorithm
+        + SERPIND1
+        + thyroxine (T4)
+    + mixOmics R: protein-metabolite relationships
+6. Global evaluation
+    + IGF signalling
+7. Knowledge-Based Analysis (Underlying Cytokine)
+8. In vivo validation
+
+## key partion: identification of top feature
+
+![top rank](png/ps_cell_1.png)
+
+## key partition: identification in classes
+
+![ACs](png/cell.2.png)
+
+## Re-analyse via MCnebula
+
+![bio-tracing](png/gather_mark_child_nebulae.png)
+
+## ACs identification
+
+![ACs.](png/ps_Acyl carnitines_graph.png)
+
+## Identification of T4
+
+![T4](png/t4.png)
+
+# E. ulmoides dataset
+
+## Compounds with |log2(FC) > 1| 
+
+![eucommia.rank](png/eucommia.rank.png)
+
+## Compounds identified summary
+
+![summary](png/eu.table.png)
+
+## Schedule
+
++ MCnebula
+    1. collate data and figures
+    2. revise article
+
+# END

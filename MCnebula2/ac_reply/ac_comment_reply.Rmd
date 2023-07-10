@@ -1,0 +1,134 @@
+---
+---
+
+# Reply to reviewer 1:
+
+## Main comments
+
+1. The R package XCMS is commonly used for the pre-processing of LC-MS data.
+   Now we have encapsulated the related functions or methods of XCMS into the R
+   package MCnebula2, which enables fast Feature Detection in R with preset
+   steps and custom parameters. We have described this module in:
+   <https://mcnebula.netlify.app/docs/prologue/quick_start/#option-2-with-xcms>
+
+2. We have built a static website with a full introduction to the MCnebula
+   workflow, where users can consult any documentation from installation
+   (Linux, Windows, MacOS) to usage or demo analysis with codes:
+   <https://mcnebula.netlify.app/>.
+
+## Other comments
+
+1.  As we discussed in the paper, the Library Match is still the mainstream
+    compared to the *In silico* Prediction, because the accuracy of the Library
+    match method can be more than 90%.  However, the *In silico* approach has
+    the unparalleled superiority of searching a broad Molecular Structure
+    Database, which will greatly expand the application of mass spectrometry in
+    biological research.  We gave the example with SIRIUS, a representative
+    method.  Unfortunately, the application of SIRIUS to lipidomics has not
+    been as successful as metabolomics, which may be related to the structure
+    of lipid compounds, such as the difficulty to generate discriminative
+    fragmentations.
+
+2. For the section of introduction in the line 34, We have revised the sentence
+   according to the instructions.
+
+3. Thank you for your guidance. In the Line 48 Page 2, We have revised the
+   sentence according to your instructions.
+
+4. In Page 13, Line 25, "the stability comparison between MCnebula and GNPS
+    were 10.5%, 19.8% and 41.7%, 50.1%, respectively (Fig. 2a).", in this
+    context, the 'Fig. 2a' was 'Fig. 3a' instead.
+
+5. We uploaded the wrong version of the table, resulting in compound 1642 not
+   appearing in it. We have now uploaded the latest version of the table.
+   Regarding the transformation of the compound, we also stay at the level of
+   conjecture: this could be a change due to heating and catalysis. We might
+   explore the possibilities in a separate topic, but a specific discussion on
+   this aspect is beyond the scope of this study. We hope that the example of
+   compound 1642 will open the horizon for the application of MCnebula.
+
+# Reply to reviewer 2:
+
+## Main comments
+
+1. Indeed, our introduction on the github project homepage
+   (<https://github.com/Cao-lab-zcmu/MCnebula2>) is so brief that it leads you
+   to be confused at some point. But now we have detailed the installation and
+   use of the MCnebula2 R package on a newly built static site
+   (<https://mcnebula.netlify.app/docs/prologue/quick_start/#option-2-with-xcms>)
+   that introduces the MCnebula workflow.
+
+2. We have added a note about 'Classified numbers' (TP + FP). In addition, we
+   have fully considered the two common indicators you mentioned, Precision and
+   Recall, and added them to our evaluation (Fig. 2).
+
+3. We mentioned Child-Nebulae and Parent-Nebula in the article, but we only
+   focused on the use of Child-Nebulae and skipped the function of
+   Parent-Nebula. In fact, the generation and visualization of Child-Nebulae is
+   the character of the MCnebula workflow, and it is the use of Child-Nebulae
+   for analysis that highlights the advantages of the ABC selection algorithm
+   for fast filtering and selection of chemical classes.  Regarding
+   Parent-Nebula, it is a graphical visualization of a mixture of all the
+   features, containing too much information for the user to get useful
+   information from it. It can be understood that Parent-Nebula is a network
+   graph obtained by the traditional Molecular Networking method, while
+   Child-Nebulae is an improvement of that, visualizing multiple views split
+   features from Parent-Nebula in a chemical taxonomy perspective.
+
+4. In supplementary Table 1, we have compared MCnebula workflow with some
+   popular public tools (SIRIUS, GNPS, MZmine, XCMS, MetaboAnalyst, MS-DIAL) to
+   indicate its characteristics. Regarding the visualization of clustering for
+   LC-MS dataset, we show three aspects of indicators (Spectral based; Classes
+   based; Indepth annotation) to characterize the differences between
+   visualizations of methods such as MCnebula and GNPS. In addition, MCnebula's
+   visualization incorporates statistical analysis with significant compounds
+   to screen chemical classes or similar molecular structure, a module we
+   called 'Tracing top features'. Compared to other tools, the extensive
+   functions of MCnebula were shown in the Table 1.
+
+5. The heat map we present in the article is related to the screening of
+   chemical classes and 'features'. First, when we focused on a class, we were
+   able to obtain the 'features' belonging to this class with Nebula-Index;
+   subsequently, we filtered the 'features' with Q-value (adjust P-value),
+   log~2~(FC). We have added in the legend of Fig 6 (heat map): "The 'features'
+   are select by either in infection groups versus control groups or HM versus
+   HS group: Q-value &lt; 0.05, |log~2~(FC)| $\geq$ 0.3."
+
+6. We have described the ABC selection algorithm in detail in the methods
+   section.  This algorithm filters and selects to obtain a series of chemical
+   classes, and then groups the 'features' according to these chemical classes
+   to form Nebula-Index. Nebula-Index contains the chemical classes and the
+   features belonging to these classes. While Nebula-Index merges with the
+   annotation data (such as molecular formula, molecular structure) of all
+   these 'features', the data for plotting Child-Nebulae is fully available.
+   The subsequent visualization involves some programming details on data
+   organization and plotting, which are achieved by encapsulating existed R
+   packages (e.g., 'ggplot2', 'igraph', 'ggraph').
+
+7. We uploaded the wrong version of the supplementary table, resulting in
+   compound 1642 not appearing in it. We have now uploaded the latest version
+   of the supplementary table. Please note that this table only shows compounds
+   with Tanimoto Similairty &gt; 0.5.
+
+8. In sub-section 'Data and code availability' of section 'Experimental
+   section', We have described how all the codes used for analysis could be
+   obtained. Due to our mistake, the wrong MASSIVE link was given and it is now
+   fixed (<https://massive.ucsd.edu/ProteoSAFe/QueryMSV?id=MSV000079949>).
+
+9. **Feature level**, in the article, it means the quantification level of
+   the peaks represented by 'features', i.e. the peak area level. **Chemical
+   classified level**, in the context of the article, it refers to the
+   classifying of 'features' with the knowledge of systematic chemical
+   classification. **Regex Match**, also termed regular expression, describes a
+   pattern of string matches that can be used to check whether a string
+   contains a certain substring, to replace a matching substring, or to remove
+   a substring from a string that matches a certain condition.
+
+10. For English notes:
+    1. The repetition of punctuations and words has been revised (Page 3, line
+       19; Page 6, line 30).
+    2. The phrase and the verb tenses has been revised (Page 8, line 30; Page
+       8, line 39).
+    3. Other mistake were revised.
+
+

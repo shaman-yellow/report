@@ -1,0 +1,94 @@
+---
+title: 'Seminar'
+author: 'Reporter: Lichuang Huang'
+institute: '`r format(Sys.Date())`'
+date: "`Supervisor: Gang Cao`"
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+fontsize: 7pt
+---
+
+# Research background
+
+## Introduction
+
++ The trouble with analysis of untarget LC-MS/MS dataset 
++ Existing identification approaches
+    1. Spectral library match
+    2. Matching with fragmentation spectra of in silico simulation
+    3. In silico prediction with matching learning
++ State-of-the-art technology: SIRIUS 4 prediction through structural libraries
++ From in silico, towards biological research: identification and biomarker
++ Classified visualization boost biological analysis?
+
+## Introduction
+
++ Chemical classification
+    1. Taxonomy and Ontology
+    2. key metabolites or drug in hierarchies
++ MCnebula workflow
+    1. Classified visualization
+    2. Abundance-based classes selection
+    3. Leveraging State-of-the-art technologies
+    4. ...
+
+# Results
+
+## Overview of MCnebula
+
+![eu.cp.nebula](/home/wizard/operation/desk/mc_data/png/fig_1.eu.couple.nebula_1.png)
+
+## Overview of MCnebula
+
+![workflow](/home/wizard/operation/desk/mc_data/png/ps_fig_2.workflow_1.png)
+
+## Evaluation
+
+![mc.tl.bar](/home/wizard/operation/desk/mc_data/png/ps_fig_5.mc.toler_1.png)
+
+## Evaluation
+
+![cp.id.accuracy](/home/wizard/operation/desk/mc_data/png/fig_6.comp.accu_identi_1.png)
+
+## Serum dataset
+
+![se.tr.nebula](/home/wizard/operation/desk/mc_data/png/ps_fig_3.trace.bio_1.png)
+
+## Serum dataset
+
+![ac.zo.3rank](/home/wizard/operation/desk/mc_data/png/ps_fig_4.ac.zoom_1.png)
+
+## *E. ulmoides* dataset
+
+![eu.rk.nebula](/home/wizard/operation/desk/mc_data/png/fig_7.eu.rank_1.png)
+
+# Discussion
+
+## Discussion
+
++ Limitation of molecular networking (MS/MS dependent classify)
++ Biases of feature selection and settlement
+    + structure
+    + classification
++ Discovery in serum dataset
++ Botanical dataset analysis
+
+# Extra
+
+## Pathway
+
+![pathway](/home/wizard/operation/desk/mc_data/png/ps_pathway.png)
+
+## Chemical reference
+
+1. Chemical synonyms
+2. OCR for mutiple PDF
+3. String dist
+4. Format
+
+# END

@@ -1,0 +1,149 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{  }
+---
+
+# Articale
+
+## Title
+
+MCnebula: Critical chemical classes to classify and boost identification
+by visualization for untargeted LC-MS/MS dataset analysis
+
+## Introduction
+
+- LC-MS/MS processing
+- Identification: library match, machine prediction ...
+- Method for analysis:
+    - Classification
+    - Statistics
+    - Visualizaiton
+- Taken together: MCnebula
+    - ABC selection
+    - ...
+    - packages: MCnebula2 exMCnebula2
+
+## Method
+
+::: columns 
+:::: column 
+- Chemical structure and formula
+- Chemcial classification
+- ABC selection
+    - Inner filter
+    - Cross filter
+        - abundance selection
+        - goodeness assessment
+        - identicality assessment
+::::
+
+:::: column 
+\includegraphics[width=70mm]{../article/MCnebula2/fts/fig6.mech.pdf}
+::::
+:::
+
+## Method
+
+- Add 'noise' into spectra
+    - Global mass shift 
+    - Individual mass shift
+    - Global intensity shift
+    - Individual intensity shift
+- 'Identify' structure via InChIKey Planar
+- Tools for data collating and visualization
+    - S4 programming
+    - Package ggplot and grid ...
+    - ...
+- Statistics
+- ...
+
+## Results
+
+- Overview
+
+```{r, eval = T, echo = F, results = "asis"}
+filename <- "~/outline/mc.test/subjective_evaluation/subEval_2023-02-21.csv"
+data <- data.table::fread(filename, check.names = F)
+data <- dplyr::filter(data, item != "software")
+data <- dplyr::mutate_if(
+  data, is.integer,
+  function(x) {
+    ifelse(x == 0, "-", 
+      vapply(x, function(x) paste0(rep("*", abs(x)), collapse = ""), 
+        character(1)))
+  }
+)
+data <- dplyr::mutate(data, group = form(group), item = form(item))
+colnames(data) <- form(colnames(data))
+data <- kroup_row(data)
+knitr::kable(data, format = "markdown", caption = "Function evaluation",
+  label = NA)
+```
+
+## Results
+
+::: columns 
+:::: column 
+- Method evaluation
+    - Dataset
+        - Original dataset of reference library
+        - Medium noise
+        - High noise
+    - Methods
+        - MCnebula
+        - GNPS
+    - Dimension
+        - Classified accuracy
+        - Identified accuracy
+::::
+
+:::: column 
+\includegraphics[height=67mm]{../article/MCnebula2/fts/fig2.compare_accuracy.pdf}
+::::
+:::
+
+## Results
+
+::: columns 
+:::: column 
+- Data analysis
+    - Serum dataset
+       - pathway enrichment
+    - Herbal dataset
+       - Chemical change
+::::
+
+:::: column 
+\includegraphics[height=67mm]{../article/MCnebula2/fts/fig4.ac_node2.pdf}
+::::
+:::
+
+## Discussion
+
+- About MCnebula and ABC selection
+- About evaluation
+- About analysis of serum dataset
+- About analysis of herbal dataset
+- End
+
+## Schedule
+
+- Finish writing the thesis
+- ...

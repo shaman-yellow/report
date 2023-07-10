@@ -1,0 +1,875 @@
+---
+title: ''
+bibliography: '../library.bib'
+csl: '../gbt7714_1987.csl'
+reference-section-title: ""
+output:
+  custom_docx_document:
+    reference_docx: ./formal_temple.docx
+---
+
+[title]: MCnebula：以关键化学类归类和可视化促进鉴定的非靶向LC-MS/MS分析策略
+[title]: MCnebula: Critical chemical classes to classify and boost identification by visualization for untargeted LC-MS/MS data analysis
+
+```{r setup, include=FALSE}
+library(officedown)
+library(flextable)
+knitr::opts_chunk$set(echo = F, fig.cap = TRUE, message = F, print = F)
+# lapply(list.files("scripts", "\\.R$", full.names = T), source)
+```
+
+```{r, echo = F}
+fpar(
+  ftext("目 录", fp_text(font.size = 14, font.family = "SimHei")),
+  fp_p = fp_par("center", line_spacing = 1.5)
+)
+```
+
+<!---BLOCK_TOC--->
+
+\newpage
+
+```{r, echo = F}
+fpar(
+  ftext("附：图目录", fp_text(font.size = 14, font.family = "SimHei")),
+  fp_p = fp_par("center", line_spacing = 1.5)
+)
+```
+
+<!---BLOCK_TOC{seq_id: 'fig'}--->
+
+\newpage
+
+```{r, echo = F}
+fpar(
+  ftext("附：表目录", fp_text(font.size = 14, font.family = "SimHei")),
+  fp_p = fp_par("center", line_spacing = 1.5)
+)
+```
+
+<!---BLOCK_TOC{seq_id: 'tab'}--->
+
+\newpage
+
+# 中文摘要 {-}
+
+**目的：**建立适应当前人工智能技术于质谱领域发展的便捷LC-MS/MS分析技术。
+
+**方法：**结合尖端的SIRIUS系列预测技术、分子网络可视化、统计筛选、R语言面向对象编程等技术，开发用于LC-MS/MS分析的工作流。
+
+**结果：**名为MCnebula（Multiple-Chemical Nebula）的框架被建立，通过聚焦于关键化学类别和多维度的可视化，以促进质谱数据分析过程。它由三个重要步骤组成：(1）基于丰度的化学类（ABC，abundance-based classes）选择算法；（2）根据关键化学类别对 "Feature"（化合物）进行归类；（3）可视化为多个Child-Nebulae（网络图）并注释以化学分类和结构等。MCnebula可以应用于探索超出参考光谱库限制的未知化合物的分类和结构特征。此外，由于它具有ABC选择和可视化的功能，它对于通路分析和生物标志物的探索是直观和便捷的。MCnebula是以R语言实现的。在R语言包中提供了一系列工具，以促进MCnebula功能的下游分析，包括'Features'筛选（Feature selection）（主要为二元比较的统计分析）、Top ‘Features’ 的同类追踪、通路富集分析、热图聚类分析、光谱可视化分析、化学信息查询和输出分析报告等。为了说明MCnebula的广泛用途，我们分析了人类血清代谢组学数据集。结果表明，通过追踪潜在生物标志物于Child-Nebulae，"Acyl carnitines" 被筛选出来，这与此前的报道是一致的。我们还研究了一个植物来源的数据集，即杜仲（*E. ulmoides*），实现了快速的未知化合物注释和发现。
+
+**结论：**MCnebula工作流功能广泛，适应于复杂的代谢组学数据分析和植物药数据分析。
+
+**主题词：**质谱，可视化，化学类，鉴定，MCnebula
+
+\newpage
+
+# ABSTRACT {-}
+
+**Objective:** Establishing a convenient LC-MS/MS analysis technique adapted to
+the current development of artificial intelligence technology in the field of
+mass spectrometry.
+
+**Methods** Combine cutting-edge predictive technologies of softwares of SIRIUS,
+visualization of molecular network, statistical screening, and object-oriented
+programming in R language to develop workflows for LC-MS/MS analysis.
+
+**Results:** We established a framework called MCnebula（Multiple-Chemical
+nebula） to facilitate mass spectrometry data analysis process by
+focusing on critical chemical classes and visualization in multiple
+dimensions. It consisted of three vital steps: (1) abundance-based
+classes (ABC) selection algorithm, (2) critical chemical classes to
+classify 'features' (compounds), (3) visualization as multiple
+Child-Nebulae (network graph) with annotation, chemical classification
+and structure. Notably, MCnebula can be applied to explore
+classification and structural characteristic of unknown compounds that
+beyond the limit of spectral library. What's more, it is intuitive and
+convenient for pathway analysis and biomarker discovery due to its
+function of ABC selection and visualization. MCnebula was implemented in
+the R language. We provided a series of tools in the R packages to
+facilitate downstream analysis in a MCnebula-featured way, including
+feature selection (statistical analysis of binary comparisons), homology
+tracing of top features, pathway enrichment analysis, heat map
+clustering analysis, spectral visualization analysis, chemical
+information query and output analysis reports, etc. In order to
+illustrate the broad utility of MCnebula, we investigated a
+human-derived serum dataset for metabolomics analysis. The results
+indicated that 'Acyl carnitines' were screened out by tracing structural
+classes of biomarkers which was consistent with the reference. We also
+investigated a plant-derived dataset of herbal *E. ulmoides* to achieve
+a rapid unknown compound annotation and discovery.
+
+**Conclusion:** MCnebula workflows are broadly powerful and adaptable to
+complex metabolomics data analysis and phytopharmaceutical data analysis.
+
+**Keywords:** Mass spectrometry, visualization, chemical classes,
+identification, MCnebula
+
+```{r abstract, fig.cap = "摘要图示"}
+inclu.fig("../MCnebula2/tocg.pdf")
+```
+
+\newpage
+
+# 前言 {-}
+
+&emsp;&emsp;
+分析非靶向LC-MS/MS数据集是复杂的，由于数据量大、光谱复杂、化合物结构多样。在过去的几十年中，许多研究人员试图解决这些问题。许多技术软件或基于网络的界面被开发出来，为数据分析提供一站式的批量解决方案[@2020p; @2018az; @2020co; @2016a]。这些解决方案应用或建议了灵活的质谱处理工具或类似的算法[@2012d; @2016e; @2006a; @2010]。为了减少假阳性和假阴性的结果，更多的算法已经实现了去卷积（Deconvolution）、'Features'筛选（Feature selection）或统计过滤[@2017f; @2022; @2017ao; @2022b]。与样品或平行样品中的化合物相对应的每一个'Feature'都具备了用于鉴定的碎片光谱。在这种情况下，研究人员不得不面对一个问题：如何准确和快速地鉴定繁多的化合物？
+
+&emsp;&emsp;
+直到今天，研究者们已经开发了几种策略来鉴定具有碎片光谱的化合物。**1）**参考光谱库的匹配。一些公共可用的数据库是通过实现参考光谱的可重复使用而建立的，如MassBank、MassBank of North America（MoNA）、Global Natural Products Society（GNPS）[@2016a]。同时，这些碎片光谱可通过其网络服务器、第三方平台（如[CompMass](http://prime.psc.riken.jp/compms/msdial/main.html#MSP%3E)）或特定工具（MASST）[@2020cm]获得。然而，与结构数据库（PubChem有超过1亿条记录）相比，光谱库的规模太小，限制了质谱的应用。为了跨越这一障碍，**2）** 通过计算机模拟碎片光谱。越来越多的研究者开发了计算机工具来模拟碎片光谱[@2010c; @2015c; @2016am; @2017aq]。一些数据库，如MoNA整理了模拟的光谱，并公开使用[@2013w]。**3）**通过机器学习进行预测。这类算法从参考光谱数据集或光谱库中训练，然后“学习”如何预测化学指纹或原理，以便从结构数据库中检索出正确的结构[@2012ab; @duhrkop_searching_2015; @2018ay]。
+
+&emsp;&emsp; 
+计算机方法正在迅速发展。到目前为止，被称为SIRIUS[@duhrkop_sirius_2019]的前沿技术，集成了许多先进的人工智能算法，据报道，在检索结构库时，其准确率达到了70%。这种方法有助于鉴定光谱库范围之外的代谢物。虽然计算机工具促进了化学鉴定，但仍然缺乏一个适当的框架，可以将SIRIUS纳入到用户友好的生物研究中，推进生物标志物的发现和质谱数据集的通路分析。人工注解化合物和筛选生物标志物相当耗时，而且结果受到主观因素的影响。提及用户友好的分析工具，分子网络由于其可视化和数据透明而越来越受欢迎。分子网络是一种基于光谱相关的可视化的方法，可以检测来自相似分子的光谱（所谓的光谱网络），即使这些光谱与任何已知化合物不匹配[@2016a]。基于分子网络的概念，我们提出了一个想法，基于化学分类的可视化的聚类可能有助于生物标志物的发现和代谢通路的分析。
+
+&emsp;&emsp; 
+化学分类的历史可以追溯到上个世纪中叶。1963年，德温特世界专利索引（Derwent World Patent Index，DWPI）首次提出了化学片段编码系统。直到近年来，像基因本体（GO）[@2000g]这样用分类学和本体论的化学分类被更系统地提出[@2016]。ClassyFire由于其可计算性和系统性，在LC-MS数据集分析的化合物注释方面颇受欢迎[@2019bt; @2019br; @2019bs; @2019bq]。该分类法和本体论是强大的，对化学大有裨益。例如，有研究者提出了一种基于层次分类的方法，称为Qemistree，通过将分子关系表达为一“层级树”来分析质谱数据，这可以在样品元数据和化学本体的背景下展现同一性和特殊性[@2021b]。
+
+&emsp;&emsp; 
+非靶向代谢组学是组学科学的一个领域，它利用尖端的分析化学技术和先进的计算方法，全覆盖式描述复杂的生化混合物。基于LC-MS的非靶向代谢组学由于其高灵敏度、小样本量和无需分离直接进样等特点而大受欢迎[@2016aq]。在统计学方法的帮助下，研究人员可以从数以千计的LC-MS 'Features' 中筛选和确定更多信息的疾病生物标志物，以帮助设计或开发改进治疗方法，并更好地评估康复结果[@2016ar]。这些统计方法主要涉及经典统计学和人工智能模型（如随机森林）[@2019bv]。由于'Features'集的复杂性或算法的稳定性，这两种方法都不可避免地导致特定的偏差[@2017i]。此外，在'Features'层面的分析无法无偏差地剖析代谢物的系统效应[@duhrkop_systematic_2021]。在这种观点下，在化学分类水平上进行分析可能是一个更好的解决方法。然而，不应该忽视同一分类层次上的代谢物的差异。例如，属于"吲哚和衍生物"（Indoles and derivatives）的小分子对芳烃受体（AHR）有结构上的差异影响[@2019c]，不同的结构特征将导致不同的活动。解决这个问题的办法是将'Feature'层面的统计和化学类层面的评估结合起来。
+
+&emsp;&emsp; 
+除了化学分类和统计分析外，聚类可视化也是一种流行的非靶向质谱数据分析工具。在过去的十年中，全球天然产物社会分子网络（GNPS MN）不断发展推进了这类方法。GNPS应用分子网络将分子的质谱基于其碎片模式的相似性连接起来[@2012a]。遗憾的是，GNPS的分子网络主要依赖于光谱的相似性，而不是化合物结构或分类的相似性。例如，黄酮类化合物由一个芳香环和一个与苯基相连的含氧杂环组成，由于其特殊的类别和结构的相似性，预计它们会被聚集在一起；然而，据报道，在以前的研究中，一些属于黄酮类化合物的化合物恰好不在其他黄酮类化合物的集群中[@duhrkop_systematic_2021]。因此，在分类层面上的聚类可视化是非靶向质谱数据集的更好选择。早在2012年，首次提出了质量数据分析的可视化分子网络概念[@2012a]，但当时还没有通过碎片谱图预测化合物分类的计算机工具。如今，随着计算机智能分类工具的发展[@2016]，有必要对可视化策略进行革新，以提高归类水平的置信度。
+
+&emsp;&emsp;
+出于上述考虑，我们提出了一个综合框架，名为MCnebula，用于非目标LC-MS/MS数据集分析。MCnebula集成了一种新的基于丰度的类别（ABC）选择算法，用于选择化学类别。ABC选择算法的原理是 (1)根据预测的概率对数千个化学类别进行初步过滤，(2)将所有的'Features'视为一个整体，检查每个化学分类的'Features'的数量和丰度（不同层次的分类，子结构和主导结构的分类），然后选择有代表性的类别，(3)对这些化学类别进行优度评估（关于其化合物的鉴定优度）和一致性评估（这些化学类别在MS/MS谱图中可以相互区别的程度）。最终的化学类别将用于后续的分析：可视化的Child-Nebulae，并聚焦这些化学类别/Nebulae的生物标志物或化学发现。基于统计分析的高排名'Features'可以被设定为追踪器（Tracer），以发现更多的化学结构、光谱相似性或同化学类别的化合物。得益于SIRIUS软件的注释模块和前沿技术[@duhrkop_searching_2015; @duhrkop_sirius_2019; @duhrkop_systematic_2021; @bocker_sirius_2009; @2015; @ludwig_database-independent_2020]，超越了光谱库匹配的限制，MCnebula可以用于探索未知化合物。MCnebula（更新为MCnebula2，涵盖更多的工具，如ABC选择算法、Nebula可视化、统计分析和输出报告等）主要以R的面向对象编程的S4系统编写，它允许所有数据在一个对象（object）中从头到尾进行流水式分析，方便了数据处理。除了MCnebula的基本功能外，我们还提供了一个额外的'exMCnebula2'包用于下游分析，其中包含了本研究中使用的所有分析工具，如通路富集分析、热图聚类分析、光谱可视化分析、化学信息查询等。非靶向LC/MS-MS的下游分析很复杂，并且因数据不同而不同。exMCnebula2包中的额外工具可以为MCnebula的扩展应用提供一个范例。
+
+&emsp;&emsp; 
+在这项研究中，我们以MCnebula分析了两个数据集，以证明方法的广泛适用：一个是源于人类的血清数据集，与金黄色葡萄球菌菌血症（SaB）的死亡风险分析相关；另一个是源于植物的草药数据集，与中药的炮制（杜仲的炮制前后）有关。在过去，代谢组学的分析方法（非靶向LC-MS/MS）借助于集成的工具或者单功能的工具应用：'Features'检测，统计分析（PCA，OPLS-DA等），光谱匹配，以机器预测无法以光谱匹配鉴定的化合物，或者可视化为分子网络来探索结构相似的化合物；这些方法或多或少存在上述讨论的技术发展中的局限性，或者带来不够全面的分析视角（见表\@ref(tab:subEval)）。中药炮制的非靶向LC-MS/MS承袭于代谢组学的分析[@cai_recent_2018]，然而面临的问题是更少可用的匹配光谱。MCnebula方法的建立将会为代谢组学分析和包括中药在内的植物药的分析鉴定带来全新的视角。
+
+\newpage
+
+# @@part MCnebula的方法构建
+
+# 材料与方法
+
+## 实验材料
+
+&emsp;&emsp; 
+个人笔记本电脑Surface pro7用于编程环境的搭建和R语言编程：
+Pop!\_OS (Ubuntu) 22.04 LTS 64-bits PC (Intel Core i7-1065G7, 1.3 GHz $\times$
+8, 16 Gb of RAM)。
+
+## 实验方法
+
+{@@id:Rpkg1}
+
+&emsp;&emsp; 
+所有语言和脚本编写均在配置好的VIM（version 8.2）中进行，运行和测试在R（version 4.2.1）中进行。必要时辅助以Bash（shell语言）。（VIM的配置：<https://github.com/Cao-lab-zcmu/bash_and_vim>）
+
+### R 的配置
+
+&emsp;&emsp; 
+以下表格为R语言编程中涉及的包以及其作用说明：
+
+```{r tab.id = "imports", ft.keepnext = F}
+flex_prep
+```
+
+# 结果
+
+## MCnebula R包概览
+
+### 设计理念
+
+MCnebula的最初R版本是简单的函数式编程（<https://github.com/Cao-lab-zcmu/MCnebula>），但它存在不少缺陷，无法满足复杂的、具有多重注释数据的代谢组学数据分析，它兼容性不够强的数据结构使得使用起来颇为困难（需要输入太多的参数）。MCnebula2 R包的设计上需要解决上个版本存在的各种问题，它需要具有以下特点：
+
+- 简明的数据对象。它以面向对象式的编程方式实现，所有的数据存储于一个对象中（即'mcnebula'），数据的中间处理和最终形成过程都在这个对象内部进行更迭，用户不需要知道它们是如何发生的，也不需要知道它们存储在哪个位置，只需要在运行结束后通过函数或者方法取得必要的数据。用户只需要掌握好这一个数据对象就能完成从头到尾的分析。
+
+- 简单明了的参数输入。它只有最必要的参数输入需求，这些参数还需要带有默认值，降低用户的使用难度。面向对象编程具有参数化多态的特征，可以利用这一特性赋予MCnebula的方法以更强的包容性。用户可以缺省参数，缺省的参数可以以默认参数替代。默认的参数必须是易于获取的，研究者往往以它们为参考而调整进一步的分析。利用参数化多态，不带有任何参数的方法将输出该方法默认的参数的列表（例如直接输入'cross_filter_stardust()'）。
+
+- 安全的参数验证。R的函数式编程往往不具备参数验证的特性。R函数式编程的针对的往往是S3类对象，它们并不是严谨的对类的定义。MCnebula2新的编程形式需要对方法的输入参数的严谨验证（应用的是S4的类），防止错误的输入导致错误的输出。这是通过定义一系列的类来实现的（例如'mcnebula'，'nebula'，'ggset'，'command'等）。
+
+- 不易出错的分析流程。MCnebula具有多个函数或方法参与的分析流程，该流程可能囊括十余个步骤，由于各个步骤的参数可定制性，它们是不能省略或相互合并的，但这将导致流程容易交叉出错，或者使用者无法理解其中先后顺序关系。因此新的编程形式需要带有数据验证环节，即对这一步需求的数据进行验证，如果缺少相应数据，将提示使用者进行上一步需要的步骤。在面向对象式的编程中，这样的验证是易于实现的，因为所有的数据都可以存储于一个数据对象中。
+
+- 兼容性更强的结构特征。各个分析环节的分析处理要分配于不同的函数或方法中，它们内部不相交叉，只通过各个接口相互衔接。一方的错误不会导致另一方的错误，它们的错误也必须是易于排查的。MCnebula的算法依赖于SIRIUS的计算，为了获取SIRIUS的计算结果，加入API模块获取它的计算结果也是必不可少的。SIRIUS已经从版本4更迭到了版本5，它的数据存储方式发生了变动。MCnebula的数据获取模块必须具有强大的稳定性，不会因为SIRIUS的版本变化而导致全局崩溃，它得是易于维护。SIRIUS对于输出数据的属性名称可能会发生改变，因此在MCnebula中，需要有自身的对于这些属性的另定义的ID名称，真正用于编程的必须是这些ID名称，而不是SIRIUS输出的名称，这样，当SIRIUS的数据结构或者属性名称发生变动时，仅仅需要更改最底层的接口，就能适应版本的变化，将维护成本降低到最小。
+
+- 高度可定制的分析流程。MCnebula2的主要算法模块为：'filter_structure'，'create_reference'，'filter_formula'，'filter_ppcp'，'create_stardust_classes'，'cross_filter_stardust'，'create_nebula_index'。'filter_\*'系列为对分子式、结构式或者化学类的候选项的筛选步骤，这些方法已经包含默认的排序和过滤方法，但它们也需要具备自定义的特征，因此，它们在设计中兼容了强大的 'dplyr' 包的表达式过滤的特性，在输入参数（作用于多重属性的表达式）后对所有的Features数据集的候选项进行过滤，在最简洁优雅的方式下操作数据集。'\*stardust\*' 系列为可视化之前的关键步骤，它将筛选出关键的化学类用以可视化，为了缓解算法上的偏颇，我们额外设计了 'backtrack_stardust' 方法，用以对过滤掉的化学类进行追溯。这些设计使得分析流程可以灵活变幻。
+
+- 高度可定制的数据可视化。MCnebula充分利用ggplot2包进行数据可视化。ggplot2这一明星级的可视化包具有精美、优雅、高度可定制的特性（多图层可视化是一大特点），MCnebula在设计可视化时，不应该丢失它的特性。我们设计了 'ggset' 这一对象，用以将我们预设的可视化函数和参数包装（这些都是ggplot2的函数和参数）。'ggset' 主要为 'layers' 数据槽（Slot），实际上它存储的是预设的 'ggplot2' 的各个图层。这样，MCnebula2的最终可视化是高度可定制的，通过操纵 'ggset'，经验丰富的 'ggplot2' 使用者就像在编写 'ggplot2' 进行绘图一样。
+
+- 直观并且美观的数据可视化。R的ggplot2包提供了大量预设的基本的美观的图形或者主题，MCnebula2需要利用这些图形或者主题来进行可视化。此外，'ggsci'包提供了各类顶级杂志社偏爱的色调，这些色调简洁明亮，可以丰富MCnebula2的可视化。为了充分利用这些可视化元素，MCnebula带有'melody'对象，用于操纵可视化的调色板。
+
+- 翔实丰富的使用说明文档。编写R包时，可以使用 'roxygen2' 包进行注释，进而生成说明文档，可用R内部使用，也可形成单独的.pdf文档或其他文档（现在可获取于：<https://github.com/Cao-lab-zcmu/MCnebula2/blob/document/reference.pdf>）。MCnebula2 包为每一个用户级的方法（Method）和函数（Function）注释了使用说明，并带有示例数据和示例代码，并在必要的部分添加了细节上的算法说明，使得用户能够无障碍使用MCnebula2 R包。
+
+- 高度可定制的输出报告。R带有一系列优秀的支持文档输出的工具包，如'rmarkdown'，'knitr'，'pander'等。MCnebula在设计时，考虑了集成这些包的工具让分析流程以完整报告的形式输出。为了实现高度的自定义，我们设计存在基本工作流模块（相对固定）和自定义模块（结合其他R代码灵活部署），前者可用包装好的'workflow'函数快速构建输出（获取代码，或直接运行直到生成报告），而后者则建立在前者的基础上增添'section'。
+
+### 数据流
+
+&emsp;&emsp; 
+MCnebula工作流程致力于从头开始分析LC-MS/MS数据集，即从样品获得的原始数据开始，经过各个阶段的分析，得到一份完整的分析报告（图\@ref(fig:stream)）。分析过程遵循一般的MCnebula分析模板，从过滤候选化学式、结构式、化学类别，到创建可视化Nebula；它还允许自定义高级分析，在聚焦于化学类别的Child-Nebulae的帮助下，进行统计分析、'Features'筛选（Feature selection）、聚焦关键代谢物（化合物）及其结构特征、通路富集、查询化合物同义名等（拓展功能请参考：{@@ref:develop}）。
+
+<!---BLOCK_LANDSCAPE_START--->
+ 
+```{r stream, fig.cap = "MCnebula数据流"}
+inclu.fig("../MCnebula2/fts/fig1.data_stream.pdf", T)
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+- 图\@ref(fig:stream)注：根据数据呈现的平台，MCnebula的工作流程可以分为两部分。第一部分是R以外的部分（在MCnebula2之前）：从**Sample**到**LC-MS/MS**，获得原始数据；**Convert raw data**，使用Proteowizard衍生的流行的MSconvert工具实现；对于**Feature detection**，用户可以用任何LC-MS处理工具实现，如MZmine、XCMS、OpenMS等；然后将.mgf或其他文件格式的MS/MS光谱导入SIRIUS进行计算。R内部的部分，MCnebula2实现了数据的整合，并在'mcnebula'对象中创建Nebulae。
+
+## MCnebula的算法
+
+{@@id:algorithm}
+
+### 整体考虑
+
+&emsp;&emsp; 
+非靶向LC-MS/MS数据集的分析一般从'Features'检测（Feature detection）开始。'Features'被识别为MS^1^（MASS一级）数据中的"峰"。每个'Features'可能代表一个化合物，并以MS^2^（MASS级别2）光谱进行分配。然后用MS^2^光谱来鉴定化合物。困难主要在于对这些'Features'进行注释以发现它们的化合物身份，并为进一步的生物研究挖掘出有益的信息。此外，非靶向的LC-MS/MS数据集通常是一个庞大的数据集，这导致整个过程的分析耗时。在此，我们采用了一种基于化学类的可视化方法，即MCnebula，来解决这些问题。
+
+&emsp;&emsp; 
+MCnebula R包本身不涉及分子式预测、结构预测和化学类的预测，因此不涉及这些部分的准确性。MCnebula通过提取SIRIUS项目的预测数据来实现下游分析。MCnebula的核心是化学类别过滤算法，也就是基于丰度的化学类（ABC）选择算法。为了详细解释ABC选择算法，我们需要从MS/MS光谱分析和鉴定化合物开始讨论。
+
+### 化学结构式和分子式
+
+&emsp;&emsp;
+MS/MS谱的分析是一个推断和预测的过程。例如，我们根据分子量结合MS/MS谱的可能碎片模式来推测元素的组成，推测化合物的潜在分子式。最后，我们从化合物结构数据库中寻找确切的化合物。有时，这个过程充满了不确定性，因为有太多的因素可能影响到MS/MS数据的可靠性和推断的正确性。可以假设，在MS/MS光谱背后有复杂的潜在化学分子式、化学结构和化学类别的候选。假设我们现在有这些候选数据，MCnebula可以帮助提取这些候选数据，并根据化学结构预测的最高分获得每个MS/MS谱的唯一分子式和化学结构；在这个过程中，和大多数算法一样，我们可以根据分数对预测进行过滤。
+
+### 根据最佳候选项确立Reference
+
+&emsp;&emsp; 
+对以LC-MS/MS谱呈现的潜在化合物进行预测，并得到了化学分子式、结构和化学类别的候选结果（这些在SIRIUS中实现了）。这些候选化合物包括阳性和阴性结果：对于化学分子式和化学结构，阳性预测是唯一的；对于化学类别，涉及多个属于不同分类的阳性预测。无从得知确切的阳性或阴性模式。通常情况下，我们通过得分对这些数据进行排序和过滤。有许多得分系统，例如根据同位素、质量误差、结构相似性、化学类别等等。选择哪种对候选项进行排名的分数系统取决于研究的目的。比如：
+
+- 要找出化学结构大多是阳性的候选，通过结构得分对候选进行排名。
+- 为了确定一个潜在的化合物是否属于某个化学类别，通过化学类的得分对候选化合物进行排名。
+
+通过MCnebula中的 'filter_formula()'、'filter_structure()'或 'filter_ppcp()' 函数，可以得到得分最高的候选化合物。然而，对于三个模块（分子式、结构、化学类），有时它们的最高分候选并不一致，也就是说，他们的最高分是针对不同的化学分子式的。为了在其他模块中找到相应的数据，应该进行 'create_reference()' 来建立 'Specific candidate'，作为后续数据整合的参考。我们通过得分和排名获得了唯一的化学分子式和化学结构式作为参考。但是对于化学类来说，这种方法是不够的。  
+
+### 化学分类学
+
+&emsp;&emsp;
+化学分类是一个复杂的系统。在这里，我们只讨论基于结构的化学分类系统[@2016]，因为MS/MS谱比生物活性和其他信息更能说明化合物的结构。
+
+&emsp;&emsp;
+根据化合物整体结构和局部结构的划分，我们可以把结构特征称为优势结构（主导结构，Dominant structure）和亚结构（Sub-structure）[@2016]。相应地，在化学分类系统中，我们不仅可以根据优势结构对化合物进行分类，还可以根据亚结构进行分类。基于化合物的优势结构的化学分类很容易理解。例如，我们将把紫杉醇（Taxifolin）归入“黄酮类”（Flavones），而不是“酚类”（Phenols），尽管它的局部结构有一个“酚”的子结构。我们希望按照化合物的主要结构而不是子结构对其进行分类，因为这样的分类更简洁，包含的信息更多。但是，在MS/MS光谱分析过程中，我们有时只能根据化合物的亚结构进行化学分类，这可能是由于：结构分析过程中的不确定性；可能是未知化合物；MS/MS光谱片段信息不足。在这种情况下，我们有必要借助于子结构信息对化合物进行分类，否则我们对那些无法获得优势结构信息的化合物一无所知。
+
+&emsp;&emsp; 
+需要注意的是化学分类学的另一个方面的复杂性，即分类的层次性。例如，'Flavones'属于其上级'Flavonoids'；再上级'Phynylpropanoids and polyketides'；进一步向上的分类是'Organic compounds'。  
+
+### ABC选择算法
+
+{@@id:abc}
+
+&emsp;&emsp;
+在非靶向LC-MS/MS数据集中，每个 'Features' 都有相应的MS/MS谱，总共可能有几千个'Features'。ABC选择算法将所有 'Features' 作为一个整体，考察属于各化学分类的 'Features' 数量和丰度（不同层次的分类、亚结构和优势结构的分类），然后选择有代表性的类（主要根据 'Features' 的数量或丰度范围来筛选类），为后续分析奠定基础（图\@ref(fig:algo)）。
+
+- 创建Stardust classes（Inner filter）。分类预测的后验概率（PPCP）数据归于每个'Features'。在进行过滤时，只设置了简单的阈值条件或绝对条件来过滤化学类；不同属性之间没有交叉，'Features'之间也没有交叉。因此，我们定义这是'Inner filter'。
+
+- 交叉过滤Stardust Classes（Cross filter）。化学类的数据和它们归属的'Features'，即Stardust Classes，被结合起来，然后根据化学类进行分组。分组后，每个化学类都有一定数量的'Features'。在过滤时，可以对组内的'Features'数据进行统计；可以对这些数据与'Features annotation'数据一起进行统计；还可以进行统计，将各组相互比较。由于其过滤的属性交叉，我们定义这是'Cross filter'。
+
+不管是全部由MCnebula函数提供的算法过滤，还是对某些化学类别进行自定义过滤，我们现在有一个叫做Nebula-Index的数据。这个数据记录了一些化学类别和归属于它们的 'Features'。随后的分析过程或可视化将以它为基础。每个化学类别被认为是一个Nebula，其分类的 'Features' 是这些Nebula的组成部分。在可视化过程中，这些Nebula将被可视化为网络。从形式上来说，我们把这些在Nebula-Index数据基础上形成的 'Nebula' 称为Child-Nebulae。相比之下，当我们把所有的'Features'放在一起形成一个大的网络时，那么这个Nebula就被称为Parent-Nebula。
+
+<!---BLOCK_LANDSCAPE_START--->
+ 
+```{r algo, fig.cap = "MCnebula过滤化学类的机制"}
+inclu.fig("../MCnebula2/figure_mech.pdf", T)
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+- 图\@ref(fig:algo)注：此图说明了MCnebula如何从'Features'中过滤预测的化学类，以形成Nebulae-Index，创建Child-Nebulae。**Inner filter**通过名字的Regex匹配（名字不含阿拉伯数字）过滤化学类，并为后验概率值设定阈值。为了创建**Nebula-Index**，先前过滤的数据被按照化学类而不是'Features'的ID重新分组。**Cross filter**通过结合Stardust Classes和'Features'注释数据对化学类进行进一步的过滤。
+
+### Cross filter stardust Classes的细节
+
+&emsp;&emsp;
+此方法是一个以下三个模块的整合（图\@ref(fig:algo)）：
+
+#### Cross filter by 'quantity' (abundance selection).
+
+&emsp;&emsp; 
+为每个组设置'Features'数量限制（每个组，即一个化学类别与其分类的'Features'）。具有太多的'Features'或太少的'Features'的组将被过滤掉。这意味着化学类会被过滤掉。这些阈值为：
+
+ - 最小数量：组内的 'Features'。
+ - 最大比例：组内的 'Features'数量与所有组的所有 'Features'（唯一）数量相比。  
+
+这一步的目的是过滤掉那些概念范围太大或者太细微的化学类别。例如，“Organic compounds”涵盖了几乎所有可以在代谢组学数据中检测到的化合物，其范围太大，对我们的生物学研究没有任何帮助。参数的设置不是绝对的，也没有最佳的解决方案。用户可以根据研究的必要性来拟定阈值。
+
+#### Cross filter by ‘score’ (Goodness assessment)
+
+&emsp;&emsp; 
+这一步将Stardust Classes的数据与'Features'注释数据联系起来。对于每个组，对每个目标属性（连续属性，一般是化合物鉴定的评分属性，如'Tanimoto similarity'）进行优度评估。如果该组符合所有预期的优度，该化学类将被保留；否则，该化学类将被过滤掉。优度（$G$）与组内的'Features'有关。
+
+- $n$：目标属性满足阈值的'Features'数量。
+- $N$：所有'Features'的数量。
+
+优度：$G = n/N$。
+
+优度的评估与'tolerance'和'cutoff'参数有关。
+
+- 预期优度，即'tolerance'的值。
+- 实际优度，与参数'cutoff'有关。$G = n/N$。
+
+可以对多个目标属性进行优度评估。只有当化学类通过了所有目标属性的优度评估时，它才会被保留。这一步的主要目的是过滤掉那些具有太多结构鉴定度低的'Features'的化学类。
+
+#### Cross filter by ‘identical’ (identicality assessment).
+
+为化学分类设定一个层级范围，让这个范围内的组进行比较，以确定彼此之间的一致性。对于两个组，如果分类的'Features'几乎相同，其中一个组所代表的化学类将被排除。对两个组（A和B）的一致性评估：
+
+- $x$：属于B的A的分类'Features'的比率
+- $y$：属于A的B的分类'Features'的比率
+- $i$：参数'identical_factor'的值 
+
+如果$x>i$和$y>i$，这两组将被认为是相同的。那么，具有较少'Features'的组将被丢弃。这一步的目的是为了过滤掉那些可能会互相包含、范围相似的类。计算机预测方法可能无法从LC-MS/MS光谱中分辨出潜在化合物属于哪一类。
+
+## 数据结构
+
+### 首要Class: 'mcnebula'的结构
+
+```{r tab.id = "mcnebula", ft.keepnext = T}
+flex_mcnebula
+```
+
+### 数据相关Class的结构
+
+```{r tab.id = "msubs", ft.keepnext = T}
+flex_mex
+```
+
+### 可视化相关Class的结构
+
+```{r tab.id = "nebula", ft.keepnext = F}
+flex_nebula
+```
+
+### 其他Class
+
+```{r tab.id = "table6", ft.keepnext = T}
+flex_others
+```
+
+## 方法（Method）和函数（Function）
+
+### 数据方法
+
+表\@ref(tab:mainMethod)为MCnebula应用中主要用于数据分析处理的方法（Method）。
+
+```{r tab.id = "mainMethod", ft.keepnext = T}
+flex_method
+```
+
+### 可视化方法
+
+表\@ref(tab:mainVis)为MCnebula中主要用于可视化的方法。
+
+```{r tab.id = "mainVis", ft.keepnext = T}
+flex_visMethod
+```
+
+### MCnebula辅助科学绘图的函数
+
+在表\@ref(tab:mainVis)提及的'visualize_all'和'visualize'方法带有一个'fun_modify'参数，这个参数允许表\@ref(tab:customVis)中的函数作为参数传递，以便快速实现科学绘图。
+
+```{r tab.id = "customVis", ft.keepnext = T}
+flex_cusVis
+```
+
+### 其他方法和函数
+
+```{r tab.id = "otherMF", ft.keepnext = T}
+flex_otherMF
+```
+
+## MCnebula的基本使用
+
+&emsp;&emsp;
+以下代码块展示了MCnebula（MCnebula2 R包）不带任何自定义参数的使用方法，从数据的初始化、整合和处理到Parent-Nebula和Child-Nebulae的可视化。更详细的使用示例请参考：1）{@@ref:herbalCode}；2）{@@ref:serumCode}；3）或者MCnebula2 R包的使用文档：<https://github.com/Cao-lab-zcmu/MCnebula2/blob/document/reference.pdf>
+
+```{r, echo = T, eval = F}
+## 初始化
+mcn <- mcnebula()
+mcn <- initialize_mcnebula(mcn, "sirius.v4", ".")
+ion_mode(mcn) <- "pos"
+## 数据整合和处理
+mcn <- filter_structure(mcn)
+mcn <- create_reference(mcn)
+mcn <- filter_formula(mcn)
+mcn <- create_stardust_classes(mcn)
+mcn <- create_features_annotation(mcn)
+mcn <- cross_filter_stardust(mcn)
+mcn <- create_nebula_index(mcn)
+## 可视化
+mcn <- compute_spectral_similarity(mcn)
+mcn <- create_parent_nebula(mcn)
+mcn <- create_child_nebulae(mcn)
+mcn <- create_parent_layout(mcn)
+mcn <- create_child_layouts(mcn)
+mcn <- activate_nebulae(mcn)
+visualize(mcn, 'parent')
+visualize_all(mcn)
+## 自定义分析
+## ...
+```
+
+# 小结
+
+&emsp;&emsp; LC-MS/MS数据的分析具有挑战性，因为其数据量大，潜在的未知化合物的信息多，而且参考谱库有限。研究人员往往需要花很多时间从这个 "黑匣子" 中找出有意义的化合物，然后再进行下一步的研究。 MCnebula可以帮助研究人员快速关注潜在的标志物或有意义的化合物，它将全谱识别与机器预测相结合，在多维视图中对Child-Nebulae进行可视化，并通过统计分析来追踪Top ‘Features’并找到类似物。ABC选择算法可以总结出数据集中具有代表性的化学类别，并获得该类别的'Features'，因此研究的整体方向是无偏差的。同时，它也是统计分析的有效保证，为下一步的追踪分析产生“校正”的Top ‘Features’：基于‘Features’水平的统计分析结果可能会因为信息的丢失而产生偏差，在化学类水平的基础上进行过滤可以在一定程度上防止偏差的产生。Child-Nebula是在ABC选择算法得到的化学类别的基础上绘制的，实现了将巨大的非目标数据集可视化为一个单一图形的目标。ABC选择算法的参数是可以主观调整的，它们应该根据研究对象的化学类别的丰富程度来确定。一般来说，我们的默认参数用来获取根据数据集的种类丰富的化学类，并过滤掉那些在概念范围内过大或过小的化学类。
+
+&emsp;&emsp; MCnebula的R包已上传至github（<https://github.com/Cao-lab-zcmu/MCnebula2>），用户可以在R命令行中输入 `remotes::install_github("Cao-lab-zcmu/MCnebula2")` 轻松安装它。
+
+# @@part MCnebula的方法评估与拓展
+
+# 材料与方法
+
+## 实验材料
+
+&emsp;&emsp; 
+个人笔记本电脑Surface pro7用于编程环境的搭建和R语言编程：
+Pop!\_OS (Ubuntu) 22.04 LTS 64-bits PC (Intel Core i7-1065G7, 1.3 GHz $\times$
+8, 16 Gb of RAM)。
+
+&emsp;&emsp;
+工作站用于运行和测试数据集：
+Pop!\_OS (Ubuntu) 22.04 LTS 64-bits workstation (Intel Core i9-10900X, 3.70GHz
+$\times$ 20, 125.5 Gb of RAM) 
+
+&emsp;&emsp; 
+用于获取参考光谱数据集的网站：
+<http://prime.psc.riken.jp/compms/msdial/main.html#MSP>
+
+&emsp;&emsp; 
+在测试阶段中，数据集被上传到GNPS服务器用于比较分析，现在这些数据集是可获取的：
+
+1) original dataset: FBMN:
+<https://gnps.ucsd.edu/ProteoSAFe/status.jsp?task=05f492249df5413ba72a1def76ca973d>.
+MolnetEnhancer:
+<https://gnps.ucsd.edu/ProteoSAFe/status.jsp?task=9d9c7f83fa2046c2bf615a3dbe35ca62>;
+2) medium noise dataset: FBMN:
+<https://gnps.ucsd.edu/ProteoSAFe/status.jsp?task=c65abe76cd9846c99f1ae47ddbd34927>;
+MolnetEnhancer:
+<https://gnps.ucsd.edu/ProteoSAFe/status.jsp?task=7cc8b5a2476f4d4e90256ec0a0f94ca7>;
+3) high noise dataset: FBMN:
+<https://gnps.ucsd.edu/ProteoSAFe/status.jsp?task=62b25cf2dcf041d3a8b5593fdbf5ac5e>;
+MolnetEnhancer:
+<https://gnps.ucsd.edu/ProteoSAFe/status.jsp?task=f6d08a335e814c5eac7c97598b26fb80>.
+
+## 实验方法
+
+### R 的配置
+
+&emsp;&emsp; 除了表\@ref(tab:imports)涉及的R包以外，在测试和拓展中还用到了额外的R包：
+
+```{r tab.id = "table9", ft.keepnext = T}
+flex_prep2
+```
+
+### 建立评估数据集
+
+#### MS/MS噪声模拟
+
+&emsp;&emsp; 
+GNPS MS/MS库的光谱集（正离子模式，以获得更多的光谱数据）被用于评估（.msp文件）（<http://prime.psc.riken.jp/compms/msdial/main.html#MSP>）。由于参考库中的碎片光谱通常具有较高的品质，在用于评估库的匹配性时，可能会导致过拟合。为了解决这个问题，参考CANOPUS的报道 [@2021]，我们在这些MS/MS图谱中加入了 "噪声"。简而言之，"噪声"包括质量偏移、峰强度偏移和插入的噪声峰；这些偏移的大小系数是从正态分布的函数中随机抽取的。总的来说，我们模拟了两种模式的 “噪音”（中度噪音和高度噪音）。噪声的模拟是在自定义R脚本中实现的。这些算法和参数与文献[@2021]平行。我们将这些数据集指定为原数据集（Origin dataset）、中度噪声数据集（Medium noise dataset）和高度噪声数据集（High noise dataset）。噪声模拟的细节如下：
+
+##### 全局质量偏移
+
+通过从$N\left( 0, \sigma_{mb}^{2} \right)$（正态分布）中抽取一个随机数$\delta^{*}$，然后将每个质量峰值$m$移动$\delta^{*}m$来模拟全局质量移动。标准差$\sigma_{mb}$被选为$\sigma_{mb}=(10/3) \times 10^{- 6}$ (中等噪声)或$\sigma_{mb}=(15/3) \times 10^{- 6}$ (高噪声)，因此$3\sigma_{mb}$区间代表中等噪声的10 ppm移动，高噪声的15 ppm移动。
+
+##### 个体质量偏移
+
+对每个质量为$m$的峰值，通过从$N\left(0, \sigma_{md}^{2}\right)$中抽取一个随机数$\delta$，并将峰值移动$\delta m$来模拟个体质量偏差。选择标准偏差$\sigma_{md}$是为了使$3\sigma_{md}$的区间代表中等噪音的10 ppm移动和高噪音的20 ppm移动。
+
+##### 峰强度偏移
+
+强度变化是在光谱中模拟的。每个峰的强度都乘以从$N\left(1,\sigma_{id}^{2} \right)$中抽取的单个随机数$\epsilon$。中等噪声的方差选择为$\sigma_{id}^{2}=1$，高噪声的方差选择为$\sigma_{id}^{2}=2$。从每个峰值强度中减去光谱最大峰值强度的0.03倍。如果一个峰值强度低于光谱中最大强度的千分之一的阈值，该峰值就被丢弃。
+
+##### 额外的噪声峰
+
+额外的“噪声峰”被添加到光谱中。在预先处理原数据集时，从碎裂光谱中收集一个“噪声峰”的库，使用所有没有已知前体分子式的分子分解的峰。对于每个光谱，这些"噪音峰"的$\alpha n$被添加到光谱中，其中$n$是光谱中的峰数，$\alpha = 0.2$为中等噪音，$\alpha = 0.4$为高噪音。“噪声峰”的强度被调整为贡献和接收光谱中的最大峰值强度的相应比例。“噪声峰”从“噪声峰”的库中随机抽出，并添加到光谱中。  
+
+#### 模拟同位素模式
+
+&emsp;&emsp; 
+另一个问题是，光谱集不具备同位素模式。在真正的LC-MS处理中（'Features'检测），同位素峰被分组和合并，这有利于SIRIUS检测一些特定的元素[@bocker_sirius_2009]。为了模拟同位素模式，我们使用'rcdk'R软件包中的'get.isotopes.pattern'函数来获得同位素质量和它的丰度[@2007j]。此外，这些质量被认为是加合物类型（Adduct）增加或减少的确切质量（Exact mass）。对于这些同位素模式的'强度'，我们模拟为相对强度，即同位素的丰度乘以100的值。这些 "同位素峰"被合并到其化合物的MS^1^列表中。所有的光谱集合都被格式调整，以适应MCnebula工作流程或基准方法的输入（.mgf文件和'Features'量化表.csv）。
+
+### 评估的方法
+
+{@@id:evalMethod}
+
+&emsp;&emsp; 
+三个模拟数据集（Origin dataset，Medium noise dataset，High noise dataset）都是用MCnebula工作流程和基准方法（GNPS）运行。当这些数据被放入SIRIUS 4命令行界面（CLI）（4.9.12版）进行计算时，具有空碎片峰的MS/MS光谱被自动过滤。此外，为了减少计算时间，过滤掉了超过800m/z前体的化合物。这些被过滤掉的化合物被排除在最终准确性评估之外。原始数据中共有8782个MS/MS谱图，经过过滤或排除后，共有7524个化合物用于最终评估。  
+
+&emsp;&emsp; 
+在ClassyFire[@2016]的辅助下，对分类准确性进行评估。细节上，我们遍历了原始的.msp光谱文件，以整理这些化合物的元数据，包括结构注释。这些化合物的国际化学识别码（InChIKey）可用于ClassyFire数据库的检索。然而，由于ClassyFire只支持那些之前已经在其服务器上进行过结构分类的化学标识，我们注意到所有的InChIKeys都被否决了。为了解决这个问题，我们采用了这些InChIKeys的第一个哈希块（InChIKey平面，代表分子骨架）来连接PubChem应用编程接口（API）（<https://pubchemdocs.ncbi.nlm.nih.gov/pug-rest>）[@2022ak]。因此，我们得到了所有可能的InChIKeys的异构体（立体异构）[@2012e]。小分子的分类取决于它的分子骨架，因此这些拥有相同InChIKey平面的化学特征在分类上是相同的。我们将获得的InChIKey列表传递给ClassyFire以获得化学分类。在R脚本中，一旦任何同分异构体的InChIKey与取得了分类数据，这个分子骨架的获取状态结束。最后，所有这些化学注释都被整理、整合并指定为标准参考（关于获取这些数据的工具，请参考：{@@ref:developChemistry}）。
+
+&emsp;&emsp; 
+MCnebula和基准方法在算法和分类结果方面的差异使它们不能在完全相同的水平上被评估。我们分别评估了这两种方法。对于MCnebula，在评估准确性之前，我们审视了从原数据集（Origin dataset）的预分析中产生的类别。超过一半的类是基于子结构类进行分类的，如 "Organic carbonic acids and derivatives"、"Hydroxy acids and derivatives"。这些类的亚结构很小，是化合物中的化学官能团。ClassyFire的原则是选择化合物中最主要的结构类进行替代[@2016]。但是，从药物发现的角度来看，结构决定药效，许多药理作用可能取决于这些子结构；另一方面，质谱的注释不容忽视任何细微的信息。为了在算法中找到更多的普遍性特征，我们在结果中保留了这些类别。基准方法中没有亚结构分类，因此我们在评估中忽略了这些类别。然而，其余的类仍然可能是亚结构类。我们为评估指定了三个级别，即 "True"、"Latent"、"False"。'True'表示分类后的类别与ClassyFire的一致。'Latent'表示分类后的类与ClassyFire不一致，但它们的"Class"级别（Level 3）的父类与ClassyFire的一致。'False'表示分类与ClassyFire的完全不一致。
+
+&emsp;&emsp; 
+为了评估类别或结构的识别，我们用InChIKey planar将结果与标准结果进行矩阵合并。为了评估化学结构的识别，一旦识别的化学结构与标准化学结构相一致（通过 InChIKey planar 匹配），我们就把它定为 "True"。事实上，这种评估忽略了立体化学。
+
+### 用于建立评估数据集和用于评估的R的函数
+
+&emsp;&emsp;
+手动实现所有的评估几乎是不可能的。为了快速得到评估结果以及将结果可视化，R的函数被编写，随后用于评估的脚本（获取这些函数以及相关评估数据：<https://github.com/Cao-lab-zcmu/exMCnebula2/blob/master/inst/extdata/evaluation.tar.gz>）：
+
+```{r tab.id = "table10", ft.keepnext = T}
+flex_evalScript
+```
+
+### MCnebula的拓展涉及的算法
+
+#### 统计分析的算法
+
+{@@id:stat}
+
+&emsp;&emsp; 
+MCnebula整合了'limma'包（差异表达分析的R包，RNA-序列和微阵列的分析）中的函数（主要为：'limma::makeContrasts', 'limma::lmFit', 'limma::eBayes'），并将其打包用于代谢组学数据的差异分析[@gentleman_limma_2005-1] 。LC-MS的'Features'量化矩阵和基因表达矩阵是相似的，都有相应的解释变量（样品信息）和因变量（基因表达值或'Features'量化值），只是一个代表基因表达水平，另一个代表代谢物水平。我们将'Features'的峰面积水平归一化，并对其进行转化（log2），利用样品的元数据信息建立设计矩阵和对比矩阵[@gentleman_limma_2005-1]；因此，即使数据本身与基因无关，也可以利用'limma'包的工具进行差异分析。'limma'是一个强大的使用线性模型进行差异分析的软件包，不仅可以处理解释变量为因子的简单实验设计（如对照组与模型组），而且可以处理解释变量为协变量的复杂实验设计（如包含时间序列的组）。然而，我们的打包方法只适合于实验设计：其中解释变量是因子变量，设计矩阵没有截点（代码：'model.matrix(~ 0 + group)')  [@law_guide_2020]。由于其简单的适用性，我们称其为'Binary comparison'。我们的评估部分没有涉及它的评价（因为它不是本研究的主要部分），但我们在两个演示数据集中使用了它，并在一定程度上进行了验证：在血清数据集中，我们将我们获得的高排名的'Features'与Wozniak等人[@2020s]的数据进行了比较（见：{@@ref:serumRes}）；在中药数据集中，我们将获得的高排名'Features'追溯到EIC图上（见：{@@ref:herbalRes}）。
+
+&emsp;&emsp; 附Law等人关于设计矩阵的图示（其中两种类型）：
+
+```{r modelmatrix1, fig.cap = "设计矩阵和对比矩阵的示例：Expected gene expression is modelled by a treatment factor"}
+inclu.fig("~/Pictures/Screenshots/Screenshot from 2023-03-14 12-45-10.png")
+```
+
+```{r modelmatrix2, fig.cap = "设计矩阵和对比矩阵的示例：Expected gene expression is modelled by a group factor"}
+inclu.fig("~/Pictures/Screenshots/Screenshot from 2023-03-14 12-48-52.png")
+```
+
+#### 其他的算法
+
+&emsp;&emsp; 
+请参考表\@ref(tab:chemFinding)表\@ref(tab:metaAna)。
+
+# 结果
+
+## MCnebula的评估
+
+### 功能评估
+
+表\@ref(tab:subEval)为MCnebula与其他工具的功能性比较。就选择的涵盖识别、分类等指标的评估而言，MCnebula的适用范围更广。
+
+<!---BLOCK_LANDSCAPE_START--->
+
+```{r tab.id = "subEval", ft.keepnext = T}
+flex_subEval
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+### 归类准确度评估
+
+&emsp;&emsp; 
+我们使用一个公开的参考光谱库来评估MCnebula的分类准确性。直接使用这种参考光谱库可能会导致评估过程中的过度拟合。我们采取了模拟噪声的方法来消除这一后果。模拟噪声，即在参考光谱中加入无效的噪声数据或对现有数据进行数字移位，也模拟了类似于真实场景的数据采集：由于采集条件不同，真实情境下的光谱数据与参考光谱相比会有更多的噪声。通过在参考光谱库中加入噪声，我们现在有三个数据集用于评估（Origin dataset、Medium noise dataset、High noise dataset）（7524个化合物（光谱））。所有这三个数据集都使用MCnebula进行分析。由于参考光谱中化合物的丰富性，对于Origin dataset，我们通过使用ABC选择算法共获得了152个化学类（每个化学类都有一个相应的待评估化合物）。这152个化学类别包括根据优势（主导）结构提炼的化学类别和根据亚结构提炼的化学类别。为了便于与其他方法进行比较，我们只选择了可能是主导结构的化学类进行评价。有37个这样的化学类别被选中进行评估。为了更客观地评价MCnebula，我们选择了GNPS（Global Natural Products Social Molecular Networking）提供的分子网络，工作流包含基于特征的分子网络（FBMN，Feature-based Molecular Networking）和MolNetEnhancer模块，作为提供质谱数据的可视化聚类分析的基准方法。GNPS是一种典型的、流行的基于光谱库的质谱注释方法。原则上，它首先通过与公共光谱库进行镜像匹配来计算光谱相似度，识别出具有准确化学结构的化合物，然后根据注释的化学结构确定化学类别。
+
+&emsp;&emsp; 
+我们将这三个数据集上传到GNPS服务器，然后获得结果并用于评估。对于Origin dataset，GNPS总共得出了44个化学类别（与MCnebula平行，每个化学类别至少有50个化合物）。总共有19个共同的类别。这些类别被选来比较MCnebula和GNPS在分类数量、稳定性和相对错误率方面的准确度。在分类数量方面，MCnebula在三个数据集中的表现优于GNPS（MCnebula：199，178，160；GNPS：162，95，81）（图\@ref(fig:accuracy)a）。在加入噪声后的分类稳定性方面，MCnebula在两个数据集上的表现优于GNPS（MCnebula：10.5%，19.8%；GNPS：41.7%，50.1%）（图\@ref(fig:accuracy)a）。对于最后一个指标，为了评估分类的性能，它结合了稳定性的水平来计算相对错误率，而不是绝对错误率。相对错误率更好地模拟了实际应用于LC-MS/MS分析的情况，因为实际的光谱数据不仅包含噪声，还包含许多无法通过光谱匹配识别的未知化合物。在这种情况下，MCnebula在三个数据集的相对错误率评估中优于GNPS（MCnebula：30.2%、32.9%、32.6%；GNPS：51.9%、48.8%、47.6%）（图\@ref(fig:accuracy)a）。除了上述三个指标外，我们还对MCnebula和GNPS在19个化学类别的个体水平上进行了比较（图\@ref(fig:accuracy)b）。结果表明，MCnebula比GNPS对噪声更稳定。
+
+```{r accuracy, fig.cap = "MCnebula归类的准确度评估"}
+inclu.fig("../MCnebula2/fts/fig2.compare_accuracy.pdf")
+```
+
+- 图\@ref(fig:accuracy)注：**a)**为MCnebula与基准方法（GNPS）在分类数量、稳定性、相对错误率三个指标上的比较。分类数量的计算方法是选定的19个化学类别中被归类的化合物的平均总数量。稳定性的计算方法为：$S = (N_{origin} - N_{x}) / N_{origin}$ ($N_{origin}$是产地数据集的平均总数；$N_{x}$是中等噪声数据集或高噪声数据集的平均总数)。相对错误率的计算方法是 $R = 1 - (1 - F) \times (1 - S)$ ($F$是绝对错误率；$S$是稳定性，即稳定性评估中的平均损失率)。**b)**为MCnebula和基准方法的分类数量比较。当噪声被添加到原始数据集中时，一些分类'Features'的数量出现&lt;50，这里设置了一个截止值（$\geq$ 50），将这些化学类排除在评估之外。**c)**为MCnebula的鉴定准确度评估，图中设置了一个临界值（Tanimoto similarity $\geq$ 0.5），以获得高匹配分数的化学结构进行评估。
+
+&emsp;&emsp; 
+附图\@ref(fig:classifyMCnebula)和图\@ref(fig:classifyMolnet)，两种方法在各自水平上的评估（非平行）。
+
+```{r classifyMCnebula, fig.cap = "MCnebula归类准确度的单独评估"}
+inclu.fig("~/tmp_backup/R/evaluation/gather_classified_accuracy.pdf")
+```
+
+- 图\@ref(fig:classifyMCnebula)注：对于**Intermediate horizontal bar plot**，为评估准确性指定了三个评估级别。'True'表示归类后的类别与ClassyFire的一致。'Latent'表示归类后的类与ClassyFire不一致，但其 "Class"级别的父类（由**Left tile diagram**图例说明）与ClassyFire一致。'False'表示分类后的类与ClassyFire的完全不一致。在原始数据集中加入了中度和高度的噪声，以评估MCnebula算法的稳定性。对于"True"和"False"的评估，箭头表示中度噪音或高度噪音会导致准确率的变化（增加或减少）。一般来说，对于每个评估的化学类别，有两对箭头，左边一对表示'True'偏移，右边一对表示'False'偏移。每对箭头：首先从黄色箭头指示的位置开始，在紫色箭头指示的位置结束；然后从紫色箭头指示的位置开始，在紫色条形图末端结束。准确度评估仅在分类特征数为$\geq$ 50时进行。如果噪声导致的分类数量为&lt; 50，则该类被排除在噪声评估之外。**Right horizontal bar plot**表示分类后的'Features'数量。评估的细节见：{@@ref:evalMethod}。
+
+```{r classifyMolnet, fig.cap = "GNPS归类准确度的单独评估"}
+inclu.fig("~/tmp_backup/R/evaluation/gather_classified_accuracy_Molnet.pdf")
+```
+
+- 图\@ref(fig:classifyMolnet)注：参考图\@ref(fig:classifyMCnebula)注解。
+
+### 鉴定准确度评估
+
+&emsp;&emsp; 
+使用MCnebula工作流程，包含8057个化合物（前体离子m/z &lt; 800）的源数据集，所有这些化合物都被预测为化学分子式，其中6610个化合物被预测到化学结构。这些化学结构在分类背景下被评估准确性。对于37个化学类别（图\@ref(fig:accuracy)c），平均识别的错误率为37%；平均识别的化合物数量为156个。其中，大部分的识别错误率在30%到40%之间，然而，有些类别的识别错误率相当低，如'Long-chain fatty acids'或'Lignans, neolignans and related compounds'。预测的化学结构的可靠性可以用一个分数来评估。Tanimoto similarity为每个预测的化学结构提供了这样一个分数（它提供了化学指纹与结构的匹配程度）。当Tanimoto similarity将临界值设定为0.5时，平均错误率为29.4%；平均鉴定的化合物数量为139个（图\@ref(fig:accuracy)c）。以上我们评估了MCnebula得到的每个化学类别的化合物的识别准确率。需要注意的是，MCnebula本身并不包含任何鉴定模块，它只利用SIRIUS预测结果中得分最高的候选化合物进行注释。关于鉴定的更多评价请参考出版物和我们以前的相关工作[@duhrkop_sirius_2019; @lai_deep_2022]。
+
+### 评估的报告和R代码
+
+以下评估的脚本和报告可见于：
+<https://github.com/Cao-lab-zcmu/exMCnebula2/tree/master/inst/extdata/scripts_evaluation/evaluation_workflow>
+
+```{r evalPreView, fig.cap = "评估报告的概览"}
+inclu.fig("../MCnebula2/others/report_evaluation.pdf")
+```
+
+## MCnebula的拓展
+
+{@@id:develop}
+
+在上一部分的算法阐述（见：{@@ref:algorithm}）和工作流阐述（图\@ref(fig:stream)）中，我们介绍了MCnebula的主体部分，它用于整合注释数据和归类可视化方面的内容。以下我们阐述MCnebula的拓展功能，将MCnebula的算法运用于更广的方面，允许高级的自定义分析（以下内容涉及：统计分析、'Features'筛选（Feature selection）、聚焦关键代谢物（化合物）及其结构特征、通路富集、查询化合物等）。
+
+### 用于化学发现
+
+{@@id:developChemistry}
+
+表\@ref(tab:chemFinding)为拓展MCnebula用于化学信息查询的函数（应用请参考：{@@ref:serumRes}或者{@@ref:herbalRes}）。
+
+```{r tab.id = "chemFinding", ft.keepnext = F}
+flex_devDisc
+```
+
+### 用于代谢组数据分析
+
+表\@ref(tab:metaAna)为拓展MCnebula用于代谢组数据分析的函数（应用请参考：{@@ref:serumRes}）。
+
+```{r tab.id = "metaAna", ft.keepnext = F}
+flex_devMeta
+```
+
+# 小结
+
+&emsp;&emsp; 对于鉴定，光谱库匹配仍然是LC-MS/MS数据的主要方法，因为它具有很高的准确性。一般的化合物分类也是基于此，即首先通过光谱匹配来识别化学结构，然后根据化学结构来评估其化学类别。考虑到参考光谱库的局限性，像CANOPUS[@duhrkop_systematic_2021]这样的分类技术应用于MCnebula中绕过了识别化学结构的第一步，而是预测可能的化学类别，即使确切的化学结构不为人所知。MCnebula将这一尖端技术与ABC选择算法相结合，实现了Child-Nebulae的可视化，这使得探索光谱库以外的未知化合物成为可能。我们将MCnebula的分类方法与GNPS进行了比较，GNPS的方法依赖于化学结构鉴定。当加入不同程度的噪声时，GNPS的分类化合物的数量与MCnebula的稳定表现相比明显减少。对于实际获得的MS/MS图谱，它们不如参考图谱好，而且含有一些噪声；事实上，现实中的MS/MS光谱更接近于有噪声的情况。这意味着MCnebula可以在一定程度上抵御噪声的干扰。在评估的最后，我们检查了MCnebula的鉴定精度。结果证实，鉴定的准确性在70%左右波动，与SIRIUS报道的一致[@duhrkop_sirius_2019]。
+
+&emsp;&emsp; 
+用于MCnebula拓展的函数（表\@ref(tab:chemFinding)和表\@ref(tab:metaAna)）被整理至额外的包'exMCnebula2'（<https://github.com/Cao-lab-zcmu/exMCnebula2>）。这些函数可配合MCnebula的R包（MCnebula2）使用，拓展MCnebula的应用，我们在随后的内容中示例了它们。
+
+# @@part 基于MCnebula策略分析杜仲炮制前后的成分变化
+
+# 材料与方法
+
+## 实验材料
+
+杜仲（*E. ulmoides*）干树皮来自浙江佐力药业股份有限公司。
+
+## 实验方法
+
+### 制备炮制前后的杜仲
+
+&emsp;&emsp; 
+生杜仲和盐杜仲的样品制备方法如下。（1） 生杜仲。取*E. ulmoides*干树皮的碎片或块状物，将其打成粉末，通过80目筛子以备进一步处理。（2） 盐杜仲。将*E. ulmoides*干树皮的丝或块用盐水（盐的用量为*E. ulmoides*的2%，加10倍水溶解）均匀喷洒，并在密闭状态下闷30 min；然后，将树皮在60℃ 的烤箱中烘干，接着在140℃ 下烘烤60 min；最后，将烘烤过的树皮打成粉末，通过80目筛子以备进一步加工。
+
+### 制备LC-MS的杜仲样品
+
+&emsp;&emsp; 
+分别称取2 g生杜仲粉和盐杜仲粉，加入50 ml甲醇/水（1:1，v/v），然后进行超声波（20 kHz，40 min）。超声后，将混合物过滤，得到滤液和残余物。残余物加入50 ml甲醇/水（1:1，v/v），再次用超声波（40 kHz，250 W，20 min）提取。混合物被过滤。然后，合并两种提取液的滤液，蒸发掉溶剂。加入甲醇/水（1:1，v/v）以重新溶解提取物，并将体积定容为5 ml。最后，通过离心（12,000 r.p.m.，10 min）得到上清液，用于进一步的LC-MS分析。
+
+### LC-MS/MS实验条件
+
+&emsp;&emsp; 
+LC-MS分析使用Dionex Ultimate 3000 UHPLC系统（Dionex，Germany），结合高分辨率傅立叶变换质谱仪（Orbitrap Elite，Thermo Fisher Scientific，Germany），使用Waters Acquity HSS T3柱（1.8 μm，100 mm $\times$ 2.1 mm，Waters公司，Milford，MA，USA）。溶剂A，甲酸/水（0.1:99，v/v）和溶剂B，甲酸/乙腈（0.1:99，v/v），作为流动相。分离的梯度曲线如下：0 min时2%的溶剂B，2 min时5%的溶剂B，10 min时15%的溶剂B，15 min时25%的溶剂B，18 min时50%的溶剂B，23 min时100%的溶剂B，25 min时2%的溶剂B，30 min时2%的溶剂B。流速为0.3 ml/min。柱温设定在40℃。质谱分析使用配备ESI源的Orbitrap Elite仪器（Thermo FisherScientific，Germany）进行，在负电离模式下操作。ESI源在50℃ 下运行，毛细管温度为275℃，电离电压为3.5 kV，鞘内气体流量为35 L/min。调查扫描在Orbitrap质量分析器中进行，在120,000（半最大全宽）分辨率下操作。调查扫描的质量范围为100-1500 m/z，归一化碰撞能量为30 eV。分析方法被设定为分析调查扫描中信号最强的前10个离子，并启用了15秒的动态排除法。
+
+# 结果
+
+{@@id:herbalRes}
+
+## MCnebula对中药数据集的基础分析
+
+&emsp;&emsp; 
+我们用MCnebula阐述了一味代表性中药——杜仲——在传统加工过程中涉及的化学结构多样性和化学转化。杜仲是*Eucommia ulmoides Oliv.（E. ulmoides）*的树皮[@2021n]。杜仲经盐制，在历史上长期以来被普遍应用于治疗肾脏疾病，但其化学基础仍有待探索。现在利用MCnebula工作流对炮制前后的*E. ulmoides*进行分析。在ABC选择算法的帮助下，共获得了29个代表*E. ulmoides*的丰富成分的化学类别。随后对炮制前后的半定量数据进行了二元比较。使用函数'select_features'（|Log2(Fold change)| &gt; 0.3, Q-value &lt; 0.05, Tanimoto similarity &gt; 0.5）选出前20个'Features'（Top20），并在Child-Nebulae中进行追踪（图\@ref(fig:herbalTracer)）。
+
+&emsp;&emsp; 
+以MCnebula绘制Top20的MS/MS图谱和提取离子色谱图（EIC）（图\@ref(fig:msms)和图\@ref(fig:eic)）。根据图\@ref(fig:eic)，推测ID1642、1785和2321的'Features'是新生成的化合物，因为与处理后相比，处理前的峰面积水平几乎为零。它们的化学结构见图\@ref(fig:msms)。其中，ID1642的'Features'具有较高的正确识别概率（Tanimoto similarity：0.69）。根据图\@ref(fig:herbalTracer)，我们知道ID 1642属于 "Iridoids and derivatives"（IAD），其他的是 "Dialkyl ethers"（DE；ID 1785）和 "Phenylpropanoids and polyketides"（PAP；ID 2321）。
+
+```{r herbalTracer, fig.cap = "在中药数据集的Child-Nebulae中追踪Top ‘Features’"}
+inclu.fig("../MCnebula2/fts/sfig6.herbal_tracer.pdf")
+```
+
+- 图\@ref(fig:herbalTracer)注：根据统计分析的'Features'排名，Top ‘Features’在Child-Nebulae中用不同的颜色标记。
+
+<!---BLOCK_LANDSCAPE_START--->
+
+```{r msms, fig.cap = "中药数据集Top ‘Features’ 的MS/MS图"}
+inclu.fig("../MCnebula2/fts/sfig7.msms.pdf", T)
+```
+
+- 图\@ref(fig:msms)注：对于Top ‘Features’，镜像的MS/MS光谱图说明了原始的MS/MS光谱（黑色）和SIRIUS预测的噪声过滤的MS/MS光谱（红色）。条形图上面的点反映了相应的关系。'Features'的化学结构的最佳候选项被映射到该图中。
+
+```{r eic, fig.cap = "中药数据集Top ‘Features’ 的EIC图"}
+inclu.fig("../MCnebula2/fts/sfig8.eic.pdf", T)
+```
+
+- 图\@ref(fig:eic)注：EIC图说明了Top ‘Features’的原始峰形（通过MCnebula绘制；通过MZmine2的自动数据分析管道（ADAP）算法检测）。
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+## MCnebula对中药数据集的聚焦分析
+
+&emsp;&emsp; 
+分别对IAD、DE和PAP的Child-Nebulae进行了深度的注释。对ID 1642、1785和2321的'Features'在Child-Nebulae中的位置进行了聚焦分析（图\@ref(fig:complex)a、b和c）。只有ID 1642的'Features'有相邻的'Features'，其识别的化学结构（ID 2110和ID 854）的母核相似。ID 2110和ID 854的'Features'的化学结构被鉴定（Tanimoto similarity：分别为0.69和0.70）（图\@ref(fig:complex)d，e和f）；它们的峰面积水平在处理后有所下降和增加。根据图\@ref(fig:complex)d和e所示的化学结构，我们推测ID 2110的化合物在加工后部分转化为ID 854的化合物，这可能涉及化学变化如脱水和重排。这种推测解释了峰面积水平的改变。此外，化合物ID 1642（其光谱显示在图\@ref(fig:msms)和图\@ref(fig:eic)中）含量的增加也可能与化合物ID 2110的减少有关。
+
+&emsp;&emsp; 我们所展示的MCnebula发现重要化合物和发现化学变化的方法可以应用于探索更多的化合物（表\@ref(tab:herbalSum)），但此处不再展开描述。
+
+<!---BLOCK_LANDSCAPE_START--->
+
+```{r complex, fig.cap = "在中药数据集聚焦于Child-Nebulae中的Top ‘Features’的方位"}
+inclu.fig("../MCnebula2/fts/sfig9.complex.pdf", T)
+```
+
+- 图\@ref(fig:complex)注：**a**，**b**和**c** 分别说明了 "Iridoids and derivatives"、"Dialkyl ethers" 或 "Phenylpropanoids and polyketides" 深度注释的Child-Nebulae的局部视图。**d**和**e**分别表示ID 2110和ID 854的'Features'（化合物）的化学结构。**f**和**g**显示了'Features'的MS/MS图谱（参考图\@ref(fig:msms)的描述）和EIC图（参考图\@ref(fig:eic)的描述）。
+
+```{r tab.id = "herbalSum"}
+flex_herbalSum
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+## 分析的报告和R代码
+
+{@@id:herbalCode}
+
+以下用于杜仲数据分析的R代码和报告可见于：
+<https://github.com/Cao-lab-zcmu/exMCnebula2/tree/master/inst/extdata/scripts_evaluation/eucommia_workflow>
+
+```{r herbalPreView, fig.cap = "杜仲数据集分析报告的概览"}
+inclu.fig("../MCnebula2/others/report_herbal.pdf")
+```
+
+# 小结
+
+&emsp;&emsp; 在草药数据集分析中，MCnebula提供了一个快速的方法：用于化合物注释和探索化学类别范围内的Child-Nebulae化学变化。*E. ulmoides*的主要成分是木脂素、环稀醚萜类、酚类、黄酮类、甾体类和萜类[@huang_traditional_2021]。在我们的研究中，通过ABC选择算法得到的化学类别包括 "Lignans, neolignans and related
+compounds"（LNARC）和 "Iridoids and derivatives"（IAD），以及 "Monoterpenoids"和 "Terpene glycosides"。黄酮类化合物由 "Phenylpropanoids and polyketides"（PAP）涵盖[@2016]，酚类化合物可在 "Methoxyphenols" 中找到。黄酮类化合物与类固醇相似，在选定的结果中没有保留'Flavonoides' 和 'Steroids and steroid derivatives'，因为它们在*E. ulmoides*（树皮）中没有LNARC和IAD那么丰富。许多在LNARC和IAD化学类别中鉴定的化合物（表\@ref(tab:herbalSum)）在以前关于*E. ulmoides*的LC-MS/MS分析的研究中被报道[@2014w; @2015v]。我们根据对处理前后'Features'量化水平变化的统计比较，获得了Top ‘Features’。其中一个变化很大甚至是新产生的化合物（ID：1642）在Child-Nebulae中被追踪到。我们推测它与两个结构相似的化合物有转化关系。这个例子很好地说明了MCnebula在分析植物来源的化合物方面的应用，特别是在快速识别和探索化学变化方面。值得注意的是，与人源性代谢物的参考光谱库相比，植物源性化合物的参考光谱库或数据库要少得多，虽然过去也构建了一些特定的植物源性化合物数据库[@2012ac]，但缺乏足够的碎片光谱进行全面的库匹配。在MCnebula的帮助下，可以实现对植物源性化合物复杂成分的快速解析。
+
+# @@part 基于MCnebula策略的血清代谢组学
+
+# 材料与方法
+
+## 实验材料
+
+&emsp;&emsp; 
+共245个来自MASSIVE（<https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp>）的LC-MS/MS数据（.mzML）（ID号：MSV000083593）（空白、对照和样品）用于MCnebula的应用和示例[@2020s]。
+
+&emsp;&emsp;
+工作站用于下载和初步处理数据集：
+Pop!\_OS (Ubuntu) 22.04 LTS 64-bits workstation (Intel Core i9-10900X, 3.70GHz
+$\times$ 20, 125.5 Gb of RAM) 
+
+&emsp;&emsp; 
+个人笔记本电脑Surface pro7用于随后的MCnebula分析：
+Pop!\_OS (Ubuntu) 22.04 LTS 64-bits PC (Intel Core i7-1065G7, 1.3 GHz $\times$
+8, 16 Gb of RAM)。
+
+## 实验方法
+
+&emsp;&emsp; 
+我们重新分析了来自MASSIVE（ID号：MSV000083593）的245份LC-MS/MS数据（.mzML）（空白、对照和样品）[@2020s]。MZmine2（2.53版）进行了'Features'检测。检测工作流程主要涉及：**1)** 自动数据分析管道（ADAP）进行峰检测和去卷积[@2017f]，**2)** 同位素峰值查找，**3)** 平行样品峰对齐，**4)** 缺失峰再寻找（Gap filling）。当导出MS/MS光谱（.mgf）供SIRIUS 4软件计算时，MS/MS谱被合并到一个列表中，并有30%的峰值计数阈值过滤。'Features'检测工作流程参照FBMN预处理和SIRIUS计算的先决条件。输出的.mgf用SIRIUS 4软件（4.9.12版）运行，与SIRIUS[@duhrkop_sirius_2019]、ZODIAC[@ludwig_database-independent_2020]、CSI:fingerID[@duhrkop_searching_2015]、CANOPUS[@duhrkop_systematic_2021]进行计算。特别是，SIRIUS被设置为检测碘元素。MCnebula软件包被用于后续的数据分析。所有的后续分析都被组织成简明的代码，并以报告的形式输出。
+
+&emsp;&emsp; 
+京都基因和基因组百科全书（KEGG）的代谢途径富集分析分别用 "Lysophosphatidylcholines"（LPCs）和 "Bile acids, alcohols and derivatives"（BAs）进行。我们使用InChIKey2D来匹配代谢通路中的化合物。具体来说，为了避免由于立体异构而导致的鉴定结果偏差，我们使用InChIKey平面通过PubChem API获得所有可能的InChIKeys。在这个步骤中，也获得了这些化合物的PubChem CID。MetaboAnalystR的R包被用来将PubChem CID转换为KEGG ID[@2020cx]。许多化合物与代谢途径无关，所以这些被过滤掉了。FELLA的R软件包被用于KEGG富集与"pagerank"算法[@2018bj]。上述方法已被整合为函数，与MCnebula工作流程对接，这些功能可在'exMCnebula2'包中找到（见表\@ref(tab:metaAna)）。
+
+# 结果
+
+{@@id:serumRes}
+
+## MCnebula对血清数据集的整体分析
+
+&emsp;&emsp; 
+血清样本收集自感染金黄色葡萄球菌菌血症（SaB）或未感染的院内患者和健康志愿者。总的来说，样本分为：1）对照组，涉及 NN（non-hospital, non-infected）和HN（hospital, non-infected）；2）感染组，涉及HS（hospital, survival），HM（hospital, mortality）。
+
+&emsp;&emsp; 
+在对血清数据集进行LC-MS预处理时，共检测到7680个'Features'。通过MS/MS光谱（用SIRIUS软件）预测化合物后，用MCnebula进行了后续分析。其中，6501个'Features'被注释为预测的分子式，进一步，3449个'Features'被注释为预测的化学结构。利用ABC选择算法，我们通过应用 "Inner filter"模块（参考：{@@ref:abc}）过滤掉了1000多个化学类别；在进行 "Cross filter"时，进一步过滤掉了508个化学类别；对于剩下的41个化学类别，我们手动过滤掉了19个化学类别，而留下最后的22个化学类别组成了Nebula-Index，进一步可视化为Child-Nebulae。值得一提的是，被过滤掉的527（508+19）个化学类可以重新加入到分析中（使用'backtrack_stardust'方法）。在此，通过MCnebula的基本工作流程，得到了Parent-Nebula和Child-Nebulae（图\@ref(fig:serumParent)，图\@ref(fig:serumChild)）。通过审视Child-Nebulae，可以对血清数据集中包含的化学类别有了基本的了解。为了从Child-Nebulae中挖掘更多的信息：我们对HS组和HM组进行了二元比较（Binary comparison，见：{@@ref:stat}），根据Q值（校正后的P值）对'Features'进行排序；前50个'Features'被设定为"Tracer"，在Child-Nebulae中进行标记（图\@ref(fig:serumTracer)）。通过结合有关Q值的'Features'选择算法，减少了Child-Nebulae中表现出的化学类别。在Child-Nebulae中，HM组与HS组的log2(Fold Change)（log2(FC)）量化被可视化（图\@ref(fig:serumFC)）。在图\@ref(fig:serumFC)中，"Bile acids, alcohols and derivatives"（BAs）类和 "Lysophosphatidylcholines"（ACs）（图\@ref(fig:acNode)a和b）类的总体水平明显增加，而 "Lysophosphatidylcholines"（LPCs）类的总体水平明显下降。事实上，BAs、ACs和LPCs被报道与肝功能障碍、肠道微生态平衡失调和死亡风险有关[@2021db; @2020s; @2016at]。
+
+```{r serumParent, fig.cap = "血清数据集的Parent-Nebula"}
+inclu.fig("../MCnebula2/fts/sfig1.serum_parent.png")
+```
+
+- 图\@ref(fig:serumParent)注：在Parent-Nebula中，'Features'被映射为网络图中的节点（Node）。边（edge）说明了相邻'Features'的光谱相似性。并非所有的'Features'都显示在Parent-Nebula中，因为孤立的节点被删除。
+
+```{r serumChild, fig.cap = "血清数据集的Child-Nebulae"}
+inclu.fig("../MCnebula2/fts/sfig2.serum_child.pdf")
+```
+
+- 图\@ref(fig:serumChild)注：Child-Nebulae是根据Nebula-Index中的化学类别创建的。化学类别的分类'Features'被映射到相应的Child-Nebula中。
+
+```{r serumTracer, fig.cap = "在血清数据集的Child-Nebulae中追踪Top ‘Features’"}
+inclu.fig("../MCnebula2/tex_mcnebula/fig4.serum_tracer.pdf")
+```
+
+- 图\@ref(fig:serumTracer)注：根据统计分析的'Features'排名，Top ‘Features’在Child-Nebulae中用不同的颜色标记。
+
+```{r serumFC, fig.cap = "在血清数据集的Child-Nebulae中可视化组间Log2(Fold Change)"}
+inclu.fig("../MCnebula2/fts/sfig3.serum_logFC.pdf")
+```
+
+- 图\@ref(fig:serumFC)注：HM组与HS组的log~2~(Fold Change)值在Child-Nebulae中显示为渐变颜色。白色的节点表示量化值缺失的'Features'（这些'Features'在我们的重新分析中被检测到，但在Wozniak等人的分析中没有[@2020s]）。
+
+## MCnebula对血清数据集的聚焦分析
+
+&emsp;&emsp; 
+通过对Child-Nebula的深度注释可视化，这三类化合物都具有相似的结构母核，它们在NN、HN、HS和HM组中的含量也相似（图\@ref(fig:acNode)c，图\@ref(fig:lpcBa)）。随后，我们对这三类化合物进行了聚类热图分析和通路富集分析。如聚类热图所示（图\@ref(fig:hps)），ACs和BAs的对照组与感染组在聚类中分离，这意味着ACs和BAs可能与SaB的感染有关。相比之下，LPCs没有显示出明显的SaB感染相关性或死亡相关性，可能是由于这类化合物对SaB疾病一般的一致性。我们对这三类化合物进行了通路富集分析（HS与HM组相比，Q值&lt; 0.05）。BAs的结果显示，四个化合物表现出与'Bile secretion'，'Cholesterol metabolism'，和 'Primary bile acid biosynthesis'等代谢相关（图\@ref(fig:pathway)b）。其中，βGCS是一类具有相同母核的化合物。LPCs的结果表明，LPCs的母核结构相似的化合物意味着与一系列下游途径有关（图\@ref(fig:pathway)c）。ACs的重要化合物在该途径中没有富集。但是，ACs在调整葡萄糖和脂肪酸代谢之间的转换中的基本作用被综述[@2018bi]。它们的功能通过酰基的双向运输在细胞膜和线粒体之间实现（图\@ref(fig:pathway)a）。
+
+```{r acNode, fig.cap = "血清数据集的代表ACs的Child-Nebula的深度可视化"}
+inclu.fig("../MCnebula2/tex_mcnebula/fig5.ac_node2.pdf")
+```
+
+- 图\@ref(fig:acNode)注：**a)**，参考图\@ref(fig:serumTracer)，审视'Acyl carnitines'的 Child-Nebula。 **b)** 参考图\@ref(fig:serumFC)。**c)** Top ‘Features’的节点用颜色标记。'Features'的节点用化学结构、环形图和类预测后验概率（PPCP）的柱状图进行了注释。'Features'的化学结构的最高候选被映射到节点中。环形图映射出每个元数据组NN（non-hospital, non-infected），HN（hospital, non-infected），HS（hospital, survival），HM（hospital, mortality）内检测到的每个'Features'的相对峰面积。没有环形图的节点表示量化值缺失的'Features'（这些'Features'在我们的重新分析中被检测到，但在Wozniak等人的分析中没有检测到）。柱状图为'Features'的结构（亚结构或主导结构）类的PPCP。**d)** 'Features' 2068（ID）的放大及其图例。
+
+```{r lpcBa, fig.cap = "血清数据集中代表LPCs和BAs的Child-Nebulae的深度可视化"}
+inclu.fig("../MCnebula2/fts/sfig4.lpc_ba.pdf")
+```
+
+- 图\@ref(fig:lpcBa)注：参考图\@ref(fig:acNode)。
+
+```{r hps, fig.cap = "血清数据集ACs、LPCs和BAs的热图分析"}
+inclu.fig("../MCnebula2/fts/fig5.hps.pdf")
+```
+
+- 图\@ref(fig:hps)注： **a*、**c*和**e*显示了AC、LPC和BA的水平热图。'Features'是通过在感染组与对照组之间或HM组与HS组之间相比选择的：Q-value &lt; 0.05，|log~2~(FC)| $\geq$ 0.3。
+
+
+```{r pathway, fig.cap = "血清数据集ACs、LPCs和BAs的通路富集分析"}
+inclu.fig("../MCnebula2/fts/sfig5.pathway.pdf")
+```
+
+- 图\@ref(fig:pathway)注：**a)** 线粒体中的肉碱系统。Abbreviation: CPT1, carnitine-palmitoyltransferase-1; CACT, carnitine-acylcarnitine translocase; CrAT, carnitine acetyltransferase; CPT2, carnitine-palmitoyltransferase-2.  **b)** 用KEGG对LPCs以pagerank算法的富集分析。Abbreviation: P A2, phospholipase A2; PC-Sterol O-AT, phosphatidylcholine-sterol O-acyltransferase; LP, lysophospholipase; 1-AGPC O-AT, 1-acylglycerophosphocholine O-acyltransferase; **c)** 用KEGG对BAs以pagerank算法富集度分析。 Abbreviation: βGC, beta-glucuronidase; βGCS, beta-D-Glucuronoside; GT, glucuronosyltransferase; TCDC 6α-H, taurochenodeoxycholate 6alpha-hydroxylase; TCDC, taurochenodeoxycholate; GCC, Glycocholate; GCCDC, Glycochenodeoxycholate; Conju. BAs syn., 'Conjugated bile acid biosynthesis, cholate'; BA-CoA, bile acid-CoA:amino acid N-acyltransferase.
+
+&emsp;&emsp; 
+在Wozniak等人的研究中[@2020s]，确定了五个ACs化合物。此外，四个Top代谢物（2-Hexadecanoylthio-1-Ethylphosphorylcholine（HEPC）；sphingosine-1-phosphate （S1P）；decanoyl-carnitine；L-Thyroxine（T4））也被鉴定。在我们的重新分析中，除了HEPC，所有的鉴定都是一致的。在我们的重新分析中，HEPC被鉴定为1-pentadecanoyl-sn-glycero-3-phosphocholine （LPC15:0）或其立体异构体。事实上，HEPC和LPC15:0在结构上非常相似，但在元素构成上不同（分别对应于C~23~H~48~NO~5~PS和C~23~H~48~NO~7~P）。在化学分类方面，它们明显不同。HEPC属于"Organic nitrogen compounds"（Super Class）家族中的 "Cholines"（Level 5），而LPC15:0属于"Lipids and lipid-like molecules"家族中的"Lysophosphatidylcholines"（LPCs）（Level 5）。作为MCnebula工作流程的一部分，硫元素对于SIRIUS的同位素模式是可以以高质量精度检测到的[@bocker_sirius_2009]。然而，对于"HEPC"的MS/MS光谱，没有包含硫元素的候选分子式。总的来说，我们用MCnebula工作流程鉴定了更多的化合物，许多结果与Wozniak等人[@2020s]的分析一致。所有鉴定的化合物都被整理（表\@ref(tab:serumCompounds)，用Tanimoto similarity &gt; 0.5过滤，并用InChIKey的首个哈希块（InChIKey Planar或InChIKey2D，代表分子骨架）去掉重复的结果；共有1086个化合物，限于篇幅，仅展示Q-value &lt; 0.05）。此外，还对Wozniak等人通过光谱库匹配没有成功鉴定、但通过MCnebula工作流鉴定出分子式或化学结构的化合物（在Wozniak等人的研究中EFS和MWU的前50名）进行了整理（表\@ref(tab:serumOtop)）。  
+
+<!---BLOCK_LANDSCAPE_START--->
+
+```{r tab.id = "serumOtop"}
+flex_serumOtop
+```
+
+\newpage
+
+```{r tab.id = "serumCompounds", ft.keepnext = T}
+flex_serumSum
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+## 分析的报告和R代码
+
+{@@id:serumCode}
+
+&emsp;&emsp; 
+以下对血清代谢组分析的脚本和报告可见于：
+<https://github.com/Cao-lab-zcmu/exMCnebula2/tree/master/inst/extdata/scripts_evaluation/eucommia_workflow>
+
+```{r serumPreView, fig.cap = "血清代谢组分析报告的概览"}
+inclu.fig("../MCnebula2/others/report_serum.pdf")
+```
+
+# 小结
+
+&emsp;&emsp; 本部分内容应用血清代谢组学数据，说明MCnebula可用于通路分析和潜在生物标志物的发现。我们的大部分结果与报道[@2020s]的结果一致。此外，我们发现了更多超出光谱库匹配范围的代谢物。Wozniak等人鉴定的四个 Top 代谢物中，有三个与我们的重新鉴定相同，但只有一个代谢物是有争议的。Wozniak等人提到ACs化合物与SaB疾病有关联，ACs化合物在我们的研究中也被重新鉴定出来。Wozniak等人使用集合'Features'选择（EFS）和Mann-Whitney U（MWU）测试的联合方法来筛选Top代谢物[@2020s]。当我们将MCnebula中集成的"Binary comparison"方法得到的50个顶级'Features'与W等人的联合方法得到的前50个代谢物（EFS的前50个和MWU的前50个）进行比较时，共筛选出37个重叠的代谢物，包括参考研究中的关键代谢物L-Thyroxine。根据'Features'选择算法，Top ‘Features’通常是不同的。除了一致的部分，MCnebula还揭示了与SaB疾病相关的其他化学类别的结果。我们发现了额外的化学类，即'Lysophosphatidylcholines'（LPCs）和'Bile acids, alcohols and derivatives'（BAs），这在Wozniak等人的研究中没有涉及。事实上，LPCs在炎症和动脉粥样硬化发展的背景下已被广泛调查[@2016at; @2020cv; @2014ao]。在最近的一篇综述中[@2020cv]，充分描述了LPCs在血管炎症中的复杂作用，涉及与环境相关的促炎或抗炎作用，对先天免疫细胞和适应性免疫系统的影响等。LPCs水平的下降与一系列死亡风险增加的疾病有关[@2016at]。研究表明，血液中LPCs的浓度与严重的败血症或脓毒症休克有一定的相关性[@2014ao]。据报道，LPCs与脓毒症患者的死亡率成反比[@2003n]。BAs的紊乱意味着肝脏功能紊乱和肠道微营养平衡的失衡[@2021dg]。在BAs的Child-Nebulae中发现的BAs的化学多样性，由肠道微生物组决定，并允许对宿主的适应性反应进行复杂的调节。在我们的研究中，BAs的水平与SaB感染的相关性比ACs高。LPCs水平的下降表明了SaB感染的死亡风险。从LPCs到BAs，类固醇相关的类别，"Lineolic acids and derivatives"，以及其他脂肪酸相关的类别，表明肝脏在SaB感染和死亡中起着核心作用。肝脏X受体（LXRs）在脂质代谢的转录控制中起着关键作用[@2018bd]。LXRs通过激活溶血磷脂酰胆碱酰基转移酶3（'lysophosphatidylcholine acyltransferase 3'，LPCAT3）来调节膜磷脂（Membrane phospholipid）组成，这与LPCs直接相关[@2021di]。上述化学类显示出与LXRs的相关性[@2018bd]。
+
+# 结论 {-}
+
+&emsp;&emsp; 
+LC-MS/MS数据的分析具有挑战性，因为其数据量大，未知化合物的信息多，而且参考光谱库有限。因此，我们建立了一个名为MCnebula的框架，通过关注关键的化学类别和多维度的可视化来促进质谱数据分析。MCnebula是用R语言提出的，并通过MCnebula包实现（目前为MCnebula2，<https://github.com/Cao-lab-zcmu/MCnebula2>）。作为一种综合的可视化方法，MCnebula对于没有生物信息学和计算机科学背景的研究人员来说可能更受欢迎。根据方法评估的结果，MCnebula归类的相对错误率比基准方法（GNPS）低，而其鉴定准确率高达70%。为了拓展MCnebula在生物学和化学领域的应用，我们开发了额外的工具包'exMCnebula2'（<https://github.com/Cao-lab-zcmu/exMCnebula2>），为MCnebula工作流的应用提供了范例。为了说明MCnebula的广泛用途，我们重新分析了一个用于代谢组学分析的人源血清数据集。结果表明，通过追踪潜在的生物标志物，'Acyl carnitines' 被筛选出来，这与文献一致[@2020s]。我们还研究了*E. ulmoides*的植物来源数据集（杜仲炮制前后），以实现快速的未知化合物注释和发现。我们的分析可以通过安装MCnebula2包和exMCnebula2包，并通过运行整理好的R代码进行重复。MCnebula在化学和生物学领域有很大的潜力。在未来，我们希望MCnebula的应用领域可以扩展到农业、食品科学、医药等领域。
+
+\newpage
+
+# 创新点 {-}
+
+&emsp;&emsp; 
+第一，本研究首次设计一种基于非靶向LC-MS/MS分析技术的化学类的过滤算法，即ABC选择算法，用于代谢组学或药物分析等领域的化学类的聚焦分析。
+
+&emsp;&emsp; 
+第二，本研究提出了全新的应用于非靶向LC-MS/MS分析中数据集层面的可视化，即Parent-Nebula结合Child-Nebulae，在化学类的视角下全面、直观的审视数据集整体。
+
+&emsp;&emsp;
+第三，本研究设计了一种全新的应用于非靶向LC-MS/MS分析的Features selection算法，通过结合统计分析和化学类，追踪高排名'Features'（Tracing top 'features'），减少寻常Feature selection算法会有的偏倚。
+
+&emsp;&emsp; 
+第四，本研究将SIRIUS系列的尖端技术结合到了MCnebula工作流中，实现快速便捷的非靶向LC-MS/MS数据的全面分析。
+
+&emsp;&emsp; 
+第五，本研究将上述技术结合，编写R包并予以升级（MCnebula2 R包），包含严谨的数据结构（S4类存储对象）和综合简便的方法（Methods）和函数（Functions），同时包含详细的说明文档和示例数据，使用户无障碍运用R包进行分析。
+
+&emsp;&emsp; 
+第六，本研究将上述以外的其他工具结合到了'exMCnebula2'R包，用以示例拓展MCnebula工作流在代谢组、化学研究等领域的应用。
+
+\newpage
+
+# 参考文献 {-}

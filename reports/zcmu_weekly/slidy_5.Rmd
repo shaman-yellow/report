@@ -1,0 +1,68 @@
+---
+title: 'Seminar'
+author: 'Reporter: Lichuang Huang'
+institute: '`r format(Sys.Date())`'
+date: "`Supervisor: Gang Cao`"
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+fontsize: 7pt
+---
+
+# End of MCnebula
+
+## Pathway enrichment ACs
+
+![ACs](/home/echo/Pictures/report/ac.png)
+
+## Pathway enrichment LPCs
+
+![LPCs](/home/echo/Pictures/report/lpc.png)
+
+## Pathway enrichment BAs
+
+![BAs](/home/echo/Pictures/report/ba.png)
+
+## MCnebula in github
+
+![MCnebula](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-10 10-22-28.png)
+
+# Next Research
+
+## Preliminary research route
+
+![research route](/home/echo/Pictures/report/ahr_infomatic.png)
+
+## Microarray and RNA-seq analysis
+
+![limma](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-10 10-59-13.png)
+
+## Experimental design
+
+```{r, eval = T, echo = F}
+
+library(dplyr)
+
+group <- c("control", "model", "raw.eu", "pro.eu", "positive", "extra")
+
+dose.meta <- data.table::data.table(No. = 1:length(group)) %>% 
+  dplyr::mutate(group = group,
+                drug = c("-", "-", "raw.eu", "pro.eu", "pos.drug", "MTA"),
+                n = 15,
+                low = ifelse(grepl("eu", drug), "5", "-"),
+                medium = ifelse(grepl("eu", drug), "10", "-"),
+                high = ifelse(grepl("eu", drug), "20", "-")) %>% 
+  dplyr::as_tibble()
+knitr::kable(dose.meta, caption = "In vivo experiment with rats")
+
+```
+
+## Processing and extracting of *E. ulmoides*
+
+![Material](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-10 11-03-56.png)
+
+# END

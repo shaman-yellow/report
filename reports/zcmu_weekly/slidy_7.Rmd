@@ -1,0 +1,134 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{  }
+---
+
+# MCnebula development
+
+## Reviewer comments
+
++ Algorithmic innovation.
+    1. Lack of innovative descriptions in algorithm.
+    2. Lack of scientific evaluation.
++ Software Engineering Implications.
+    1. Immature and uncritical development.
+    2. The methods lack independence.
+
+## Development: Algorithm or Software?
+
+::: columns 
+:::: column 
+
+Algorithm
+
++ Classified visualization.
+    1. \textcolor{red}{Novel but algorithmically underpowered.}
+    2. \textcolor{red}{Faild to evaluate scientifically.}
++ Re-rank identifications.
+    1. \textcolor{red}{Technical and theoretical deficiencies.}
+    2. \textcolor{red}{Periodic Uncertainty.}
+
+::::
+:::: column 
+
+Software engineering
+
++ Compatibility and ease-of-use.
+    1. Adaptation of sirius version.
+    2. Complexity of parameters.
++ Functional expansion.
+    1. Data processing.
+    2. Workflow.
++ Exhibition format.
+    1. Documentation.
+    2. Website.
+
+::::
+:::
+
+# MCnebula2
+
+## Object-oriented programming: MCnebula2
+
+::: columns 
+:::: column 
+
++ Advantages
+    1. Clarity of code structure
+    2. Easy expansion
+    3. Easy maintenance
++ Example R packages
+    1. MetaboAnalistR
+    2. TidyMass
+
+::::
+
+:::: column 
+![MCnebula2](png/MCnebula2_site.png)
+::::
+:::
+
+## Code refactoring
+
+::: columns 
+:::: column 
++ S4 data structure \textcolor{green}{\checkmark}
++ Extract data \textcolor{green}{\checkmark}
+    1. project_conformation \textcolor{green}{\checkmark}
+    2. project_metadata \textcolor{green}{\checkmark}
+    3. project_api \textcolor{green}{\checkmark}
+    4. project_dataset \textcolor{green}{\checkmark}
++ Filter data
+    0. collate_data \textcolor{green}{\checkmark}
+    1. filter_formula \textcolor{green}{\checkmark}
+    2. filter_structure \textcolor{green}{\checkmark}
+    3. filter_ppcp \textcolor{green}{\checkmark}
+    4. create_reference
+    5. ...
+::::
+
+:::: column 
+
++ Visualization
+    1. Re-write in S4 object.
+    2. Flexibility.
++ Statistic analysis
+    1. Linear regression.
+    2. Feature selection.
+    3. PCA etc.
++ Report
+    1. Flexibility.
+
+::::
+:::
+
+# Next Schedule
+
+## Code refactoring
+
++ \textcolor{red}{Data filtering and arranging system.}
++ \textcolor{red}{Visualization system.}
++ Statistic system.
++ Report.
++ Documentation.
++ Website.
++ Figures for article.
++ Rerite article.
+

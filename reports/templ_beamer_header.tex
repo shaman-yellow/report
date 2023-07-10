@@ -1,0 +1,47 @@
+\usepackage[orientation = landscape, size = custom, width = 16, height = 9, scale = 0.5]{beamerposter}
+\setbeamertemplate{footline}[frame number]
+\usefonttheme{serif}
+% ## ---------------------------------------------------------------------- 
+\setbeamerfont{supervisor}{size = \scriptsize}
+\setbeamerfont{instructor}{size = \scriptsize}
+% ## ---------------------------------------------------------------------- 
+\defbeamertemplate{title page}{RunTemplate}
+{
+  \vfill
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 10pt, center]{titleGraph}
+    \inserttitlegraphic
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center, rounded = true]{title}
+    \usebeamerfont{title}\inserttitle\par
+    \ifx\insertsubtitle\@empty
+  \else
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \fi
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \vskip0.4em
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{author}
+    \usebeamerfont{author}\insertauthor\par
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 5pt, center]{supervisor}
+    \usebeamerfont{supervisor}Supervisor: \supervisor
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 5pt, center]{instructor}
+    \usebeamerfont{instructor}\instructor
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{institute}
+    \usebeamerfont{institute}\insertinstitute\par
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{date}
+    \usebeamerfont{date}\insertdate\par
+  \end{beamercolorbox}
+  \vfill
+}
+\setbeamertemplate{title page}[RunTemplate]

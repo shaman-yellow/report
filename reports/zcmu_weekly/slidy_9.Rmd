@@ -1,0 +1,173 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{  }
+---
+
+# Update of visualization system
+
+## Child nebulae: Unify scale limits
+
+::: columns 
+:::: column 
+1. \small visualize_all(x)
+
+\vspace{0.8em}
+
++ nodes fill
+    + mz
+    + ...
++ nodes size
+    + tani.score
+    + ...
++ edge width
+    + similarity
+::::
+
+:::: column 
+![](~/operation/sirius.test/child_nebulae_1.png)
+::::
+:::
+
+## Parent- and child-nebula
+
+::: columns 
+:::: column 
+1. \small visualize(x, "parent")
+![](~/operation/sirius.test/parent_1.png)
+::::
+
+:::: column 
+2. \small visualize(x, item)
+![](~/operation/sirius.test/child_7_1.png)
+::::
+:::
+
+
+## Annotate child nebula
+
+::: columns 
+:::: column 
+1. \small visualize(x, name)
+2. \small show_node(x, id)
+\vspace{0.3em}
+
+![](~/operation/sirius.test/fatty._1.png)
+::::
+
+:::: column 
+![](~/operation/sirius.test/node_2076_1.png)
+![](~/operation/sirius.test/node_202_1.png)
+::::
+:::
+# Progress
+
+## Code refactoring: data processing
+
+::: columns 
+:::: column 
+\small Formerly finished:
+
++ S4 data structure \textcolor{cyan}{\checkmark}
++ Extract data \textcolor{cyan}{\checkmark}
+    1. project_conformation \textcolor{cyan}{\checkmark}
+    2. project_metadata \textcolor{cyan}{\checkmark}
+    3. project_api \textcolor{cyan}{\checkmark}
+    4. project_dataset \textcolor{cyan}{\checkmark}
++ Filter data
+    0. collate_data \textcolor{cyan}{\checkmark}
+    1. filter_formula \textcolor{cyan}{\checkmark}
+    2. filter_structure \textcolor{cyan}{\checkmark}
+    3. filter_ppcp \textcolor{cyan}{\checkmark}
+    4. create_reference \textcolor{cyan}{\checkmark}
+::::
+
+:::: column 
+
++ oganize data
+    1. create_features_annotation \textcolor{cyan}{\checkmark}
+    2. create_stardust_classes \textcolor{cyan}{\checkmark}
+    3. cross_filter_stardust \textcolor{cyan}{\checkmark}
+        + quantity \textcolor{cyan}{\checkmark}
+        + score \textcolor{cyan}{\checkmark}
+        + identical \textcolor{cyan}{\checkmark}
+    4. create_nebula_index \textcolor{cyan}{\checkmark}
+    5. compute_spectral_similarity \textcolor{cyan}{\checkmark}
+    6. create_parent_nebula \textcolor{cyan}{\checkmark}
+    7. create_child_nebulae \textcolor{cyan}{\checkmark}
+
+::::
+:::
+
+## Code refactoring: visualization
+
+::: columns 
+:::: column 
+\small This time finished:
+
++ for oganizing visualization
+    1. command \textcolor{orange}{\checkmark}
+        + new_command \textcolor{orange}{\checkmark}
+        + call_command \textcolor{orange}{\checkmark}
+    2. ggset \textcolor{orange}{\checkmark}
+        + new_ggset \textcolor{orange}{\checkmark}
+        + mutate_layer \textcolor{orange}{\checkmark}
+        + add_layer \textcolor{orange}{\checkmark}
+        + delete_layer \textcolor{orange}{\checkmark}
+        + modify_set_labs \textcolor{orange}{\checkmark}
+        + modify_unify_scale_limits \textcolor{orange}{\checkmark}
+        + modify_rm_legend \textcolor{orange}{\checkmark}
+        + modify_... \textcolor{orange}{\checkmark}
+        + call_command \textcolor{orange}{\checkmark}
+        + ...
+::::
+
+:::: column 
++ visualization
+    1. create_child_layout \textcolor{orange}{\checkmark}
+    2. activate_nebulae \textcolor{orange}{\checkmark}
+    3. quantification \textcolor{orange}{\checkmark}
+        + features_quantification \textcolor{orange}{\checkmark}
+        + sample_metadata \textcolor{orange}{\checkmark}
+    4. annotate_nebula \textcolor{orange}{\checkmark}
+        + draw_structures \textcolor{orange}{\checkmark}
+        + draw_nodes \textcolor{orange}{\checkmark}
+    5. visualize \textcolor{orange}{\checkmark}
+        + visualize \textcolor{orange}{\checkmark}
+        + visualize_all \textcolor{orange}{\checkmark}
+        + show_node \textcolor{orange}{\checkmark}
+        + show_structure \textcolor{orange}{\checkmark}
+::::
+:::
+
+# Next Schedule
+
+## Overall
+
++ Data filtering and arranging system. \textcolor{orange}{\checkmark}
++ Visualization system. \textcolor{orange}{\checkmark}
++ \textcolor{cyan}{LC-MS runing in XCMS.}
++ \textcolor{red}{Statistic system.}
++ \textcolor{red}{Report.}
++ Documentation.
++ Website.
++ Figures for article.
++ Rerite article.
+

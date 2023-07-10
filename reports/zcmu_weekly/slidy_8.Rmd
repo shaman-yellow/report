@@ -1,0 +1,414 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{Lu Wang}
+---
+
+# Identification of MASS spectra
+
+## From MS/MS spectrum to compound
+
+```{r, eval = F, echo = F }
+source("slidy_8_script/mirror.ms2.R")
+```
+
+Compounds smashed by energy
+
+::: columns 
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/2095_tree.png)
+::::
+
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/2095_ms2.png)
+::::
+:::
+
+## Massive MS/MS spectra
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/dataset_msms.R")
+```
+
+A metabolitic research need lots of identification.
+
+::: columns 
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/dataset_msms.png)
+::::
+
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/all_ms2.png)
+::::
+:::
+
+## Why so many spectra ? \tiny ——LC-MS/MS alignment
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/lc_ms_align.R")
+```
+
+::: columns 
+:::: column 
+![](~/operation/sirius.test/lc_ms.png)
+
+![](~/operation/sirius.test/ms1ms2.png)
+::::
+
+:::: column 
+![](~/operation/sirius.test/align.png)
+::::
+:::
+
+## From manpower to machine
+
+```{r, eval = F, echo = F}
+svg("mcnebula_results/2095_raw_ms2.svg", height = 4, width = 6)
+print(p)
+dev.off()
+system("cairosvg mcnebula_results/2095_raw_ms2.svg -d 300 -o mcnebula_results/2095_raw_ms2.png")
+```
+
+The speculation of MS/MS spectra.
+
+::: columns 
+:::: column 
+
+1. MS^1^ $\Rightarrow$ chemical formula
+    + ion mass
+    + isotopes
+    + ...
+2. MS^2^ $\Rightarrow$ chemical structure
+    + fragmentation m/z
+    + relative intensity
+    + ...
+3. structure $\Rightarrow$ chemical classes
+    + dominant structure
+    + sub-structure
+
+::::
+
+:::: column 
+Ion mass: 619.2446  
+Ion type: [M + ?]-
+![]("~/operation/sirius.test/mcnebula_results/2095_raw_ms2.png")
+::::
+:::
+
+## From manpower to machine \tiny Extra
+
+Another speculation mode of MS/MS spectra.
+
+::: columns 
+:::: column 
+
+1. MS^1^ and MS^2^ $\Rightarrow$ formula
+    + ion mass
+    + isotopes
+    + fragmentation m/z
+    + relative intensity
+2. Database search $\Rightarrow$ structure
+    + fragmentation tree
+3. structure $\Rightarrow$ classes
+    + dominant structure
+    + sub-structure
+
+::::
+
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/2095_tree.png)
+::::
+:::
+
+## Identification \scriptsize instance: ID:2095
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/the_compound.R")
+```
+
+Identification candidates
+
+::: columns 
+:::: column 
+1. formula
+
+```{r, eval = T, echo = F}
+knitr::kable(head(formula, n = 18), format = "markdown")
+```
+
+::::
+
+:::: column 
+2. structure
+
+```{r, eval = T, echo = F, results = "asis", caption = "structure"}
+
+readLines("~/operation/sirius.test/test.tex") %>% 
+  paste0(collapse = "\n") %>% 
+  cat()
+
+```
+
+::::
+:::
+
+## Classification \tiny in MS/MS spectra view
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/the_compound_class.R")
+```
+
+::: columns 
+:::: column 
+
++ classes for \textcolor{red}{sub-} or dominant structure
++ Hierarchy
+
+![](~/operation/sirius.test/mcnebula_results/2095_ms2.png)
+
+::::
+
+:::: column 
+![](~/Pictures/Screenshots/Screenshot from 2022-09-16 17-41-54.png)
+![](~/Pictures/Screenshots/Screenshot from 2022-09-16 17-44-56.png)
+::::
+:::
+
+## Classification \scriptsize instance: ID:2095
+
+::: columns 
+:::: column 
+
+Prediction for all candidates
+
+```{r, eval = T, echo = F}
+knitr::kable(head(formula, n = 18), format = "markdown")
+```
+
+::::
+
+:::: column 
+![](~/operation/sirius.test/mcnebula_results/2095_class.png)
+::::
+:::
+
+## Individual feature $\Rightarrow$ overall dataset
+
+::: columns 
+:::: column 
+
++ Individual feature
+    1. formula
+    2. structure
+    3. class
+
+\vspace{0.3em}
+\qquad \qquad $\Downarrow$
+\vspace{0.3em}
+
++ Overall dataset
+    1. mutiple...
+
+::::
+
+:::: column 
+![](png/parent_nebula.png)
+::::
+:::
+
+# The principle of MCnebula
+
+## The purpose of MCnebula
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/main_workflow.R")
+```
+
+::: columns 
+:::: column 
+
+Main steps
+
+0. \textcolor{green}{Candidates collection}
+1. Filter candidates
+2. \textcolor{red}{Create reference}
+3. \textcolor{red}{Filter classification}
+    + \textcolor{red}{...}
+4. Gather for an overall
+    + formula
+    + structure
+    + ...
+5. Visualization in specific classes
+
+::::
+
+:::: column 
+![](png/child_nebulae.png)
+::::
+:::
+
+## Create reference $\Rightarrow$ specific candidate
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/alluvium.R")
+```
+
+::: columns 
+:::: column 
+Ranking methods
+
++ Formulae
+    + sirius.score
+    + zodiac.score $\blacktriangleleft$
+    + tree.score
+    + iso.score
+    + error.mass
+    + ...
++ Structure
+    + csi.score $\blacktriangleleft$
+    + tani.score
+    + cosmic.score
++ Classification
+    + specific classes
+
+::::
+
+:::: column 
+\tiny Ranking relationship of formula, structure and classification
+![](~/operation/sirius.test/alluvium.png)
+::::
+:::
+
+## Filter classification \scriptsize instance: ID:2095 2_C24H44O18_[M-H]- $\Rightarrow$ dataset
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/the_compound_all_class.R")
+```
+
+::: columns 
+:::: column 
+![](~/operation/sirius.test/2095_class_bar.png)
+::::
+
+:::: column 
+![](~/operation/sirius.test/all_class_bar.png)
+::::
+:::
+
+## Filter classification \scriptsize multiple filtering
+
+```{r, eval = F, echo = F}
+source("slidy_8_script/cross_filter.R")
+```
+
+::: columns 
+:::: column 
+
+1. \textcolor{red}{Inner filter}
+    + by posterior probability
+    + by class name
+        + position isomerism
+        + specific classes
+2. \textcolor{orange}{Create stardust classes}
+3. \textcolor{red}{Cross filter stardust}
+    + Quantity
+    + Score
+    + Identical
+4. Create nebula-index
+
+::::
+
+:::: column 
+![](~/operation/sirius.test/filter_ppcp.png)
+::::
+:::
+
+# Progress
+
+## Code refactoring: data processing
+
+::: columns 
+:::: column 
++ S4 data structure \textcolor{cyan}{\checkmark}
++ Extract data \textcolor{cyan}{\checkmark}
+    1. project_conformation \textcolor{cyan}{\checkmark}
+    2. project_metadata \textcolor{cyan}{\checkmark}
+    3. project_api \textcolor{cyan}{\checkmark}
+    4. project_dataset \textcolor{cyan}{\checkmark}
++ Filter data
+    0. collate_data \textcolor{cyan}{\checkmark}
+    1. filter_formula \textcolor{cyan}{\checkmark}
+    2. filter_structure \textcolor{cyan}{\checkmark}
+    3. filter_ppcp \textcolor{cyan}{\checkmark}
+    4. create_reference \textcolor{cyan}{\checkmark}
+::::
+
+:::: column 
+
++ oganize data
+    1. create_features_annotation \textcolor{orange}{\checkmark}
+    2. create_stardust_classes \textcolor{orange}{\checkmark}
+    3. cross_filter_stardust \textcolor{orange}{\checkmark}
+        + quantity \textcolor{orange}{\checkmark}
+        + score \textcolor{orange}{\checkmark}
+        + identical \textcolor{orange}{\checkmark}
+    4. create_nebula_index \textcolor{orange}{\checkmark}
+    5. compute_spectral_similarity \textcolor{orange}{\checkmark}
+    6. create_parent_nebula \textcolor{orange}{\checkmark}
+    7. create_child_nebulae \textcolor{orange}{\checkmark}
+
+::::
+:::
+
+## Code refactoring: data processing
+
+::: columns 
+:::: column 
+
++ Visualization
+    1. Re-write in S4 object.
+    2. Flexibility.
++ Statistic analysis
+    1. Linear regression.
+    2. Feature selection.
+    3. PCA etc.
++ Report
+    1. Flexibility.
+
+::::
+
+:::: column 
+
+::::
+:::
+
+# Next Schedule
+
+## Overall
+
++ Data filtering and arranging system. \textcolor{orange}{\checkmark}
++ \textcolor{red}{Visualization system.}
++ \textcolor{red}{Statistic system.}
++ \textcolor{red}{Report.}
++ Documentation.
++ Website.
++ Figures for article.
++ Rerite article.
+

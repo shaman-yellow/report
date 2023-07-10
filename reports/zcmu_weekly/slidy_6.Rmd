@@ -1,0 +1,135 @@
+---
+title: 'Seminar'
+author: 'Reporter: Lichuang Huang'
+institute: '`r format(Sys.Date())`'
+date: "`Supervisor: Gang Cao`"
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+fontsize: 5pt
+---
+
+# RNA-seq analysis
+
+## Literature and Guidances
+
+![limma guidance](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 11-58-35.png)
+
+## Literature and Guidances
+
+![design matrix](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 12-01-11.png)
+
+## Literature and Guidances
+
+![RNA-seq](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 11-59-53.png)
+
+## Analysis route
+
+1. Data packaging
+    + Reading in count-data
+    + Organising sample information
+    + Organising gene annotations
+2. Data pre-processing
+    + Transformations from the raw-scale
+    + Removing genes that are lowly expressed
+    + Normalising gene expression distributions
+    + Unsupervised clustering of samples
+3. Differential expression analysis
+    + Creating a design matrix and contrasts
+    + Removing heteroscedascity from count data
+    + Fitting linear models for comparisons of interest
+    + ...
+
+## Limma Workflow: read data
+
+Raw counts data
+
+```{r, echo = F}
+knitr::kable(head(dge.list$counts[, 1:5]), caption = "Raw counts")
+```
+
+## Limma Worklow: gene annotations
+
+```{r, echo = F}
+knitr::kable(head(dge.list$genes), caption = "Gene annotations")
+```
+
+## Limma Worklow: filter and normalization
+
+```{r, echo = F}
+knitr::kable(head(voom$E[, 1:4]), caption = "Normalization")
+```
+
+## Limma Worklow: design matrix
+
+Design matrix to create linear model
+```{r, echo = F}
+knitr::kable(head(voom$design), caption = "Design matrix")
+```
+
+## Limma Worklow: design matrix
+
+![Single factor](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 11-39-16.png)
+
+## Limma Worklow: design matrix
+
+![multiple factor](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 11-42-40.png)
+
+## Limma Worklow: design matrix
+
+![covariate: time series](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 11-44-43.png)
+
+## Limma Worklow: design matrix
+
+![covariate: complex model](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 11-46-06.png)
+
+## Limma Worklow: fit linear model
+
+Binary comparison: basal.vs.ml
+```{r, echo = F}
+knitr::kable(head(basal.vs.ml[, 1:5]), caption = "Fitting")
+```
+
+# AHR and Kidney
+
+## Analysis route
+
+![Route](/home/echo/Pictures/report/ahr_infomatic.png)
+
+## AHR signature screening
+
+![Route-ahr.sig](/home/echo/Pictures/report/ahr.sig.png)
+
+## GEO data series for screening AHR signature
+
+  ```{r, echo = F}
+  df <- data.table::fread("~/Documents/ahr_sig_metadata.tsv") %>% 
+    apply(2, stringr::str_trunc, width = 8) %>% 
+    dplyr::as_tibble() 
+  knitr::kable(df[1:7, 1:5], caption = "GSE siries")
+  ```
+
+# MCnebula in Website
+
+## MCnebula mount at:
+
+![Website](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 10-11-10.png)
+
+## Long documentation: vignette
+
+![vignette](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 10-42-15.png)
+
+## Long documentation: vignette
+
+![vignette.2](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 10-24-51.png)
+
+# Next Schedule
+
+## Gene informatics analysis
+
++ GEO datasets analysis
++ ...

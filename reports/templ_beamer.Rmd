@@ -1,0 +1,62 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{  }
+---
+
+# RNA-seq analysis
+
+## Literature and Guidances
+
+::: columns 
+:::: column 
+![design matrix](/home/echo/Pictures/Screenshots/Screenshot from 2022-06-24 12-01-11.png)
+::::
+:::: column 
+
++ test1 \textcolor{red}{you know that you have}
++ test2 \textcolor{purple}{Screenshot}
++ test3 \textcolor{red}{}
+
+::::
+:::
+
+## Analysis route
+
+1. Data packaging
+    + Reading in count-data
+    + Organising sample information
+    + Organising gene annotations
+2. Data pre-processing
+    + Transformations from the raw-scale
+    + Removing genes that are lowly expressed
+    + Normalising gene expression distributions
+    + Unsupervised clustering of samples
+3. Differential expression analysis
+    + Creating a design matrix and contrasts
+    + Removing heteroscedascity from count data
+    + Fitting linear models for comparisons of interest
+    + ...
+
+# Next Schedule
+
+## Gene informatics analysis
+
++ GEO datasets analysis
++ ...

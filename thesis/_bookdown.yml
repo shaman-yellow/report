@@ -1,0 +1,20 @@
+delete_merged_file: true
+language:
+  label:
+    fig: '图 '
+    tab: '表 '
+    eq: '公式 '
+    thm: 'Theorem '
+    lem: 'Lemma '
+    cor: 'Corollary '
+    prp: 'Proposition '
+    cnj: 'Conjecture '
+    def: 'Definition '
+    exm: 'Example '
+    exr: 'Exercise '
+    hyp: 'Hypothesis '
+    proof: 'Proof. '
+    remark: 'Remark. '
+    solution: 'Solution. '
+  ui:
+    chapter_name: !expr function(i) paste0(i, '. fejezet')

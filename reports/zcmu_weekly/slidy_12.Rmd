@@ -1,0 +1,86 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Zhejiang Chinese Medical University
+date: '`r format(Sys.Date())`'
+output:
+  beamer_presentation:
+    toc: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: templ_beamer_header.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics[width=7cm]{zcmu_logo.png}}
+  \newcommand\supervisor{Cao Gang}
+  \newcommand\instructor{  }
+---
+
+# Article Figures
+
+## Data stream in MCenbula2
+
+\includegraphics[height=67mm]{slidy_12_fig/figure.pdf}
+
+## Filter for chemical classes
+
+\includegraphics[height=67mm]{slidy_12_fig/figure_mech.pdf}
+
+## Re-analysis \scriptsize Mortality Risk...  https://doi.org/10.1016/j.cell.2020.07.040
+
+::: columns 
+:::: column 
+\includegraphics[height=67mm]{slidy_12_fig/parent_nebula.png}
+::::
+
+:::: column 
+\includegraphics[height=67mm]{slidy_12_fig/child_nebula.pdf}
+::::
+:::
+
+## Report
+
+::: columns 
+:::: column 
+Reproduction analysis
+
+\small
+```{r, eval = F, echo = T}
+url <- paste0(
+  "https://raw.githubusercontent.com/",
+  "Cao-lab-zcmu/utils_tool/master/",
+  "inst/extdata/mcn_serum6501.rdata"
+)
+rdata <- RCurl::getURLContent(url)
+file <- paste0(tmp, "/mcn.rdata")
+target <- file(file, "wb")
+writeBin(rdata, target)
+close(target)
+```
+::::
+
+:::: column 
+\includegraphics[height=67mm]{slidy_12_fig/grid_report.pdf}
+::::
+:::
+
+# Next Schedule
+
+## Overall
+
++ Data filtering and arranging system. \textcolor{orange}{\checkmark}
++ Visualization system. \textcolor{orange}{\checkmark}
++ \textcolor{cyan}{LC-MS runing in XCMS.}
++ Statistic system. \textcolor{orange}{\checkmark}
++ Report. \textcolor{orange}{\checkmark}
++ Documentation. \textcolor{orange}{\checkmark}
++ Website. \textcolor{orange}{\checkmark}
++ \textcolor{red}{Test in Linux, Windows, Mac}
++ \textcolor{red}{Figures for article}.
++ \textcolor{red}{Rewrite article}.
+
