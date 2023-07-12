@@ -1,0 +1,330 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+```
+
+# Repetition of Technology
+
+## Article
+
+\includegraphics[width=135mm]{~/Pictures/Screenshots/Screenshot from 2023-07-11 10-24-38.png}
+
+```{r eval = T, echo = F, results = "asis"}
+citethis("SerumAndUrineYang2017")
+```
+
+## Research idea
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.3\textwidth}"} 
+- Main
+    - Identification
+    - Quantification
+    - Feature selection
+    - Establish model
+    - Validation
+:::
+
+::: {.col data-latex="{0.6\textwidth}"} 
+\includegraphics[height=65mm]{./figs/idea.pdf}
+:::
+
+::::::
+
+```{r}
+idea <- as_network(
+  list(
+    "Data:Metadata, Serum, Urine",
+    "Metadata:Statistic",
+    "Urine:Analysis.",
+    "Analysis.:Top_metabolites",
+    "Serum:Identification, Quantification",
+    "Identification:H-NMR",
+    "Quantification:Screening",
+    "Screening:PCA, OPLS-DA, Correlation",
+    "OPLS-DA:Top_metabolites",
+    "Top_metabolites:Pathway, Random_forest, Logistic",
+    "Logistic:ROC"
+  )
+)
+p <- flowChart(idea, 1.1, 1.02)
+smallsvg(p, "idea.pdf", 9, 6)
+```
+
+## Statistic of metadata
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.4\textwidth}"} 
+- The pre-test
+    1. Normal distribution
+       - `shapiro.test()`
+    2. Variance test
+       - `bartlett.test()`
+- ANOVA
+    - `aov()`
+- Multiple comparison
+    - `TurkeyHSD()`
+:::
+
+::: {.col data-latex="{0.6\textwidth}"} 
+
+\includegraphics[height=65mm]{./figs/idea_ex.pdf}
+
+:::
+
+::::::
+
+```{r}
+idea_ex <- as_network(
+  list(
+    "Metadata:Statistic",
+    "Statistic:Normal, Non-normal",
+    "Non-normal:Likeli-hood_ratio_Test",
+    "Normal:Variance., T-test",
+    "Variance.:ANOVA",
+    "ANOVA:Fisher LSD, Tukey HSD"
+  )
+)
+p <- flowChart(idea_ex, , 1.01)
+smallsvg(p, "idea_ex.pdf", 6.5, 5)
+```
+
+## Demo statistic
+
+```{r}
+data <- openxlsx::read.xlsx("./jcsm12246-sup-0002-meta-of-tables-4.xlsx",
+  startRow = 2, sheet = 2)
+data <- dplyr::select(data, Number, Stage, Total.cholesterol)
+demo <- split_lapply_rbind(data, ~ Stage, head, n = 5)
+demo <- dplyr::rename(demo, sample = Number, group = Stage)
+```
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+
+```{r eval = T, echo = F}
+knitr::kable(head(demo, n = 13), caption = "Demo data")
+```
+
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+
+```{r}
+metadata <- dplyr::distinct(demo, sample, group)
+demo.long <- handling_na.long(demo)
+res.lsd <- dplyr::filter(variance_analysis(demo.long), type != "Tukey HSD")
+```
+
+```{r}
+fun <- function(data) {
+  p <- ggplot(data) +
+    geom_col(aes(x = name, y = p.value, fill = p.value)) +
+    coord_flip() +
+    scale_fill_gradient2(mid = "lightyellow", high = "red", midpoint = 0.05) +
+    facet_wrap(~ factor(type, unique(type)), ncol = 1, scales = "free_y")
+}
+res.vis <- fun(all.p)
+smallsvg(res.vis, "var_p.pdf", 7, 7)
+```
+
+\includegraphics[height=62mm]{./figs/var_p.pdf}
+
+:::
+
+::::::
+
+## Multivariate statistics: PCA
+
+```{r}
+iris.show <- split_lapply_rbind(iris, ~ Species, head, n = 4)
+```
+
+```{r}
+data <- dplyr::mutate(iris, sample = paste0("sample", 1:nrow(iris)))
+data <- dplyr::rename(data, group = Species)
+data <- pca_data.long(data)
+```
+
+```{r}
+p <- ggplot(data$data, aes(x = PC1, y = PC2, fill = group)) +
+  geom_point(alpha = 0.8, size = 3, shape = 21, stroke = 0, color = "transparent") +
+  stat_ellipse(aes(color = group), level  =  0.95) +
+  labs(x = paste0("PC1 (", anno[1], ")"),
+    y = paste0("PC2 (", anno[2], ")"), color = "Group", fill = "Group") +
+  ggsci::scale_color_npg() +
+  ggsci::scale_fill_npg() +
+  theme()
+smallsvg(p, "pca.pdf", 5, 5)
+```
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.6\textwidth}"} 
+
+```{r eval = T, echo = F}
+knitr::kable(iris.show, caption = "Demo data")
+```
+
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=60mm]{./figs/pca.pdf}
+:::
+
+::::::
+
+## Multivariate statistics: OPLS-DA
+
+```{r}
+whi <- which(metadata$group %in% c("virginica", "setosa"))
+data <- data.frame(t(data.form))
+data <- dplyr::slice(data, whi)
+pdf("figs/opls_form.pdf", 7, 7)
+metadata.opls <- dplyr::slice(metadata, whi)
+opls <- ropls::opls(
+  data, as.character(metadata.opls$group),
+  predI = 1, orthoI = NA
+)
+dev.off()
+```
+
+```{r}
+res <- cbind(opls@scoreMN[, 1], opls@orthoScoreMN[, 1])
+colnames(res) <- c("h1", paste0("o", 1))
+# vip <- data.frame(opls@vipVn)
+# vip <- cbind(rownames(vip), vip)
+# colnames(vip) <- c("var", "vip")
+```
+
+```{r}
+x_lab <- paste0("T score[1](", opls@modelDF[1, "R2X"] * 100, "%)")
+y_lab <- paste0("Orthogonal T score[1](", opls@modelDF[2, "R2X"] * 100, "%)")
+p <- ggplot(data.frame(res), aes(x = h1, y = o1)) +
+ 	geom_point(alpha = 0.8, size = 3, shape = 21,
+    aes(fill = metadata.opls$group), stroke = 0, color = "transparent") +
+ 	stat_ellipse(aes(color = metadata.opls$group), level  =  0.95) +
+  ggsci::scale_color_npg() +
+  ggsci::scale_fill_npg() +
+  labs(x = x_lab, y = y_lab, color = "Group", fill = "Group")
+smallsvg(p, "opls.pdf", 5, 4)
+```
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=65mm]{./figs/opls_form.pdf}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=65mm]{./figs/opls.pdf}
+:::
+::::::
+
+## Random Forest
+
+```{r}
+set.seed(71)
+iris.rf <- randomForest::randomForest(Species ~ ., data=iris, importance=TRUE, proximity=TRUE)
+data <- round(randomForest::importance(iris.rf), 2)
+data <- data.frame(data)
+data <- dplyr::mutate(data, var = rownames(data))
+```
+
+```{r}
+p <- ggplot(data) +
+    geom_col(aes(x = reorder(var, MeanDecreaseAccuracy),
+        y = MeanDecreaseAccuracy, fill = MeanDecreaseAccuracy), width = .7) +
+    labs(x = "Variable", y = "") +
+    coord_flip()
+smallsvg(p, "rf.pdf", 7, 7)
+```
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.6\textwidth}"} 
+
+```{r eval = T, echo = F}
+knitr::kable(head(iris.show, n = 13), caption = "Traning data")
+```
+
+:::
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=65mm]{./figs/rf.pdf}
+:::
+
+::::::
+
+## Logistic regression
+
+```{r}
+iris_m <- dplyr::mutate(iris, Species = sample(c(0, 1), nrow(iris), T))
+model <- glm(Species ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width, data = iris_m, family = "binomial")
+fun <- function(x) rnorm(nrow(iris), mean(x), mean(x) / 10)
+set.seed(10)
+iris_v <- dplyr::mutate(iris,
+   Sepal.Length = fun(Sepal.Length),
+   Sepal.Width = fun(Sepal.Width),
+   Petal.Length = fun(Petal.Length),
+   Petal.Width = fun(Petal.Width),
+   Species = NULL
+)
+pos <- predict(model, iris_v, type = "response")
+```
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+
+```{r eval = T, echo = F}
+knitr::kable(head(iris.show, n = 4), caption = "Traning data")
+```
+
+```{r eval = T, echo = F}
+knitr::kable(head(round(iris_v, 2), n = 4), caption = "Validate data")
+```
+
+:::
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=65mm]{./figs/roc.png}
+:::
+
+::::::
+
+
+# Thank you

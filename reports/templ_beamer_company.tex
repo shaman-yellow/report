@@ -2,8 +2,8 @@
 \setbeamertemplate{footline}[frame number]
 \usefonttheme{serif}
 % ## ---------------------------------------------------------------------- 
-\setbeamerfont{supervisor}{size = \scriptsize}
-\setbeamerfont{instructor}{size = \scriptsize}
+% \setbeamerfont{supervisor}{size = \scriptsize}
+% \setbeamerfont{instructor}{size = \scriptsize}
 % ## ---------------------------------------------------------------------- 
 \defbeamertemplate{title page}{RunTemplate}
 {
@@ -27,13 +27,13 @@
     \usebeamerfont{author}\insertauthor\par
   \end{beamercolorbox}
   % ## ---------------------------------------------------------------------- 
-  \begin{beamercolorbox}[sep = 5pt, center]{supervisor}
-  % \usebeamerfont{supervisor}Supervisor: \supervisor
-  \end{beamercolorbox}
+  % \begin{beamercolorbox}[sep = 5pt, center]{supervisor}
+    % \usebeamerfont{supervisor}Supervisor: \supervisor
+  % \end{beamercolorbox}
   % ## ---------------------------------------------------------------------- 
-  \begin{beamercolorbox}[sep = 5pt, center]{instructor}
-  % \usebeamerfont{instructor}\instructor
-  \end{beamercolorbox}
+  % \begin{beamercolorbox}[sep = 5pt, center]{instructor}
+    % \usebeamerfont{instructor}\instructor
+  % \end{beamercolorbox}
   % ## ---------------------------------------------------------------------- 
   \begin{beamercolorbox}[sep = 8pt, center]{institute}
     \usebeamerfont{institute}\insertinstitute\par
@@ -45,3 +45,21 @@
   \vfill
 }
 \setbeamertemplate{title page}[RunTemplate]
+
+\newenvironment{cols}[1][]{}{}
+
+\newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
