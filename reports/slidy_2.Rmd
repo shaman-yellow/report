@@ -1,0 +1,141 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+```
+
+## Last Month
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+- AutoDock (vina)
+    - Computational
+- Weighted genes co-expression
+- RNA-protein binding prediction
+- Prediction model
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+- Single-cell analysis
+    - Standard processing (Seurat)
+    - Cell annotation (Garnett)
+    - Cell communication (CellChat)
+    - Cell pseudo-time (monocle3)
+:::
+::::::
+
+# Repetition of Technology
+
+## Article
+
+\includegraphics[width=135mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 16-33-47.png}
+
+```{r eval = T, echo = F, results = "asis"}
+citethis("SingleCellTraHeLe2022")
+```
+
+## Research idea
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+
+- CRD and disease (Malignant)
+    - Clustering
+    - Cell annotation
+    - WGCNA
+- CRD and therapy
+    - ...
+    - Pathway enrichment
+- CRDscore validation
+    - Correlation
+
+:::
+
+
+::: {.col data-latex="{0.5\textwidth}"} 
+- CRD and prognosis
+    - TCGA Survival
+    - TCGA CRDscore
+- Construct prediction model
+    - LASSO
+    - SVM
+- Experimental validation
+:::
+
+::::::
+
+## Techniques 1
+
+Standard worflow and annotation
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-17-19.png}
+
+## Techniques 2
+
+Weighted gene co-expression ... (WGCNA)
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-19-12.png}
+
+
+## Techniques 3
+
+Differential analysis and Pathway enrichment
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-30-36.png}
+
+
+## Techniques 4
+
+Cell–cell ligand‐receptor (LRs) analysis
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-34-07.png}
+
+
+## Techniques 5
+
+Survival analysis
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-36-16.png}
+
+
+## Techniques 6
+
+LASSO and SVM
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-43-28.png}
+
+## Techniques 7
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-47-10.png}
+
+# Thank you
+
+

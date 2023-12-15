@@ -1,0 +1,355 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  5pt,
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Berlin}
+\usecolortheme{beaver}
+\usefonttheme{structurebold}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Seminar},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage[orientation = landscape, size = custom, width = 16, height = 9, scale = 0.5]{beamerposter}
+\setbeamertemplate{footline}[frame number]
+\usefonttheme{serif}
+% ## ---------------------------------------------------------------------- 
+% \setbeamerfont{supervisor}{size = \scriptsize}
+% \setbeamerfont{instructor}{size = \scriptsize}
+% ## ---------------------------------------------------------------------- 
+\defbeamertemplate{title page}{RunTemplate}
+{
+  \vfill
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 10pt, center]{titleGraph}
+    \inserttitlegraphic
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center, rounded = true]{title}
+    \usebeamerfont{title}\inserttitle\par
+    \ifx\insertsubtitle\@empty
+  \else
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \fi
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \vskip0.4em
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{author}
+    \usebeamerfont{author}\insertauthor\par
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  % \begin{beamercolorbox}[sep = 5pt, center]{supervisor}
+    % \usebeamerfont{supervisor}Supervisor: \supervisor
+  % \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  % \begin{beamercolorbox}[sep = 5pt, center]{instructor}
+    % \usebeamerfont{instructor}\instructor
+  % \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{institute}
+    \usebeamerfont{institute}\insertinstitute\par
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{date}
+    \usebeamerfont{date}\insertdate\par
+  \end{beamercolorbox}
+  \vfill
+}
+\setbeamertemplate{title page}[RunTemplate]
+
+\newenvironment{cols}[1][]{}{}
+
+\newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
+\AtBeginEnvironment{longtable}{\tiny} \titlegraphic{\centering \includegraphics{./logo_lixiao.png}} \usepackage{caption} \captionsetup{font={tiny}} \usepackage{setspace} \setstretch{1.3} \linespread{1.3}
+
+\title{Seminar}
+\author{Lichuang Huang}
+\date{2023-08-09}
+\institute{Wie-Biotech}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Last Month}
+\protect\hypertarget{last-month}{}
+\begin{cols}
+
+\begin{col}{0.5\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  AutoDock (vina)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Computational
+  \end{itemize}
+\item
+  Weighted genes co-expression
+\item
+  RNA-protein binding prediction
+\item
+  Prediction model
+\end{itemize}
+
+\end{col}
+
+\begin{col}{0.5\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Single-cell analysis
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Standard processing (Seurat)
+  \item
+    Cell annotation (Garnett)
+  \item
+    Cell communication (CellChat)
+  \item
+    Cell pseudo-time (monocle3)
+  \end{itemize}
+\end{itemize}
+
+\end{col}
+
+\end{cols}
+\end{frame}
+
+\hypertarget{repetition-of-technology}{%
+\section{Repetition of Technology}\label{repetition-of-technology}}
+
+\begin{frame}{Article}
+\protect\hypertarget{article}{}
+\includegraphics[width=135mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 16-33-47.png}
+
+\tiny
+
+He L, et al.~(2022). \emph{Journal of Pineal Research}.\vspace{0.5em}
+\newline
+\end{frame}
+
+\begin{frame}{Research idea}
+\protect\hypertarget{research-idea}{}
+\begin{cols}
+
+\begin{col}{0.5\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  CRD and disease (Malignant)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Clustering
+  \item
+    Cell annotation
+  \item
+    WGCNA
+  \end{itemize}
+\item
+  CRD and therapy
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \ldots{}
+  \item
+    Pathway enrichment
+  \end{itemize}
+\item
+  CRDscore validation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Correlation
+  \end{itemize}
+\end{itemize}
+
+\end{col}
+
+\begin{col}{0.5\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  CRD and prognosis
+
+  \begin{itemize}
+  \tightlist
+  \item
+    TCGA Survival
+  \item
+    TCGA CRDscore
+  \end{itemize}
+\item
+  Construct prediction model
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LASSO
+  \item
+    SVM
+  \end{itemize}
+\item
+  Experimental validation
+\end{itemize}
+
+\end{col}
+
+\end{cols}
+\end{frame}
+
+\begin{frame}{Techniques 1}
+\protect\hypertarget{techniques-1}{}
+Standard worflow and annotation
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-17-19.png}
+\end{frame}
+
+\begin{frame}{Techniques 2}
+\protect\hypertarget{techniques-2}{}
+Weighted gene co-expression \ldots{} (WGCNA)
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-19-12.png}
+\end{frame}
+
+\begin{frame}{Techniques 3}
+\protect\hypertarget{techniques-3}{}
+Differential analysis and Pathway enrichment
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-30-36.png}
+\end{frame}
+
+\begin{frame}{Techniques 4}
+\protect\hypertarget{techniques-4}{}
+Cell--cell ligand‐receptor (LRs) analysis
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-34-07.png}
+\end{frame}
+
+\begin{frame}{Techniques 5}
+\protect\hypertarget{techniques-5}{}
+Survival analysis
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-36-16.png}
+\end{frame}
+
+\begin{frame}{Techniques 6}
+\protect\hypertarget{techniques-6}{}
+LASSO and SVM
+
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-43-28.png}
+\end{frame}
+
+\begin{frame}{Techniques 7}
+\protect\hypertarget{techniques-7}{}
+\includegraphics[height=55mm]{~/Pictures/Screenshots/Screenshot from 2023-08-08 17-47-10.png}
+\end{frame}
+
+\hypertarget{thank-you}{%
+\section{Thank you}\label{thank-you}}
+
+\end{document}

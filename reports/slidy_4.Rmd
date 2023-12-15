@@ -1,0 +1,163 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+```
+
+# Last Month
+
+## Order 1: WES (mutation detection)
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.4\textwidth}"} 
+- QC
+- Detect variants
+- filter variants
+- Annotation
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=65mm]{~/outline/lixiao/2023_08_17_eval/Figure+Table/summary-of-mutations-in-samples.pdf}
+:::
+
+::::::
+
+## Order 2: Multi-Omics
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+- Network pharm.
+- Omics: Microbiota (16s RNA)
+- Omics: Metabolites
+- Microbiota $\Rightarrow$ Metabolites: gutMDisorder
+- Omics: RNA
+- drug Binding: Molecular docking
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=65mm]{~/outline/lixiao/2023_08_24_eval/Figure+Table/Integration-of-datasets-for-metabolites-and-microbiota-selection.pdf}
+:::
+
+::::::
+
+## Order 3: Package touchPDB
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+- Protein basic Information
+- Active sites
+- Binding sites
+- Visualization
+- ...
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-19 10-14-19.png}
+:::
+
+::::::
+
+## Order 4: dual disease and pathway selection
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.3\textwidth}"} 
+- Multi datasets
+    - TCGA
+    - GEO
+- WGCNA
+- Enrichment
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=60mm]{~/outline/lixiao/2023_07_20_yuye/Figure+Table/fig4.pdf}
+:::
+
+::::::
+
+# Article Sharing
+
+## Article
+
+\includegraphics[width=135mm]{~/Pictures/Screenshots/Screenshot from 2023-10-11 17-53-11.png}
+
+```{r eval = T, echo = F, results = "asis"}
+citethis("AMolecularCelTravag2020")
+```
+
+## A molecular cell atlas of the human lung
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-10-11 17-55-18.png}
+
+## Marker identification
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-10-11 17-57-09.png}
+
+## Usefull and available data
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-10-11 18-00-27.png}
+
+# Issues
+
+## Issues
+
+1. No public available data
+2. No correlation between multi-omics
+3. Computation is time-consumed
+
+# Schedule
+
+## Projects
+
+- Gene selection: XiaGuoLian
+- Spatial transcriptome: CaoZhuo
+- ...
+- Dual disease correlation: KIRC and CKD 
+- Image repeat detection
+
+

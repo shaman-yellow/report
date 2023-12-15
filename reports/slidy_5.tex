@@ -1,0 +1,389 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  5pt,
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Berlin}
+\usecolortheme{beaver}
+\usefonttheme{structurebold}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Seminar},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage[orientation = landscape, size = custom, width = 16, height = 9, scale = 0.5]{beamerposter}
+\setbeamertemplate{footline}[frame number]
+\usefonttheme{serif}
+% ## ---------------------------------------------------------------------- 
+% \setbeamerfont{supervisor}{size = \scriptsize}
+% \setbeamerfont{instructor}{size = \scriptsize}
+% ## ---------------------------------------------------------------------- 
+\defbeamertemplate{title page}{RunTemplate}
+{
+  \vfill
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 10pt, center]{titleGraph}
+    \inserttitlegraphic
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center, rounded = true]{title}
+    \usebeamerfont{title}\inserttitle\par
+    \ifx\insertsubtitle\@empty
+  \else
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \fi
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \vskip0.4em
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{author}
+    \usebeamerfont{author}\insertauthor\par
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  % \begin{beamercolorbox}[sep = 5pt, center]{supervisor}
+    % \usebeamerfont{supervisor}Supervisor: \supervisor
+  % \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  % \begin{beamercolorbox}[sep = 5pt, center]{instructor}
+    % \usebeamerfont{instructor}\instructor
+  % \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{institute}
+    \usebeamerfont{institute}\insertinstitute\par
+  \end{beamercolorbox}
+  % ## ---------------------------------------------------------------------- 
+  \begin{beamercolorbox}[sep = 8pt, center]{date}
+    \usebeamerfont{date}\insertdate\par
+  \end{beamercolorbox}
+  \vfill
+}
+\setbeamertemplate{title page}[RunTemplate]
+
+\newenvironment{cols}[1][]{}{}
+
+\newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
+\AtBeginEnvironment{longtable}{\tiny} \titlegraphic{\centering \includegraphics{./logo_lixiao.png}} \usepackage{caption} \captionsetup{font={tiny}} \usepackage{setspace} \setstretch{1.3} \linespread{1.3}
+
+\title{Seminar}
+\author{Lichuang Huang}
+\date{2023-11-10}
+\institute{Wie-Biotech}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{last-month}{%
+\section{Last Month}\label{last-month}}
+
+\begin{frame}{Order 1: TNA and Sepsis}
+\protect\hypertarget{order-1-tna-and-sepsis}{}
+\begin{cols}
+
+\begin{col}{0.25\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Screen DEGs
+\item
+  Microbiota
+\item
+  Ferroptosis
+\end{itemize}
+
+\end{col}
+
+\begin{col}{0.02\textwidth}
+
+\hspace{1pt}
+
+\end{col}
+
+\begin{col}{0.3\textwidth}
+\includegraphics[height=45mm]{~/outline/lixiao/2023_10_05_xiaguolian/Figure+Table/Target-genes-of-TNA-in-mutiple-tissue-of-sepsis-of-Hippo-pathway.pdf}
+
+\end{col}
+
+\begin{col}{0.02\textwidth}
+
+\hspace{1pt}
+
+\end{col}
+
+\begin{col}{0.4\textwidth}
+\includegraphics[height=45mm]{~/outline/lixiao/2023_10_05_xiaguolian/Figure+Table/All-DEGs-of-GSEA-enrichment-via-FerrDb-V2.pdf}
+
+\end{col}
+
+\end{cols}
+\end{frame}
+
+\begin{frame}{Order 2: Spatial scRNA}
+\protect\hypertarget{order-2-spatial-scrna}{}
+\begin{cols}
+
+\begin{col}{0.4\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Cell annotation
+\item
+  Cancer cell prediction
+\item
+  Cancer cell subtype
+\item
+  Cell communication
+\item
+  \ldots{}
+\end{itemize}
+
+\end{col}
+
+\begin{col}{0.02\textwidth}
+
+\hspace{1pt}
+
+\end{col}
+
+\begin{col}{0.6\textwidth}
+\includegraphics[height=35mm]{~/outline/lixiao/2023_10_06_lunST/Figure+Table/cancer-subtypes-in-all-cells.pdf}
+\includegraphics[height=20mm]{~/outline/lixiao/2023_10_06_lunST/Figure+Table/visualization-of-communication-between-macrophage-and-cancer-cells.pdf}
+
+\end{col}
+
+\end{cols}
+\end{frame}
+
+\begin{frame}{Order 3: CKD and Renal Cancer}
+\protect\hypertarget{order-3-ckd-and-renal-cancer}{}
+\begin{cols}
+
+\begin{col}{0.2\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  RCC
+\item
+  CKD
+
+  \begin{itemize}
+  \tightlist
+  \item
+    HN
+  \item
+    IgA
+  \item
+    IMN
+  \end{itemize}
+\end{itemize}
+
+\end{col}
+
+\begin{col}{0.02\textwidth}
+
+\hspace{1pt}
+
+\end{col}
+
+\begin{col}{0.3\textwidth}
+\includegraphics[height=60mm]{~/outline/lixiao/2023_09_27_dualdisease/Figure+Table/fig1.pdf}
+
+\end{col}
+
+\begin{col}{0.1\textwidth}
+
+\hspace{1pt}
+
+\end{col}
+
+\begin{col}{0.45\textwidth}
+\includegraphics[width=60mm]{~/outline/lixiao/2023_09_27_dualdisease/Figure+Table/fig3.pdf}
+
+\end{col}
+
+\end{cols}
+\end{frame}
+
+\hypertarget{article-sharing}{%
+\section{Article Sharing}\label{article-sharing}}
+
+\begin{frame}{Article}
+\protect\hypertarget{article}{}
+\includegraphics[height=50mm]{~/Pictures/Screenshots/Screenshot from 2023-11-09 17-41-15.png}
+
+\tiny
+
+Li Q, et al.~(2022). \emph{Nature}.\vspace{0.5em} \newline
+\end{frame}
+
+\begin{frame}{A molecular cell atlas of the human lung}
+\protect\hypertarget{a-molecular-cell-atlas-of-the-human-lung}{}
+\begin{cols}
+
+\begin{col}{0.4\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  RNA editing
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A-to-I editing (mostly)
+  \item
+    C-to-U editing
+  \end{itemize}
+\item
+  eQTLs
+\item
+  edQTLs
+\item
+  sQTLs
+\item
+  \ldots{}
+\end{itemize}
+
+\end{col}
+
+\begin{col}{0.02\textwidth}
+
+\hspace{1pt}
+
+\end{col}
+
+\begin{col}{0.6\textwidth}
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-11-09 17-52-24.png}
+
+\end{col}
+
+\end{cols}
+\end{frame}
+
+\begin{frame}{edQTLs data in GTEx database}
+\protect\hypertarget{edqtls-data-in-gtex-database}{}
+\includegraphics[width=130mm]{~/Pictures/Screenshots/Screenshot from 2023-11-09 17-58-44.png}
+\end{frame}
+
+\hypertarget{issues}{%
+\section{Issues}\label{issues}}
+
+\begin{frame}{Issues}
+\protect\hypertarget{issues-1}{}
+\begin{enumerate}
+\tightlist
+\item
+  Meta-analysis: Literatures
+\end{enumerate}
+\end{frame}
+
+\hypertarget{schedule}{%
+\section{Schedule}\label{schedule}}
+
+\begin{frame}{Projects}
+\protect\hypertarget{projects}{}
+\begin{itemize}
+\tightlist
+\item
+  RNA-seq and GPBAR/TGR5
+\item
+  RNA-editing and inflammation
+\item
+  \ldots{}
+\end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,159 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+```
+
+# Last Month
+
+## 16s rRNA
+
+Qiime2 and MicrobiotaProcess.
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+
+- importing data
+- ...
+- Alpha and beta diversity analysis
+- Alpha rarefaction plotting
+- Taxonomic analysis
+- ...
+
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=70mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-30-40.png}
+:::
+
+::::::
+
+## 16s rRNA
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-37-52.png}
+
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-36-20.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-39-34.png}
+:::
+
+::::::
+
+## 16s rRNA
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-41-59.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-43-19.png}
+:::
+
+::::::
+
+## WES
+
+~~GATK4~~ elprep, ANNOVAR and maftools 
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-54-56.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 16-50-51.png}
+:::
+
+::::::
+
+## WES
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 17-00-41.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[width=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 17-01-38.png}
+:::
+
+::::::
+
+# Repetition of Technology
+
+## Article
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 17-43-53.png}
+
+```{r eval = T, echo = F, results = "asis"}
+citethis("BugsigdbCapturGeistl2023")
+```
+
+## A wide range of data sources
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 17-42-21.png}
+
+## Microbe co-occurrence
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 17-55-32.png}
+
+## Microorganisms and disease
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2023-09-12 17-50-28.png}
+
