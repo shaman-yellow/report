@@ -37,13 +37,62 @@ options(font_family = NULL)
 
 ## Overview
 
+\includegraphics[height=65mm]{./figs/orders.pdf}
+
+# Workflow summary
+
+## Structure \small Automatic data arrangement 
+
+\includegraphics[height=65mm]{./figs/workflow1.pdf}
+
+## Overview \small Frequency
+
+\includegraphics[height=65mm]{./figs/workflow2.pdf}
+
+# Report summary
+
+## Structure \small Automatic annotation
+
+\includegraphics[height=62mm]{./figs/report1.pdf}
+
+# System summary
+
+## Overview \small Automatic summary
+
+\includegraphics[height=65mm]{./figs/system1.pdf}
+
+# Summary
+
+## Prospect
+
+- More workflow
+- More details in report
+    - Method description
+    - Figure description
+    - Table description
+- More intelligent system
+
+# Thanks
+
 ```{r}
 alls <- get_orders()
 alls <- filter(alls, !grpl(belong, "12-01$"))
 
 p.lst <- plot_orders_summary(alls)
-```
+p.lst$p.alls
+autosv(p.lst$p.alls, "orders")
 
-```{r}
-plot_workflow_summary()
+p.wlst <- plot_workflow_summary(alls)
+p.wlst$p.fr1
+p.wlst$p.fr2
+autosv(p.wlst$p.fr1, "workflow1")
+autosv(p.wlst$p.fr2, "workflow2")
+
+p.rep <- plot_report_summary()
+p.rep
+autosv(p.rep, "report1")
+
+p.task <- plot_task_summary()
+p.task$p.alls
+autosv(p.task$p.alls, "system1")
 ```
