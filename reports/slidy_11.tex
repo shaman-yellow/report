@@ -153,11 +153,11 @@
     {}%
 }
 \makeatother
-\AtBeginEnvironment{longtable}{\tiny} \titlegraphic{\centering \includegraphics{./logo_lixiao.png}} \usepackage{caption} \captionsetup{font={tiny}} \usepackage{setspace} \setstretch{1.3} \linespread{1.3} \usepackage{xeCJK}
+\usepackage{pgfornament} \AtBeginEnvironment{longtable}{\tiny} \titlegraphic{\centering \includegraphics{./logo_lixiao.png}} \usepackage{caption} \captionsetup{font={tiny}} \usepackage{setspace} \setstretch{1.3} \linespread{1.3} \usepackage{xeCJK}
 
 \title{Seminar}
 \author{Lichuang Huang}
-\date{2024-01-11}
+\date{2024-06-14}
 \institute{Wie-Biotech}
 
 \begin{document}
@@ -166,63 +166,122 @@
 \hypertarget{tasks-summary}{%
 \section{Tasks summary}\label{tasks-summary}}
 
-\begin{frame}{Overview}
-\protect\hypertarget{overview}{}
-\includegraphics[height=65mm]{./figs/orders.pdf}
+\begin{frame}{Overview 2024-05}
+\protect\hypertarget{overview-2024-05}{}
+\includegraphics[height=65mm]{./figs/workflow2_05.pdf}
 \end{frame}
 
-\hypertarget{workflow-summary}{%
-\section{Workflow summary}\label{workflow-summary}}
-
-\begin{frame}{Structure \small Automatic data arrangement}
-\protect\hypertarget{structure-automatic-data-arrangement}{}
-\includegraphics[height=65mm]{./figs/workflow1.pdf}
+\begin{frame}{Methods 2024-05}
+\protect\hypertarget{methods-2024-05}{}
+\includegraphics[height=65mm]{./figs/types_05.pdf}
 \end{frame}
 
-\begin{frame}{Overview \small Frequency}
-\protect\hypertarget{overview-frequency}{}
-\includegraphics[height=65mm]{./figs/workflow2.pdf}
-\end{frame}
-
-\hypertarget{report-summary}{%
-\section{Report summary}\label{report-summary}}
-
-\begin{frame}{Structure \small Automatic annotation}
-\protect\hypertarget{structure-automatic-annotation}{}
-\includegraphics[height=62mm]{./figs/report1.pdf}
-\end{frame}
-
-\hypertarget{system-summary}{%
-\section{System summary}\label{system-summary}}
-
-\begin{frame}{Overview \small Automatic summary}
-\protect\hypertarget{overview-automatic-summary}{}
-\includegraphics[height=65mm]{./figs/system1.pdf}
-\end{frame}
-
-\hypertarget{summary}{%
-\section{Summary}\label{summary}}
-
-\begin{frame}{Prospect}
-\protect\hypertarget{prospect}{}
+\begin{frame}{New Methods}
+\protect\hypertarget{new-methods}{}
 \begin{itemize}
 \tightlist
 \item
-  More workflow
+  scfea: scFEA 单细胞数据的代写通量预测
 \item
-  More details in report
+  methy: missMethyl, DMRcate, Gviz Methyl-seq 数据分析
+\item
+  ucscTable: rtracklayer UCSC Table 数据获取
+\item
+  cig: makeCGI CpG Islands 预测
+\item
+  dmr: Gviz DMR 数据可视化
+\end{itemize}
+\end{frame}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    Method description
-  \item
-    Figure description
-  \item
-    Table description
-  \end{itemize}
+\begin{frame}[fragile]{New Features \small report}
+\protect\hypertarget{new-features-report}{}
+\begin{itemize}
+\tightlist
 \item
-  More intelligent system
+  Auto Tags: 自动统计分析标签 \(\Rightarrow\) Note
+\item
+  Auto Section name: 自动生成分析标题, Method + Content + (Signature)
+\end{itemize}
+
+\small
+
+\texttt{\#\#\ Cardinal\ 空间代谢组数据分析\ (INTEGRATE)}
+
+\texttt{\#\#\#\ ClusterProfiler\ 富集分析\ (STNCANCER)}
+
+\texttt{\#\#\ Seurat\ 空间转录组分析\ (CANCER)}
+
+\begin{itemize}
+\tightlist
+\item
+  Delimiter
+\end{itemize}
+
+\begin{center}\pgfornament[anchor=center,ydelta=0pt,width=9cm]{88}\vspace{1.5cm}\end{center}
+\end{frame}
+
+\hypertarget{article-sharing}{%
+\section{Article sharing}\label{article-sharing}}
+
+\begin{frame}{Theme}
+\protect\hypertarget{theme}{}
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-24-31.png}
+\end{frame}
+
+\begin{frame}{Visualization}
+\protect\hypertarget{visualization}{}
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-27-26.png}
+\end{frame}
+
+\begin{frame}{Visualization}
+\protect\hypertarget{visualization-1}{}
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-28-39.png}
+\end{frame}
+
+\begin{frame}{Gviz for DNA}
+\protect\hypertarget{gviz-for-dna}{}
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-30-00.png}
+\end{frame}
+
+\begin{frame}{Gviz Visualization}
+\protect\hypertarget{gviz-visualization}{}
+\begin{cols}
+
+\begin{col}{0.45\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  For Genome Visualization
+\end{itemize}
+
+\end{col}
+
+\begin{col}{0.02\textwidth}
+
+\hspace{1pt}
+
+\end{col}
+
+\begin{col}{0.45\textwidth}
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-31-00.png}
+
+\end{col}
+
+\end{cols}
+\end{frame}
+
+\hypertarget{schedule}{%
+\section{Schedule}\label{schedule}}
+
+\begin{frame}{Schedule}
+\protect\hypertarget{schedule-1}{}
+\begin{itemize}
+\tightlist
+\item
+  Finish orders
+\item
+  New methods
 \end{itemize}
 \end{frame}
 

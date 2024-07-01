@@ -1,0 +1,153 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+  \usepackage{xeCJK}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+options(font_family = NULL)
+```
+
+# Tasks summary
+
+## Overview
+
+\includegraphics[height=65mm]{./figs/orders_11-12.pdf}
+
+## Methods used
+
+\includegraphics[height=65mm]{./figs/workflow2_11-12.pdf}
+
+## New Methods
+
+- edqtl: GTEX (eQTL, edQTL)
+- biblio: bibliometrix
+- hybrid: miRNA binding RNA
+- miranda: miRNA binding mRNA
+- tcmsp: TCM Database
+- pubchemr: Compounds ID mapping
+- swiss: Batch prediction
+- biomart2: Biomart API mapping genes
+
+```{r}
+writeLines(news)
+NULL
+```
+
+# Article sharing
+
+## RNA velocity
+
+\includegraphics[height=50mm]{~/Pictures/Screenshots/Screenshot from 2024-01-11 10-08-54.png}
+
+```{r eval = T, echo = F, results = "asis"}
+citethis("RnaVelocityOfLaMan2018")
+```
+
+## Details
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-01-11 10-13-21.png}
+
+## Compare with Pseudotime analysis
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-01-11 10-15-06.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/embryo_pr_graph_by_time.png}
+:::
+
+::::::
+
+## Recent years: cellDancer and PhyloVelo 
+
+```{r}
+rsvg::rsvg_png("~/Pictures/diagram_no_text.svg", "~/Pictures/diagram_no_text.png", 4000, 4000)
+```
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=50mm]{~/Pictures/about6.png}
+:::
+
+::: {.col data-latex="{0.1\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/diagram_no_text.png}
+:::
+
+::::::
+
+# Schedule
+
+## Workflow document
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-01-11 10-39-38.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-01-11 10-41-21.png}
+:::
+
+::::::
+
+# Thanks
+
+```{r}
+alls <- get_orders()
+these <- filter(alls, grpl(belong, "2023-1[12]"))
+
+p.lst <- plot_orders_summary(these)
+p.lst$p.alls
+autosv(p.lst$p.alls, "orders_11-12")
+
+p.wlst <- plot_workflow_summary(these)
+p.wlst$p.fr2
+autosv(p.wlst$p.fr2, "workflow2_11-12")
+```
+
+```{r}
+news <- get_workflow_news("2023-11-01", "2023-12-01")
+```

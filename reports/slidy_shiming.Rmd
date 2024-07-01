@@ -1,0 +1,111 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+  \usepackage{xeCJK}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+options(font_family = NULL)
+```
+
+# 生信-国自然标书
+
+## 网络药理学
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/intersection-of-all-compounds.pdf}
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/Overall-targets-number-of-datasets.pdf}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/Network-pharmacology-with-disease.pdf}
+:::
+::::::
+
+## PPI
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.3\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-raw-PPI-network.pdf}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.3\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-Top30-MCC-score.pdf}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.3\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-KEGG-enrichment.pdf}
+:::
+::::::
+
+## GEO dataset
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.4\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/RAT-Model-vs-Control-DEGs.pdf}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.3\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_03_13_shiming/Figure+Table/hsa04010.pathview.png}
+:::
+::::::
+
+# 生信-SCI
+
+## 复方和水蛭素
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_04_10_shiming2/Figure+Table/Network-pharmacology-with-disease.pdf}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/outline/lixiao/2024_04_10_shiming2/Figure+Table/Hirudin-targets-of-disease.pdf}
+:::
+::::::

@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.29)  10 JAN 2024 18:05
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.29)  11 APR 2024 15:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**slidy_6_year.tex
-(./slidy_6_year.tex
+**slidy_9.tex
+(./slidy_9.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/beam
 er/beamer.cls
@@ -990,8 +990,8 @@ age=dflt;"
 guage=dflt;"
 (fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
 
-(./slidy_6_year.aux)
-\openout1 = `slidy_6_year.aux'.
+(./slidy_9.aux)
+\openout1 = `slidy_9.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 163.
 LaTeX Font Info:    ... okay on input line 163.
@@ -1371,7 +1371,7 @@ ern Roman (RS)
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-(./slidy_6_year.nav)
+(./slidy_9.nav)
 File: ./logo_lixiao.png Graphic file (type bmp)
 <./logo_lixiao.png>
 [1
@@ -1379,8 +1379,8 @@ File: ./logo_lixiao.png Graphic file (type bmp)
 ] [2
 
 ]
-File: ./figs/orders.pdf Graphic file (type pdf)
-<use ./figs/orders.pdf>
+File: ./figs/workflow2_03.pdf Graphic file (type pdf)
+<use ./figs/workflow2_03.pdf>
 
 Overfull \vbox (12.04083pt too high) detected at line 172
  []
@@ -1389,70 +1389,109 @@ Overfull \vbox (12.04083pt too high) detected at line 172
 
 ] [4
 
-]
-File: ./figs/workflow1.pdf Graphic file (type pdf)
-<use ./figs/workflow1.pdf>
-
-Overfull \vbox (12.04083pt too high) detected at line 180
- []
-
-[5
+] [5
 
 ]
-File: ./figs/workflow2.pdf Graphic file (type pdf)
-<use ./figs/workflow2.pdf>
-
-Overfull \vbox (12.04083pt too high) detected at line 185
- []
-
-[6
+LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/m/n' will be
+(Font)              scaled to size 12.44pt on input line 220.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.708pt on input line 220.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.22pt on input line 220.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
+20.
+(/usr/share/texmf/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.44133pt on input line 220.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.70891pt on input line 220.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.22066pt on input line 220.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 12.43866pt on input line 220.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.70706pt on input line 220.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.21933pt on input line 220.
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) [6
 
 ] [7
 
 ]
-File: ./figs/report1.pdf Graphic file (type pdf)
-<use ./figs/report1.pdf>
+File: ~/Pictures/Screenshots/Screenshot from 2024-04-11 15-16-33.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-04-11 15-16-33.png>
 
-Overfull \vbox (3.505pt too high) detected at line 193
+Overfull \vbox (8.2494pt too high) detected at line 246
  []
 
 [8
 
-] [9
+]
+File: ~/Pictures/Screenshots/Screenshot from 2024-04-11 15-15-07.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-04-11 15-15-07.png>
+
+Overfull \vbox (12.04083pt too high) detected at line 280
+ []
+
+[9
 
 ]
-File: ./figs/system1.pdf Graphic file (type pdf)
-<use ./figs/system1.pdf>
+File: ~/Pictures/Screenshots/Screenshot from 2024-04-11 15-29-02.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-04-11 15-29-02.png>
 
-Overfull \vbox (12.04083pt too high) detected at line 201
+Overfull \vbox (12.04083pt too high) detected at line 285
  []
 
 [10
 
-] [11
+]
+File: ~/Pictures/Screenshots/Screenshot from 2024-04-11 15-39-17.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-04-11 15-39-17.png>
+
+Overfull \hbox (32.7696pt too wide) in paragraph at lines 319--319
+[][] 
+ []
+
+
+Overfull \vbox (12.04083pt too high) detected at line 319
+ []
+
+[11
 
 ] [12
 
 ] [13
 
+] [14
+
 ]
 \tf@nav=\write5
-\openout5 = `slidy_6_year.nav'.
+\openout5 = `slidy_9.nav'.
 
 \tf@toc=\write6
-\openout6 = `slidy_6_year.toc'.
+\openout6 = `slidy_9.toc'.
 
 \tf@snm=\write7
-\openout7 = `slidy_6_year.snm'.
+\openout7 = `slidy_9.snm'.
 
-(./slidy_6_year.aux) ) 
+(./slidy_9.aux) ) 
 Here is how much of TeX's memory you used:
- 33824 strings out of 476191
- 700808 string characters out of 5812072
- 1156965 words of memory out of 5000000
- 53923 multiletter control sequences out of 15000+600000
- 470581 words of font info for 53 fonts, out of 8000000 for 9000
+ 33959 strings out of 476191
+ 706389 string characters out of 5812072
+ 1162405 words of memory out of 5000000
+ 54022 multiletter control sequences out of 15000+600000
+ 473433 words of font info for 72 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,20n,122p,1009b,896s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 128i,20n,122p,1004b,896s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on slidy_6_year.pdf (13 pages).
+Output written on slidy_9.pdf (14 pages).

@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.29)  10 JAN 2024 18:05
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.4.21)  13 JUN 2024 17:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**slidy_6_year.tex
-(./slidy_6_year.tex
+**slidy_11.tex
+(./slidy_11.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/beam
 er/beamer.cls
@@ -853,24 +853,104 @@ P-MUL ) ( FP-ROUND ) ) ( FP-UPN ( FP-MUL ) ( FP-ROUND ) ) ( FP-UPN ( FP-MUL ) (
 UPN ( FP-MUL ) ( FP-ROUND ) ) ( FP-UPN ( FP-MUL ) ( FP-ROUND ) ) ( FP-UPN ( FP-
 MUL ) ( FP-ROUND ) ) ( FP-UPN ( FP-MUL ) ( FP-ROUND ) ) ( FP-UPN ( FP-MUL ) ( F
 P-ROUND ) )) (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemeser
-if.sty) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+if.sty) (/usr/share/texlive/texmf-dist/tex/latex/pgfornament/pgfornament.sty (/
+usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/share/t
+exlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box79
+) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
+.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen292
+\pgf@nodesepend=\dimen293
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
+.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/shar
+e/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/share/texlive/te
+xmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/share/texlive/texmf
+-dist/tex/latex/pgf/math/pgfmath.sty (/usr/share/texlive/texmf-dist/tex/generic
+/pgf/math/pgfmath.code.tex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/uti
+lities/pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen294
+\pgffor@skip=\dimen295
+\pgffor@stack=\toks48
+\pgffor@toks=\toks49
+))
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
+.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count373
+\pgfplotmarksize=\dimen296
+)
+\tikz@lastx=\dimen297
+\tikz@lasty=\dimen298
+\tikz@lastxsaved=\dimen299
+\tikz@lastysaved=\dimen300
+\tikz@lastmovetox=\dimen301
+\tikz@lastmovetoy=\dimen302
+\tikzleveldistance=\dimen303
+\tikzsiblingdistance=\dimen304
+\tikz@figbox=\box80
+\tikz@figbox@bg=\box81
+\tikz@tempbox=\box82
+\tikz@tempbox@bg=\box83
+\tikztreelevel=\count374
+\tikznumberofchildren=\count375
+\tikznumberofcurrentchild=\count376
+\tikz@fig@count=\count377
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count378
+\pgfmatrixcurrentcolumn=\count379
+\pgf@matrix@numberofcolumns=\count380
+)
+\tikz@expandcount=\count381
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (/usr/share/texlive/texmf-dist/tex/latex/pgfopts/pgfopts.sty
+Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
+\pgfopts@list@add@a@toks=\toks50
+\pgfopts@list@add@b@toks=\toks51
+)
+Package: pgfornament 2020/05/26 v1.2 vector ornaments
+
+(/usr/share/texlive/texmf-dist/tex/latex/pgfornament/pgflibraryvectorian.code.t
+ex
+2020/04/06 1.1 pgflibraryvectorian.code.tex
+)) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2020/10/26 v3.5g Customizing captions (AR)
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen292
-\captionmargin@=\dimen293
-\captionwidth=\dimen294
-\caption@tempdima=\dimen295
-\caption@indent=\dimen296
-\caption@parindent=\dimen297
-\caption@hangindent=\dimen298
+\captionmargin=\dimen305
+\captionmargin@=\dimen306
+\captionwidth=\dimen307
+\caption@tempdima=\dimen308
+\caption@indent=\dimen309
+\caption@parindent=\dimen310
+\caption@hangindent=\dimen311
 Package caption Info: beamer document class detected.
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption-beamer.sto
 File: caption-beamer.sto 2020/08/22 v2.0 Adaption of the caption package to the
  beamer document classes (AR)
 ))
-\c@caption@flags=\count373
-\c@continuedfloat=\count374
+\c@caption@flags=\count382
+\c@continuedfloat=\count383
 Package caption Info: hyperref package is loaded.
 Package caption Info: Hyperref support is turned off
 (caption)             because hyperref has stopped early.
@@ -882,18 +962,18 @@ Package: xeCJK 2021/12/12 v3.8.8 Typesetting CJK scripts with XeLaTeX
 Package: ctexhook 2021/12/12 v2.5.8 Document and package hooks (CTEX)
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty
 Package: xtemplate 2022-01-12 L3 Experimental prototype document functions
-\l__xtemplate_tmp_dim=\dimen299
-\l__xtemplate_tmp_int=\count375
+\l__xtemplate_tmp_dim=\dimen312
+\l__xtemplate_tmp_int=\count384
 \l__xtemplate_tmp_muskip=\muskip19
 \l__xtemplate_tmp_skip=\skip67
 )
-\l__xeCJK_tmp_int=\count376
-\l__xeCJK_tmp_box=\box79
-\l__xeCJK_tmp_dim=\dimen300
+\l__xeCJK_tmp_int=\count385
+\l__xeCJK_tmp_box=\box84
+\l__xeCJK_tmp_dim=\dimen313
 \l__xeCJK_tmp_skip=\skip68
-\g__xeCJK_space_factor_int=\count377
-\l__xeCJK_begin_int=\count378
-\l__xeCJK_end_int=\count379
+\g__xeCJK_space_factor_int=\count386
+\l__xeCJK_begin_int=\count387
+\l__xeCJK_end_int=\count388
 \c__xeCJK_CJK_class_int=\XeTeXcharclass1
 \c__xeCJK_FullLeft_class_int=\XeTeXcharclass2
 \c__xeCJK_FullRight_class_int=\XeTeXcharclass3
@@ -903,47 +983,47 @@ Package: xtemplate 2022-01-12 L3 Experimental prototype document functions
 \c__xeCJK_CM_class_int=\XeTeXcharclass7
 \c__xeCJK_HangulJamo_class_int=\XeTeXcharclass8
 \l__xeCJK_last_skip=\skip69
-\g__xeCJK_node_int=\count380
-\c__xeCJK_CJK_node_dim=\dimen301
-\c__xeCJK_CJK-space_node_dim=\dimen302
-\c__xeCJK_default_node_dim=\dimen303
-\c__xeCJK_default-space_node_dim=\dimen304
-\c__xeCJK_CJK-widow_node_dim=\dimen305
-\c__xeCJK_normalspace_node_dim=\dimen306
+\g__xeCJK_node_int=\count389
+\c__xeCJK_CJK_node_dim=\dimen314
+\c__xeCJK_CJK-space_node_dim=\dimen315
+\c__xeCJK_default_node_dim=\dimen316
+\c__xeCJK_default-space_node_dim=\dimen317
+\c__xeCJK_CJK-widow_node_dim=\dimen318
+\c__xeCJK_normalspace_node_dim=\dimen319
 \l__xeCJK_ccglue_skip=\skip70
 \l__xeCJK_ecglue_skip=\skip71
 \l__xeCJK_punct_kern_skip=\skip72
-\l__xeCJK_last_penalty_int=\count381
-\l__xeCJK_last_bound_dim=\dimen307
-\l__xeCJK_last_kern_dim=\dimen308
-\l__xeCJK_widow_penalty_int=\count382
+\l__xeCJK_last_penalty_int=\count390
+\l__xeCJK_last_bound_dim=\dimen320
+\l__xeCJK_last_kern_dim=\dimen321
+\l__xeCJK_widow_penalty_int=\count391
 
 Package xtemplate Info: Declaring object type 'xeCJK/punctuation' taking 0
 (xtemplate)             argument(s) on line 2337.
 
-\l__xeCJK_fixed_punct_width_dim=\dimen309
-\l__xeCJK_mixed_punct_width_dim=\dimen310
-\l__xeCJK_middle_punct_width_dim=\dimen311
-\l__xeCJK_fixed_margin_width_dim=\dimen312
-\l__xeCJK_mixed_margin_width_dim=\dimen313
-\l__xeCJK_middle_margin_width_dim=\dimen314
-\l__xeCJK_bound_punct_width_dim=\dimen315
-\l__xeCJK_bound_margin_width_dim=\dimen316
-\l__xeCJK_margin_minimum_dim=\dimen317
-\l__xeCJK_kerning_total_width_dim=\dimen318
-\l__xeCJK_same_align_margin_dim=\dimen319
-\l__xeCJK_different_align_margin_dim=\dimen320
-\l__xeCJK_kerning_margin_width_dim=\dimen321
-\l__xeCJK_kerning_margin_minimum_dim=\dimen322
-\l__xeCJK_bound_dim=\dimen323
-\l__xeCJK_reverse_bound_dim=\dimen324
-\l__xeCJK_margin_dim=\dimen325
-\l__xeCJK_minimum_bound_dim=\dimen326
-\l__xeCJK_kerning_margin_dim=\dimen327
-\g__xeCJK_family_int=\count383
-\l__xeCJK_fam_int=\count384
-\g__xeCJK_fam_allocation_int=\count385
-\l__xeCJK_verb_case_int=\count386
+\l__xeCJK_fixed_punct_width_dim=\dimen322
+\l__xeCJK_mixed_punct_width_dim=\dimen323
+\l__xeCJK_middle_punct_width_dim=\dimen324
+\l__xeCJK_fixed_margin_width_dim=\dimen325
+\l__xeCJK_mixed_margin_width_dim=\dimen326
+\l__xeCJK_middle_margin_width_dim=\dimen327
+\l__xeCJK_bound_punct_width_dim=\dimen328
+\l__xeCJK_bound_margin_width_dim=\dimen329
+\l__xeCJK_margin_minimum_dim=\dimen330
+\l__xeCJK_kerning_total_width_dim=\dimen331
+\l__xeCJK_same_align_margin_dim=\dimen332
+\l__xeCJK_different_align_margin_dim=\dimen333
+\l__xeCJK_kerning_margin_width_dim=\dimen334
+\l__xeCJK_kerning_margin_minimum_dim=\dimen335
+\l__xeCJK_bound_dim=\dimen336
+\l__xeCJK_reverse_bound_dim=\dimen337
+\l__xeCJK_margin_dim=\dimen338
+\l__xeCJK_minimum_bound_dim=\dimen339
+\l__xeCJK_kerning_margin_dim=\dimen340
+\g__xeCJK_family_int=\count392
+\l__xeCJK_fam_int=\count393
+\g__xeCJK_fam_allocation_int=\count394
+\l__xeCJK_verb_case_int=\count395
 \l__xeCJK_verb_exspace_skip=\skip73
 (/usr/share/texlive/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg
 File: xeCJK.cfg 2021/12/12 v3.8.8 Configuration file for xeCJK package
@@ -990,8 +1070,8 @@ age=dflt;"
 guage=dflt;"
 (fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
 
-(./slidy_6_year.aux)
-\openout1 = `slidy_6_year.aux'.
+(./slidy_11.aux)
+\openout1 = `slidy_11.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 163.
 LaTeX Font Info:    ... okay on input line 163.
@@ -1055,7 +1135,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count387
+\c@section@level=\count396
 )
 LaTeX Info: Redefining \ref on input line 163.
 LaTeX Info: Redefining \pageref on input line 163.
@@ -1371,7 +1451,7 @@ ern Roman (RS)
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-(./slidy_6_year.nav)
+(./slidy_11.nav)
 File: ./logo_lixiao.png Graphic file (type bmp)
 <./logo_lixiao.png>
 [1
@@ -1379,30 +1459,87 @@ File: ./logo_lixiao.png Graphic file (type bmp)
 ] [2
 
 ]
-File: ./figs/orders.pdf Graphic file (type pdf)
-<use ./figs/orders.pdf>
+File: ./figs/workflow2_05.pdf Graphic file (type pdf)
+<use ./figs/workflow2_05.pdf>
 
 Overfull \vbox (12.04083pt too high) detected at line 172
  []
 
 [3
 
-] [4
-
 ]
-File: ./figs/workflow1.pdf Graphic file (type pdf)
-<use ./figs/workflow1.pdf>
+File: ./figs/types_05.pdf Graphic file (type pdf)
+<use ./figs/types_05.pdf>
 
-Overfull \vbox (12.04083pt too high) detected at line 180
+Overfull \vbox (12.04083pt too high) detected at line 177
  []
 
+[4
+
+]
+LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/m/n' will be
+(Font)              scaled to size 12.44pt on input line 194.
 [5
 
 ]
-File: ./figs/workflow2.pdf Graphic file (type pdf)
-<use ./figs/workflow2.pdf>
+\openout4 = `slidy_11.vrb'.
 
-Overfull \vbox (12.04083pt too high) detected at line 185
+(./slidy_11.vrb
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.708pt on input line 6.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.22pt on input line 6.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
+.
+(/usr/share/texmf/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.44133pt on input line 6.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.70891pt on input line 6.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.22066pt on input line 6.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 12.43866pt on input line 6.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.70706pt on input line 6.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.21933pt on input line 6.
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+
+Package fontspec Warning: Font "FandolFang-Regular" does not contain requested
+(fontspec)                Script "CJK".
+
+
+Package fontspec Info: FandolFang-Regular scale = 0.9410462602124907.
+
+
+Package fontspec Info: FandolFang-Regular scale = 0.9410462602124907.
+
+
+Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
+(fontspec)             'FandolFang-Regular' with options
+(fontspec)             [Scale=MatchLowercase,Script={CJK},Extension={.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9410462602124907]"[FandolFang-Regular.otf]/OT:la
+nguage=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `TU/FandolFang-Regular(0)/m/n' will be
+(Font)              scaled to size 9.75858pt on input line 13.
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgfornament/vectorian/vectorian88.pg
+f))
+Overfull \vbox (46.75768pt too high) detected at line 221
  []
 
 [6
@@ -1410,49 +1547,79 @@ Overfull \vbox (12.04083pt too high) detected at line 185
 ] [7
 
 ]
-File: ./figs/report1.pdf Graphic file (type pdf)
-<use ./figs/report1.pdf>
+File: ~/Pictures/Screenshots/Screenshot from 2024-06-13 17-24-31.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-06-13 17-24-31.png>
 
-Overfull \vbox (3.505pt too high) detected at line 193
+Overfull \vbox (12.04083pt too high) detected at line 229
  []
 
 [8
 
-] [9
+]
+File: ~/Pictures/Screenshots/Screenshot from 2024-06-13 17-27-26.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-06-13 17-27-26.png>
+
+Overfull \vbox (12.04083pt too high) detected at line 234
+ []
+
+[9
 
 ]
-File: ./figs/system1.pdf Graphic file (type pdf)
-<use ./figs/system1.pdf>
+File: ~/Pictures/Screenshots/Screenshot from 2024-06-13 17-28-39.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-06-13 17-28-39.png>
 
-Overfull \vbox (12.04083pt too high) detected at line 201
+Overfull \vbox (12.04083pt too high) detected at line 239
  []
 
 [10
 
-] [11
+]
+File: ~/Pictures/Screenshots/Screenshot from 2024-06-13 17-30-00.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-06-13 17-30-00.png>
 
-] [12
+Overfull \vbox (12.04083pt too high) detected at line 244
+ []
+
+[11
+
+]
+File: ~/Pictures/Screenshots/Screenshot from 2024-06-13 17-31-00.png Graphic fi
+le (type bmp)
+<~/Pictures/Screenshots/Screenshot from 2024-06-13 17-31-00.png>
+
+Overfull \vbox (12.04083pt too high) detected at line 272
+ []
+
+[12
 
 ] [13
 
+] [14
+
+] [15
+
 ]
 \tf@nav=\write5
-\openout5 = `slidy_6_year.nav'.
+\openout5 = `slidy_11.nav'.
 
 \tf@toc=\write6
-\openout6 = `slidy_6_year.toc'.
+\openout6 = `slidy_11.toc'.
 
 \tf@snm=\write7
-\openout7 = `slidy_6_year.snm'.
+\openout7 = `slidy_11.snm'.
 
-(./slidy_6_year.aux) ) 
+(./slidy_11.aux) ) 
 Here is how much of TeX's memory you used:
- 33824 strings out of 476191
- 700808 string characters out of 5812072
- 1156965 words of memory out of 5000000
- 53923 multiletter control sequences out of 15000+600000
- 470581 words of font info for 53 fonts, out of 8000000 for 9000
+ 37188 strings out of 476191
+ 783586 string characters out of 5812072
+ 1241535 words of memory out of 5000000
+ 57169 multiletter control sequences out of 15000+600000
+ 473473 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,20n,122p,1009b,896s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 128i,20n,127p,1005b,897s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on slidy_6_year.pdf (13 pages).
+Output written on slidy_11.pdf (15 pages).

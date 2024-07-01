@@ -1,0 +1,138 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+  \usepackage{xeCJK}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+options(font_family = NULL)
+```
+
+# Tasks summary
+
+## Overview 2024-04
+
+\includegraphics[height=65mm]{./figs/workflow2_04.pdf}
+
+## New Methods
+
+- batman, `BATMAN-TCM`
+- tcmsp2, TCMSP
+- dl, `D-GCAN` (python), drug-likeness
+- ctd, `Comparative Toxicogenomics Database`
+- cluspro, `ClusPro`, protein-protein docking
+
+# Article sharing
+
+## scFEA
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-05-14 16-48-58.png}
+
+## Overview
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.45\textwidth}"} 
+- 构建数据: Metabolic modules
+- 通量估计: Cell-wise Flux Rate
+- 下游分析: Others
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-05-14 16-39-31.png}
+:::
+::::::
+
+## Situation
+
+自发性脑出血（ICH）后调控 小胶质细胞代谢 的关键基因XXX
+
+\qquad \qquad $\Downarrow$
+
+- 单细胞数据
+- 代谢水平
+- 代谢物和基因的关系
+- 但没有空间代谢组数据
+
+## Examples
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/Pictures/Screenshots/Screenshot from 2024-05-14 16-51-32.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/Pictures/Screenshots/Screenshot from 2024-05-14 16-55-26.png}
+:::
+::::::
+
+## Integrate with Seurat
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/Pictures/Screenshots/Screenshot from 2024-05-14 16-58-25.png}
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[width=60mm]{~/Pictures/Screenshots/Screenshot from 2024-05-14 17-00-00.png}
+:::
+::::::
+
+# Schedule
+
+## Schedule
+
+- Finish orders
+- New methods
+
+# Thanks
+
+```{r}
+alls <- get_orders()
+these <- dplyr::filter(alls, grpl(belong, "2024-04"))
+
+p.wlst <- plot_workflow_summary(these)
+p.wlst$p.fr2
+autosv(p.wlst$p.fr2, "workflow2_04")
+```
+
+```{r}
+news <- get_workflow_news("2024-04-01")
+writeLines(news)
+```

@@ -1,0 +1,148 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+  \usepackage{xeCJK}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+options(font_family = NULL)
+```
+
+# Tasks summary
+
+## Overview 2024-03
+
+\includegraphics[height=65mm]{./figs/workflow2_03.pdf}
+
+## New Methods
+
+- unitmp: UNIfied database of TransMembrane Proteins
+- prr: (RNA-seq) Clinical Chemotherapeutic Response 
+- musite (GPS-MSP, PRmePred): (MusiteDeep) Post-translational modification site
+    - Web
+    - Python
+- epifactor: Epigenetic regulators
+
+```{r}
+writeLines(news)
+```
+
+# Article sharing
+
+## Concept
+
+- WGS / WES
+- GWAS
+- Gene locus  (基因座)
+- Allele (等位基因) 
+- Linkage Disequilibrium  (连锁不平衡) 
+- ...
+- eQTL (GTEX database): SNPs $\Rightarrow$ mRNA expression levels
+
+## GWAS
+
+- Disease $\rightleftarrows$ Variants
+- Variants $\Rightarrow$ Genes
+- Variants $\Rightarrow$ ... $\Rightarrow$ Genes
+
+\qquad \qquad $\Downarrow$
+
+- Variants $\Rightarrow$ ? $\Rightarrow$ Disease
+
+## Article with multiple tools
+
+\includegraphics[width=135mm]{~/Pictures/Screenshots/Screenshot from 2024-04-11 15-16-33.png}
+
+## Flow Chart
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.4\textwidth}"} 
+- Sherlock
+- SMR
+- NetWAS (GIANT websevier)
+- Depict
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-04-11 15-15-07.png}
+:::
+
+::::::
+
+
+## Sherlock (and SMR) \small via eQTL
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-04-11 15-29-02.png}
+
+## Depict \small via Prediction
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.4\textwidth}"} 
+1. 预测关联位点对应基因的功能
+2. 候选基因功能富集分析
+3. 候选基因表达特异性分析 (细胞、组织)
+4. Gene prioritization
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.5\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-04-11 15-39-17.png}
+:::
+::::::
+
+
+# Schedule
+
+## Schedule
+
+- Finish orders
+- New methods
+
+# Thanks
+
+```{r}
+alls <- get_orders()
+these <- dplyr::filter(alls, grpl(belong, "2024-03"))
+
+p.wlst <- plot_workflow_summary(these)
+p.wlst$p.fr2
+autosv(p.wlst$p.fr2, "workflow2_03")
+```
+
+```{r}
+news <- get_workflow_news("2024-03-01")
+writeLines(news)
+```

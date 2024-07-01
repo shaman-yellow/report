@@ -1,0 +1,116 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+  \usepackage{xeCJK}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+options(font_family = NULL)
+```
+
+# Tasks summary
+
+## Overview 2024-01 ~ 2024-02
+
+\includegraphics[height=65mm]{./figs/workflow2_01-02.pdf}
+
+## New Methods
+
+- gmix: `DisGeNet`, `GeneCards`, `PharmGKB`
+- lzerd: `LZerD` and `HawkDock` webservers, protein–protein docking
+- hob: Python, human oral bioavailability
+- plantdb: (crawler) The Database `PlantaeDB`
+- superpred: (crawler) drug-targets relationship prediction (SwissTargetPrediction)
+- ocr: Python, `doctr`
+- tfbs: (crawler) Transcription Factor Target Gene Database
+
+## New Methods
+
+- mpa: `MetaPhlAn`, microbial communities from metagenomic data
+- adcp: auto molecular docking (docking peptides)
+- nomo: logistic, nomogram
+- classyfire: systematic classification of chemical compounds
+- msconvert: file formats of MASS data
+- xcms: MASS data preprocessing
+
+```{r}
+writeLines(news)
+```
+
+# Article sharing
+
+## Reconstruction of colon cancer microbiome
+
+\includegraphics[height=50mm]{~/Pictures/Screenshots/Screenshot from 2024-03-12 16-23-47.png}
+
+## Details
+
+:::::: {.cols data-latex=""} 
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-03-12 16-25-37.png}
+:::
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-03-12 16-49-27.png}
+:::
+
+::::::
+
+## Code availability
+
+\includegraphics[width=135mm]{~/Pictures/Screenshots/Screenshot from 2024-03-12 16-30-58.png}
+
+# Schedule
+
+## Schedule
+
+- Finish orders
+- New methods
+
+# Thanks
+
+```{r}
+alls <- get_orders()
+these <- dplyr::filter(alls, grpl(belong, "2024-0[12]"))
+these <- dplyr::filter(these, id != "workflow")
+
+p.lst <- plot_orders_summary(these)
+p.lst$p.alls
+autosv(p.lst$p.alls, "orders_01-02")
+
+p.wlst <- plot_workflow_summary(these)
+p.wlst$p.fr2
+autosv(p.wlst$p.fr2, "workflow2_01-02")
+```
+
+```{r}
+news <- get_workflow_news("2024-01-01", "2024-02-01")
+writeLines(news)
+
+```

@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2023.6.29)  10 JAN 2024 18:05
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.4.21)  29 APR 2024 14:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**slidy_6_year.tex
-(./slidy_6_year.tex
+**slidy_shiming.tex
+(./slidy_shiming.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/beam
 er/beamer.cls
@@ -990,8 +990,8 @@ age=dflt;"
 guage=dflt;"
 (fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.: 
 
-(./slidy_6_year.aux)
-\openout1 = `slidy_6_year.aux'.
+(./slidy_shiming.aux)
+\openout1 = `slidy_shiming.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 163.
 LaTeX Font Info:    ... okay on input line 163.
@@ -1371,88 +1371,149 @@ ern Roman (RS)
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-(./slidy_6_year.nav)
+(./slidy_shiming.nav)
+LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/b/n' will be
+(Font)              scaled to size 5.82431pt on input line 163.
 File: ./logo_lixiao.png Graphic file (type bmp)
 <./logo_lixiao.png>
 [1
 
-] [2
+]
+LaTeX Font Info:    Font shape `TU/FandolSong-Regular(0)/b/n' will be
+(Font)              scaled to size 17.39526pt on input line 167.
+[2
 
 ]
-File: ./figs/orders.pdf Graphic file (type pdf)
-<use ./figs/orders.pdf>
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/intersection-of-all-comp
+ounds.pdf Graphic file (type pdf)
+<use ~/outline/lixiao/2024_03_13_shiming/Figure+Table/intersection-of-all-compo
+unds.pdf>
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/Overall-targets-number-o
+f-datasets.pdf Graphic file (type pdf)
+<use ~/outline/lixiao/2024_03_13_shiming/Figure+Table/Overall-targets-number-of
+-datasets.pdf>
 
-Overfull \vbox (12.04083pt too high) detected at line 172
+Underfull \hbox (badness 10000) in paragraph at lines 191--191
+[][]
+ []
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.708pt on input line 191.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.22pt on input line 191.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+91.
+(/usr/share/texmf/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.44133pt on input line 191.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.70891pt on input line 191.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.22066pt on input line 191.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 12.43866pt on input line 191.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.70706pt on input line 191.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.21933pt on input line 191.
+(/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/Network-pharmacology-wit
+h-disease.pdf Graphic file (type pdf)
+<use ~/outline/lixiao/2024_03_13_shiming/Figure+Table/Network-pharmacology-with
+-disease.pdf>
+
+Overfull \vbox (1.2539pt too high) detected at line 191
  []
 
 [3
 
-] [4
+]
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-raw-PPI-network.pd
+f Graphic file (type pdf)
+<use ~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-raw-PPI-network.pdf
+>
+
+Overfull \hbox (51.21373pt too wide) in paragraph at lines 225--225
+[][] 
+ []
+
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-Top30-MCC-score.pd
+f Graphic file (type pdf)
+<use ~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-Top30-MCC-score.pdf
+>
+
+Overfull \hbox (51.21373pt too wide) in paragraph at lines 225--225
+[][] 
+ []
+
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-KEGG-enrichment.pd
+f Graphic file (type pdf)
+<use ~/outline/lixiao/2024_03_13_shiming/Figure+Table/HERBS-KEGG-enrichment.pdf
+>
+
+Overfull \hbox (51.21373pt too wide) in paragraph at lines 225--225
+[][] 
+ []
+
+[4
 
 ]
-File: ./figs/workflow1.pdf Graphic file (type pdf)
-<use ./figs/workflow1.pdf>
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/RAT-Model-vs-Control-DEG
+s.pdf Graphic file (type pdf)
+<use ~/outline/lixiao/2024_03_13_shiming/Figure+Table/RAT-Model-vs-Control-DEGs
+.pdf>
 
-Overfull \vbox (12.04083pt too high) detected at line 180
+Overfull \hbox (11.38353pt too wide) in paragraph at lines 248--248
+[][] 
+ []
+
+File: ~/outline/lixiao/2024_03_13_shiming/Figure+Table/hsa04010.pathview.png Gr
+aphic file (type bmp)
+<~/outline/lixiao/2024_03_13_shiming/Figure+Table/hsa04010.pathview.png>
+
+Overfull \hbox (51.21373pt too wide) in paragraph at lines 248--248
+[][] 
  []
 
 [5
 
-]
-File: ./figs/workflow2.pdf Graphic file (type pdf)
-<use ./figs/workflow2.pdf>
-
-Overfull \vbox (12.04083pt too high) detected at line 185
- []
-
-[6
-
-] [7
+] [6
 
 ]
-File: ./figs/report1.pdf Graphic file (type pdf)
-<use ./figs/report1.pdf>
-
-Overfull \vbox (3.505pt too high) detected at line 193
- []
-
-[8
-
-] [9
-
-]
-File: ./figs/system1.pdf Graphic file (type pdf)
-<use ./figs/system1.pdf>
-
-Overfull \vbox (12.04083pt too high) detected at line 201
- []
-
-[10
-
-] [11
-
-] [12
-
-] [13
+File: ~/outline/lixiao/2024_04_10_shiming2/Figure+Table/Network-pharmacology-wi
+th-disease.pdf Graphic file (type pdf)
+<use ~/outline/lixiao/2024_04_10_shiming2/Figure+Table/Network-pharmacology-wit
+h-disease.pdf>
+File: ~/outline/lixiao/2024_04_10_shiming2/Figure+Table/Hirudin-targets-of-dise
+ase.pdf Graphic file (type pdf)
+<use ~/outline/lixiao/2024_04_10_shiming2/Figure+Table/Hirudin-targets-of-disea
+se.pdf>
+[7
 
 ]
 \tf@nav=\write5
-\openout5 = `slidy_6_year.nav'.
+\openout5 = `slidy_shiming.nav'.
 
 \tf@toc=\write6
-\openout6 = `slidy_6_year.toc'.
+\openout6 = `slidy_shiming.toc'.
 
 \tf@snm=\write7
-\openout7 = `slidy_6_year.snm'.
+\openout7 = `slidy_shiming.snm'.
 
-(./slidy_6_year.aux) ) 
+(./slidy_shiming.aux) ) 
 Here is how much of TeX's memory you used:
- 33824 strings out of 476191
- 700808 string characters out of 5812072
- 1156965 words of memory out of 5000000
- 53923 multiletter control sequences out of 15000+600000
- 470581 words of font info for 53 fonts, out of 8000000 for 9000
+ 33869 strings out of 476191
+ 706949 string characters out of 5812072
+ 1148888 words of memory out of 5000000
+ 53931 multiletter control sequences out of 15000+600000
+ 473417 words of font info for 70 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,20n,122p,1009b,896s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 128i,20n,122p,1010b,896s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on slidy_6_year.pdf (13 pages).
+Output written on slidy_shiming.pdf (7 pages).

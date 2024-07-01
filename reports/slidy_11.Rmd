@@ -1,0 +1,132 @@
+---
+title: 'Seminar'
+author: |
+        | Lichuang Huang
+institute: Wie-Biotech
+date: '`r format(Sys.Date() + 1)`'
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    df_print: kable
+    theme: "Berlin"
+    colortheme: "beaver"
+    fonttheme: "structurebold"
+    includes:
+      in_header: ./templ_beamer_company.tex
+fontsize: 5pt
+header-includes:
+  \usepackage{pgfornament}
+  \AtBeginEnvironment{longtable}{\tiny}
+  \titlegraphic{\centering \includegraphics{./logo_lixiao.png}}
+  \usepackage{caption}
+  \captionsetup{font={tiny}}
+  \usepackage{setspace}
+  \setstretch{1.3}
+  \linespread{1.3}
+  \usepackage{xeCJK}
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+if (!requireNamespace("utils.tool"))
+  devtools::load_all("~/utils.tool/")
+options(font_family = NULL)
+```
+
+# Tasks summary
+
+## Overview 2024-05
+
+\includegraphics[height=65mm]{./figs/workflow2_05.pdf}
+
+## Methods 2024-05
+
+ \includegraphics[height=65mm]{./figs/types_05.pdf}
+
+## New Methods
+
+```{r}
+writeLines(news)
+```
+
+- scfea: scFEA 单细胞数据的代写通量预测
+- methy: missMethyl, DMRcate, Gviz Methyl-seq 数据分析
+- ucscTable: rtracklayer UCSC Table 数据获取
+- cig: makeCGI CpG Islands 预测
+- dmr: Gviz DMR 数据可视化
+
+## New Features \small report
+
+- Auto Tags: 自动统计分析标签 $\Rightarrow$ Note
+- Auto Section name: 自动生成分析标题, Method + Content + (Signature)
+
+\small
+`## Cardinal 空间代谢组数据分析 (INTEGRATE)`
+
+`### ClusterProfiler 富集分析 (STNCANCER)`
+
+`## Seurat 空间转录组分析 (CANCER)`
+
+- Delimiter
+
+\begin{center}\pgfornament[anchor=center,ydelta=0pt,width=9cm]{88}\vspace{1.5cm}\end{center}
+
+# Article sharing
+
+## Theme
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-24-31.png}
+
+## Visualization
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-27-26.png}
+
+## Visualization
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-28-39.png}
+
+## Gviz for DNA
+
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-30-00.png}
+
+## Gviz Visualization
+
+:::::: {.cols data-latex=""} 
+::: {.col data-latex="{0.45\textwidth}"} 
+- For Genome Visualization
+:::
+
+::: {.col data-latex="{0.02\textwidth}"}
+\hspace{1pt}
+:::
+
+::: {.col data-latex="{0.45\textwidth}"} 
+\includegraphics[height=65mm]{~/Pictures/Screenshots/Screenshot from 2024-06-13 17-31-00.png}
+:::
+::::::
+
+# Schedule
+
+## Schedule
+
+- Finish orders
+- New methods
+
+# Thanks
+
+```{r}
+alls <- get_orders()
+these <- dplyr::filter(alls, grpl(belong, "2024-05"))
+
+p.wlst <- plot_workflow_summary(these)
+p.wlst$p.fr2
+p.wlst$p.tags
+autosv(p.wlst$p.fr2, "workflow2_05")
+autosv(p.wlst$p.tags, "types_05", showtext = T)
+```
+
+```{r}
+news <- get_workflow_news("2024-05-01")
+writeLines(news)
+```

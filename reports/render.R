@@ -1,7 +1,9 @@
 
 reload_bib("~/utils.tool/inst/extdata/library.bib")
 
-browseURL(rmarkdown::render("./slidy_6_year.Rmd"))
+browseURL(rmarkdown::render("./slidy_11.Rmd"))
+
+browseURL(rmarkdown::render("./slidy_shiming.Rmd"))
 
 route <- as_network(list(
     "Mail:Deparse",
